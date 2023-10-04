@@ -220,7 +220,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <!-- Columns are always 50% wide, on mobile and desktop -->
                                         <div class="row">
                                             <div class="col-6">
@@ -252,7 +252,7 @@
                                                 </div>
                                             </div>
                                         </div>
-    
+
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="form-group">
@@ -286,7 +286,8 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group m-0">
-                                                    <label for="exampleFormControlInput1" class="m-0">Foto Profile</label>
+                                                    <label for="exampleFormControlInput1" class="m-0">Foto
+                                                        Profile</label>
                                                 </div>
                                                 <span class="fileinput-wrapper file-selected mt-2">
                                                     <input type="file" name="file" id="image-add">
@@ -299,8 +300,8 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                         class="nav-icon fas fa-times mr-1"></i> Close</button>
-                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()" id="button-add"><i
-                                        class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"
+                                    id="button-add"><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -602,7 +603,7 @@
             buttonClass: 'btn btn-danger',
         });
 
-        
+
         let typingTimeout;
 
         function delayedTestValidator() {
@@ -610,7 +611,7 @@
                 clearTimeout(typingTimeout);
             }
 
-            typingTimeout = setTimeout(function() {
+            typingTimeout = setTimeout(function () {
                 const inputValue = $("#name-add").val();
 
                 // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
@@ -623,7 +624,9 @@
                     $("#name-add").addClass("is-valid");
                     $("#button-add").prop("disabled", false);
                     $("#validationServer03Feedback").remove();
-                    return;
+                    if (inputValue == "") {
+                        $("#name-add").removeClass("is-valid");
+                    }
                 } else {
                     // Lanjutkan dengan logika Anda jika input valid
                     console.log("Nama tidak diperbolehkan mengandung karakter unik.");
@@ -632,7 +635,7 @@
                     $("#name-add").addClass("is-invalid");
                     $("#button-add").prop("disabled", true);
                     if ($("#validationServer03Feedback").length > 0) {
-                        return;
+                        $("#validationServer03Feedback").remove();
                     }
                     $("#name-add").after(`
                         <div id="validationServer03Feedback" class="invalid-feedback">
@@ -640,7 +643,11 @@
                         </div>
                     `);
                 };
-                
+
+                console.log("testing");
+
+
+
             }, 1000);
         }
     </script>
