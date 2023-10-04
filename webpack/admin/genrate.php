@@ -614,7 +614,7 @@
                 const inputValue = $("#name-add").val();
 
                 // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
-                const regex = /[^A-Za-z0-9\s]/;
+                const regex = /[^A-Za-z0-9\.\s]/;
 
                 // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
                 if (!regex.test(inputValue)) {
