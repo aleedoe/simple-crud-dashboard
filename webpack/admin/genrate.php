@@ -200,7 +200,7 @@
                                                 <div class="form-group">
                                                     <label for="tambahNama">Nama</label>
                                                     <input type="email" class="form-control" id="name-add"
-                                                        placeholder="Nama Mahasiswa" oninput="validatorNameAdd()"
+                                                        placeholder="Nama Mahasiswa" oninput="validatorName()"
                                                         maxlength="12">
                                                 </div>
                                             </div>
@@ -606,7 +606,7 @@
 
 
         let typingTimeout;
-        function validatorNameAdd() {
+        function validatorName(action) {
             if (typingTimeout) {
                 clearTimeout(typingTimeout);
             }
@@ -615,7 +615,7 @@
                 const inputValue = $("#name-add").val();
 
                 // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
-                const regex = /[^A-Za-z0-9\s]/;
+                const regex = /[^A-Za-z0-9\.\s]/;
 
                 // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
                 if (!regex.test(inputValue)) {
