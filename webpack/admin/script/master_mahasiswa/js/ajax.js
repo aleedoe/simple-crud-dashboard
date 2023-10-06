@@ -38,7 +38,7 @@ var MahasiswaModule = (function() {
                                         <div class="form-group">
                                             <label for="tambahKode">Kode</label>
                                             <input type="email" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa">
+                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCodeAdd()">
                                         </div>
                                     </div>
                                 </div>
@@ -174,7 +174,7 @@ var MahasiswaModule = (function() {
                                     <div class="form-group">
                                         <label for="tambahKode">Kode</label>
                                         <input type="email" class="form-control" id="kode-edit"
-                                            placeholder="Kode Mahasiswa">
+                                            placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCodeEdit()">
                                     </div>
                                 </div>
                             </div>
@@ -419,7 +419,7 @@ var MahasiswaModule = (function() {
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="ambilDataPersonal(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
                     <i class="nav-icon fas fa-pen fa-sm"></i>
                 </button>
                 </td>
@@ -502,6 +502,64 @@ var MahasiswaModule = (function() {
     // function validation //
 
     let typing_time_out;
+    function validatorCodeAdd() {
+        if (typing_time_out) {
+            clearTimeout(typing_time_out);
+        }
+
+        typing_time_out = setTimeout(function () {
+            const input_value = $("#kode-add").val();
+
+            // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
+            const regex = /[^A-Za-z0-9\s]/;
+
+            // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
+            if (!regex.test(input_value)) {
+                // Memeriksa apakah ada angka dalam input
+                const has_number = /[0-9]/.test(input_value);
+
+                if (has_number) {
+                    // Jika tidak ada angka dalam input, maka input valid
+                    $("#button-add").prop("disabled", false);
+                    $("#kode-add").removeClass("is-invalid");
+                    $("#kode-add").addClass("is-valid");
+                    $("#feedback-kode-add").remove();
+                } else {
+                    // Jika ada angka dalam input, maka input tidak valid
+                    $("#button-add").prop("disabled", true);
+                    $("#kode-add").removeClass("is-valid");
+                    $("#kode-add").addClass("is-invalid");
+                    if ($("#feedback-kode-add").length > 0) {
+                        $("#feedback-kode-add").remove();
+                    }
+                    $("#kode-add").after(`
+                    <div id="feedback-kode-add" class="invalid-feedback">
+                    Kode harus berupa angka.
+                    </div>
+                    `);
+                    if (input_value == "") {
+                        $("#kode-add").removeClass("is-valid");
+                        $("#kode-add").removeClass("is-invalid");
+                        $("#feedback-kode-add").remove();
+                    }
+                }
+            } else {
+                // Lanjutkan dengan logika Anda jika input valid
+                $("#button-add").prop("disabled", true);
+                $("#kode-add").removeClass("is-valid");
+                $("#kode-add").addClass("is-invalid");
+                if ($("#feedback-kode-add").length > 0) {
+                    $("#feedback-kode-add").remove();
+                }
+                $("#kode-add").after(`
+            <div id="feedback-kode-add" class="invalid-feedback">
+            Nama tidak diperbolehkan mengandung karakter unik.
+            </div>
+        `);
+            }
+        }, 1000);
+    }
+
     function validatorNameAdd() {
         if (typing_time_out) {
             clearTimeout(typing_time_out);
@@ -613,7 +671,63 @@ var MahasiswaModule = (function() {
             }
         }, 1000);
     }
+    function validatorCodeEdit() {
+        if (typing_time_out) {
+            clearTimeout(typing_time_out);
+        }
 
+        typing_time_out = setTimeout(function () {
+            const input_value = $("#kode-edit").val();
+
+            // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
+            const regex = /[^A-Za-z0-9\s]/;
+
+            // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
+            if (!regex.test(input_value)) {
+                // Memeriksa apakah ada angka dalam input
+                const has_number = /[0-9]/.test(input_value);
+
+                if (has_number) {
+                    // Jika tidak ada angka dalam input, maka input valid
+                    $("#button-edit").prop("disabled", false);
+                    $("#kode-edit").removeClass("is-invalid");
+                    $("#kode-edit").addClass("is-valid");
+                    $("#feedback-kode-edit").remove();
+                } else {
+                    // Jika ada angka dalam input, maka input tidak valid
+                    $("#button-edit").prop("disabled", true);
+                    $("#kode-edit").removeClass("is-valid");
+                    $("#kode-edit").addClass("is-invalid");
+                    if ($("#feedback-kode-edit").length > 0) {
+                        $("#feedback-kode-edit").remove();
+                    }
+                    $("#kode-edit").after(`
+                    <div id="feedback-kode-edit" class="invalid-feedback">
+                    Kode harus berupa angka.
+                    </div>
+                    `);
+                    if (input_value == "") {
+                        $("#kode-edit").removeClass("is-valid");
+                        $("#kode-edit").removeClass("is-invalid");
+                        $("#feedback-kode-edit").remove();
+                    }
+                }
+            } else {
+                // Lanjutkan dengan logika Anda jika input valid
+                $("#button-edit").prop("disabled", true);
+                $("#kode-edit").removeClass("is-valid");
+                $("#kode-edit").addClass("is-invalid");
+                if ($("#feedback-kode-edit").length > 0) {
+                    $("#feedback-kode-edit").remove();
+                }
+                $("#kode-edit").after(`
+            <div id="feedback-kode-edit" class="invalid-feedback">
+            Nama tidak diperbolehkan mengandung karakter unik.
+            </div>
+        `);
+            }
+        }, 1000);
+    }
 
     return {
         load: load,
@@ -621,7 +735,9 @@ var MahasiswaModule = (function() {
         renderData: renderData,
         renderPagination: renderPagination,
         validatorNameAdd: validatorNameAdd,
-        validatorNameEdit: validatorNameEdit
+        validatorCodeAdd: validatorCodeAdd,
+        validatorNameEdit: validatorNameEdit,
+        validatorCodeEdit: validatorCodeEdit
     };
 
 })();
