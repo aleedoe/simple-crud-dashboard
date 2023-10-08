@@ -56,7 +56,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Jenis Kelamin</label>
-                                            <select class="form-control select2-default" id="gender-add">
+                                            <select class="form-control select2-default-add" id="gender-add">
                                                 <option selected="selected">Alabama</option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
@@ -74,7 +74,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Provinsi</label>
-                                            <select class="form-control select2-search-box" id="provinsi-add">
+                                            <select class="form-control select2-search-box-add" id="provinsi-add">
                                                 <option selected="selected">Alabama</option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
@@ -88,7 +88,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box" id="kabupaten-add">
+                                            <select class="form-control select2-search-box-add" id="kabupaten-add">
                                                 <option selected="selected">Alabama</option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
@@ -105,7 +105,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box" id="kecamatan-add">
+                                            <select class="form-control select2-search-box-add" id="kecamatan-add">
                                                 <option selected="selected">Alabama</option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
@@ -119,7 +119,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Desa</label>
-                                            <select class="form-control select2-search-box" id="desa-add">
+                                            <select class="form-control select2-search-box-add" id="desa-add">
                                                 <option selected="selected">Alabama</option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
@@ -147,9 +147,9 @@ var MahasiswaModule = (function() {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
-                                class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"
-                            id="button-add"><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                            class="nav-icon fas fa-times mr-1"></i> Close</button>
+                        <button type="button" class="btn btn-primary" onclick="MahasiswaRequest.dataAdd()"
+                            id="button-add" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
             </div>
@@ -191,7 +191,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Jenis Kelamin</label>
-                                        <select class="form-control select2-default" id="gender-edit">
+                                        <select class="form-control select2-default-edit" id="gender-edit">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
@@ -209,7 +209,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Provinsi</label>
-                                        <select class="form-control select2-search-box" id="provinsi-edit">
+                                        <select class="form-control select2-search-box-edit" id="provinsi-edit">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
@@ -223,7 +223,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kabupaten</label>
-                                        <select class="form-control select2-search-box" id="kabupaten-edit">
+                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
@@ -240,7 +240,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kecamatan</label>
-                                        <select class="form-control select2-search-box" id="kecamatan-edit">
+                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
@@ -254,7 +254,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Desa</label>
-                                        <select class="form-control select2-search-box" id="desa-edit">
+                                        <select class="form-control select2-search-box-edit" id="desa-edit">
                                             <option selected="selected">Alabama</option>
                                             <option>Alaska</option>
                                             <option>California</option>
@@ -281,7 +281,7 @@ var MahasiswaModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"  id="button-edit"><i
+                        <button type="button" class="btn btn-primary" onclick=""  id="button-edit" disabled><i
                                 class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
@@ -348,13 +348,25 @@ var MahasiswaModule = (function() {
         </div>
         `);
 
-        $('.select2-search-box').select2({
+        // definition for modal add
+        $('.select2-search-box-add').select2({
             theme: 'bootstrap4',
             dropdownParent: $("#staticBackdrop-add"),
         })
-        $('.select2-default').select2({
+        $('.select2-default-add').select2({
             theme: 'bootstrap4',
             dropdownParent: $("#staticBackdrop-add"),
+            minimumResultsForSearch: -1
+        })
+
+        // definition for modal edit
+        $('.select2-search-box-edit').select2({
+            theme: 'bootstrap4',
+            dropdownParent: $("#staticBackdrop-edit"),
+        })
+        $('.select2-default-edit').select2({
+            theme: 'bootstrap4',
+            dropdownParent: $("#staticBackdrop-edit"),
             minimumResultsForSearch: -1
         })
         $('input[type="file"]').fileinput({
@@ -502,7 +514,6 @@ var MahasiswaModule = (function() {
     // function validation //
 
     let typing_time_out;
-
     function validatorCode(inputId, buttonId) {
         if (typing_time_out) {
             clearTimeout(typing_time_out);
@@ -586,6 +597,7 @@ var MahasiswaModule = (function() {
                     $("#feedback-" + inputId).remove();
                     if (input_value == "") {
                         $("#" + inputId).removeClass("is-valid");
+                        $("#" + buttonId).prop("disabled", true);
                     }
                 } else {
                     // Jika ada angka dalam input, maka input tidak valid

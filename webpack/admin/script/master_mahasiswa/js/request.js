@@ -20,7 +20,6 @@ var MahasiswaRequest = (function() {
     
     function dataAdd() {
         var formData = new FormData();
-  
         formData.append("kode_add", $("#kode-add").val());
         formData.append("name_add", $("#name-add").val());
         formData.append("gender_add", $("#gender-add").val());
