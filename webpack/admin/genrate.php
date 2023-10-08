@@ -191,7 +191,7 @@
                                                 <div class="form-group">
                                                     <label for="tambahKode">Kode</label>
                                                     <input type="email" class="form-control" id="kode-add"
-                                                        placeholder="Kode Mahasiswa">
+                                                        placeholder="Kode Mahasiswa" oninput="validatorCode('kode-add', 'button-add')">
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +200,7 @@
                                                 <div class="form-group">
                                                     <label for="tambahNama">Nama</label>
                                                     <input type="email" class="form-control" id="name-add"
-                                                        placeholder="Nama Mahasiswa" oninput="validatorNameAdd()"
+                                                        placeholder="Nama Mahasiswa" oninput="validatorName('name-add', 'button-add')"
                                                         maxlength="12">
                                                 </div>
                                             </div>
@@ -327,7 +327,7 @@
                                             <div class="form-group">
                                                 <label for="tambahKode">Kode</label>
                                                 <input type="email" class="form-control" id="kode-edit"
-                                                    placeholder="Kode Mahasiswa">
+                                                    placeholder="Kode Mahasiswa" oninput="validatorCode('kode-edit', 'button-edit')">
                                             </div>
                                         </div>
                                     </div>
@@ -336,7 +336,7 @@
                                             <div class="form-group">
                                                 <label for="tambahNama">Nama</label>
                                                 <input type="email" class="form-control" id="name-edit"
-                                                    placeholder="Nama Mahasiswa" oninput="validatorNameEdit()">
+                                                    placeholder="Nama Mahasiswa" oninput="validatorName('name-edit', 'button-edit')">
                                             </div>
                                         </div>
                                     </div>
@@ -434,8 +434,8 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                         class="nav-icon fas fa-times mr-1"></i> Close</button>
-                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"  id="button-edit"><i
-                                        class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"
+                                    id="button-edit"><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>
@@ -606,13 +606,73 @@
 
 
         let typing_time_out;
-        function validatorNameAdd() {
+
+        function validatorCode(inputId, buttonId) {
             if (typing_time_out) {
                 clearTimeout(typing_time_out);
             }
 
             typing_time_out = setTimeout(function () {
-                const input_value = $("#name-add").val();
+                const input_value = $("#" + inputId).val();
+
+                // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
+                const regex = /[^A-Za-z0-9\s]/;
+
+                // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
+                if (!regex.test(input_value)) {
+                    // Memeriksa apakah ada angka dalam input
+                    const has_number = /^[0-9]+$/.test(input_value);
+
+                    if (has_number) {
+                        // Jika input hanya berisi angka, maka input valid
+                        $("#" + buttonId).prop("disabled", false);
+                        $("#" + inputId).removeClass("is-invalid");
+                        $("#" + inputId).addClass("is-valid");
+                        $("#feedback-" + inputId).remove();
+                    } else {
+                        // Jika input tidak hanya berisi angka, maka input tidak valid
+                        $("#" + buttonId).prop("disabled", true);
+                        $("#" + inputId).removeClass("is-valid");
+                        $("#" + inputId).addClass("is-invalid");
+                        if ($("#feedback-" + inputId).length > 0) {
+                            $("#feedback-" + inputId).remove();
+                        }
+                        $("#" + inputId).after(`
+                    <div id="feedback-${inputId}" class="invalid-feedback">
+                    Kode harus berupa angka.
+                    </div>
+                `);
+                        if (input_value == "") {
+                            $("#" + inputId).removeClass("is-valid");
+                            $("#" + inputId).removeClass("is-invalid");
+                            $("#feedback-" + inputId).remove();
+                        }
+                    }
+
+                } else {
+                    // Lanjutkan dengan logika Anda jika input valid
+                    $("#" + buttonId).prop("disabled", true);
+                    $("#" + inputId).removeClass("is-valid");
+                    $("#" + inputId).addClass("is-invalid");
+                    if ($("#feedback-" + inputId).length > 0) {
+                        $("#feedback-" + inputId).remove();
+                    }
+                    $("#" + inputId).after(`
+                <div id="feedback-${inputId}" class="invalid-feedback">
+                Nama tidak diperbolehkan mengandung karakter unik.
+                </div>
+            `);
+                }
+            }, 1000);
+        }
+
+        function validatorName(inputId, buttonId) {
+            if (typing_time_out) {
+                clearTimeout(typing_time_out);
+            }
+
+            typing_time_out = setTimeout(function () {
+                const input_value = $("#" + inputId).val();
 
                 // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
                 const regex = /[^A-Za-z0-9\.\s]/;
@@ -624,99 +684,44 @@
 
                     if (!has_number) {
                         // Jika tidak ada angka dalam input, maka input valid
-                        $("#button-add").prop("disabled", false);
-                        $("#name-add").removeClass("is-invalid");
-                        $("#name-add").addClass("is-valid");
-                        $("#feedback-name-add").remove();
+                        $("#" + buttonId).prop("disabled", false);
+                        $("#" + inputId).removeClass("is-invalid");
+                        $("#" + inputId).addClass("is-valid");
+                        $("#feedback-" + inputId).remove();
                         if (input_value == "") {
-                            $("#name-add").removeClass("is-valid");
+                            $("#" + inputId).removeClass("is-valid");
                         }
                     } else {
                         // Jika ada angka dalam input, maka input tidak valid
-                        $("#button-add").prop("disabled", true);
-                        $("#name-add").removeClass("is-valid");
-                        $("#name-add").addClass("is-invalid");
-                        if ($("#feedback-name-add").length > 0) {
-                            $("#feedback-name-add").remove();
+                        $("#" + buttonId).prop("disabled", true);
+                        $("#" + inputId).removeClass("is-valid");
+                        $("#" + inputId).addClass("is-invalid");
+                        if ($("#feedback-" + inputId).length > 0) {
+                            $("#feedback-" + inputId).remove();
                         }
-                        $("#name-add").after(`
-                    <div id="feedback-name-add" class="invalid-feedback">
+                        $("#" + inputId).after(`
+                    <div id="feedback-${inputId}" class="invalid-feedback">
                     Nama tidak boleh mengandung angka.
                     </div>
                 `);
                     }
                 } else {
                     // Lanjutkan dengan logika Anda jika input valid
-                    $("#button-add").prop("disabled", true);
-                    $("#name-add").removeClass("is-valid");
-                    $("#name-add").addClass("is-invalid");
-                    if ($("#feedback-name-add").length > 0) {
-                        $("#feedback-name-add").remove();
+                    $("#" + buttonId).prop("disabled", true);
+                    $("#" + inputId).removeClass("is-valid");
+                    $("#" + inputId).addClass("is-invalid");
+                    if ($("#feedback-" + inputId).length > 0) {
+                        $("#feedback-" + inputId).remove();
                     }
-                    $("#name-add").after(`
-                <div id="feedback-name-add" class="invalid-feedback">
+                    $("#" + inputId).after(`
+                <div id="feedback-${inputId}" class="invalid-feedback">
                 Nama tidak diperbolehkan mengandung karakter unik.
                 </div>
             `);
-                }
-            }, 1000);
         }
+    }, 1000);
+}
 
-        function validatorNameEdit() {
-            if (typing_time_out) {
-                clearTimeout(typing_time_out);
-            }
-
-            typing_time_out = setTimeout(function () {
-                const input_value = $("#name-edit").val();
-
-                // Gunakan ekspresi reguler untuk mencocokkan karakter yang bukan huruf, angka, atau spasi
-                const regex = /[^A-Za-z0-9\.\s]/;
-
-                // Memeriksa apakah ada karakter khusus yang tidak diizinkan dalam input
-                if (!regex.test(input_value)) {
-                    // Memeriksa apakah ada angka dalam input
-                    const has_number = /[0-9]/.test(input_value);
-
-                    if (!has_number) {
-                        // Jika tidak ada angka dalam input, maka input valid
-                        $("#button-edit").prop("disabled", false);
-                        $("#name-edit").removeClass("is-invalid");
-                        $("#name-edit").addClass("is-valid");
-                        $("#feedback-name-edit").remove();
-                        if (input_value == "") {
-                            $("#name-edit").removeClass("is-valid");
-                        }
-                    } else {
-                        // Jika ada angka dalam input, maka input tidak valid
-                        $("#button-edit").prop("disabled", true);
-                        $("#name-edit").removeClass("is-valid");
-                        $("#name-edit").addClass("is-invalid");
-                        if ($("#feedback-name-edit").length > 0) {
-                            $("#feedback-name-edit").remove();
-                        }
-                        $("#name-edit").after(`
-                    <div id="feedback-name-edit" class="invalid-feedback">
-                    Nama tidak boleh mengandung angka.
-                    </div>
-                `);
-                    }
-                } else {
-                    // Lanjutkan dengan logika Anda jika input valid
-                    $("#button-edit").prop("disabled", true);
-                    $("#name-edit").removeClass("is-valid");
-                    $("#name-edit").addClass("is-invalid");
-                    if ($("#feedback-name-edit").length > 0) {
-                        $("#feedback-name-edit").remove();
-                    }
-                    $("#name-edit").after(`
-                <div id="feedback-name-edit" class="invalid-feedback">
-                Nama tidak diperbolehkan mengandung karakter unik.
-                </div>
-            `);
-                }
-            }, 1000);
-        }
 
     </script>
 
