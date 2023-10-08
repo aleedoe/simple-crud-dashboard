@@ -191,7 +191,8 @@
                                                 <div class="form-group">
                                                     <label for="tambahKode">Kode</label>
                                                     <input type="email" class="form-control" id="kode-add"
-                                                        placeholder="Kode Mahasiswa" oninput="validatorCode('kode-add', 'button-add')">
+                                                        placeholder="Kode Mahasiswa"
+                                                        oninput="validatorCode('kode-add', 'button-add')">
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +201,8 @@
                                                 <div class="form-group">
                                                     <label for="tambahNama">Nama</label>
                                                     <input type="email" class="form-control" id="name-add"
-                                                        placeholder="Nama Mahasiswa" oninput="validatorName('name-add', 'button-add')"
+                                                        placeholder="Nama Mahasiswa"
+                                                        oninput="validatorName('name-add', 'button-add')"
                                                         maxlength="12">
                                                 </div>
                                             </div>
@@ -327,7 +329,8 @@
                                             <div class="form-group">
                                                 <label for="tambahKode">Kode</label>
                                                 <input type="email" class="form-control" id="kode-edit"
-                                                    placeholder="Kode Mahasiswa" oninput="validatorCode('kode-edit', 'button-edit')">
+                                                    placeholder="Kode Mahasiswa"
+                                                    oninput="validatorCode('kode-edit', 'button-edit')">
                                             </div>
                                         </div>
                                     </div>
@@ -336,7 +339,8 @@
                                             <div class="form-group">
                                                 <label for="tambahNama">Nama</label>
                                                 <input type="email" class="form-control" id="name-edit"
-                                                    placeholder="Nama Mahasiswa" oninput="validatorName('name-edit', 'button-edit')">
+                                                    placeholder="Nama Mahasiswa"
+                                                    oninput="validatorName('name-edit', 'button-edit')">
                                             </div>
                                         </div>
                                     </div>
@@ -658,10 +662,10 @@
                         $("#feedback-" + inputId).remove();
                     }
                     $("#" + inputId).after(`
-                <div id="feedback-${inputId}" class="invalid-feedback">
-                Nama tidak diperbolehkan mengandung karakter unik.
-                </div>
-            `);
+                        <div id="feedback-${inputId}" class="invalid-feedback">
+                        Nama tidak diperbolehkan mengandung karakter unik.
+                        </div>
+                    `);
                 }
             }, 1000);
         }
@@ -714,13 +718,13 @@
                         $("#feedback-" + inputId).remove();
                     }
                     $("#" + inputId).after(`
-                <div id="feedback-${inputId}" class="invalid-feedback">
-                Nama tidak diperbolehkan mengandung karakter unik.
-                </div>
-            `);
+                        <div id="feedback-${inputId}" class="invalid-feedback">
+                        Nama tidak diperbolehkan mengandung karakter unik.
+                        </div>
+                    `);
+                }
+            }, 1000);
         }
-    }, 1000);
-}
 
 
     </script>
