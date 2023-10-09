@@ -56,8 +56,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Jenis Kelamin</label>
-                                            <select class="form-control select2-default-add" id="gender-add">
-                                                <option selected="selected">Alabama</option>
+                                            <select class="form-control select2-default-add" id="gender-add" onchange="MahasiswaModule.validatorGender('button-add')">
+                                                <option></option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
                                                 <option>Delaware</option>
@@ -74,8 +74,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Provinsi</label>
-                                            <select class="form-control select2-search-box-add" id="provinsi-add">
-                                                <option selected="selected">Alabama</option>
+                                            <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorAddress('button-add')">
+                                                <option></option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
                                                 <option>Delaware</option>
@@ -88,8 +88,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-add" id="kabupaten-add">
-                                                <option selected="selected">Alabama</option>
+                                            <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MahasiswaModule.validatorAddress('button-add')">
+                                                <option></option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
                                                 <option>Delaware</option>
@@ -105,8 +105,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-add" id="kecamatan-add">
-                                                <option selected="selected">Alabama</option>
+                                            <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MahasiswaModule.validatorAddress('button-add')">
+                                                <option></option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
                                                 <option>Delaware</option>
@@ -119,8 +119,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Desa</label>
-                                            <select class="form-control select2-search-box-add" id="desa-add">
-                                                <option selected="selected">Alabama</option>
+                                            <select class="form-control select2-search-box-add" id="desa-add" onchange="MahasiswaModule.validatorAddress('button-add')">
+                                                <option></option>
                                                 <option>Alaska</option>
                                                 <option>California</option>
                                                 <option>Delaware</option>
@@ -511,7 +511,10 @@ var MahasiswaModule = (function() {
         paginationLinks.appendChild(ul);
     }
 
-    // function validation //
+    // validation function //
+
+
+
 
     let typing_time_out;
     function validatorCode(inputId, buttonId) {
@@ -532,7 +535,9 @@ var MahasiswaModule = (function() {
 
                 if (has_number) {
                     // Jika input hanya berisi angka, maka input valid
-                    $("#" + buttonId).prop("disabled", false);
+                    if ($("#kode-add").val() !== "" && $("#name-add").val() !== "" && $("#gender-add").val() !== "" && $("#provinsi-add").val() !== "" && $("#kabupaten-add").val() !== "" && $("#kecamatan-add").val() !== "" && $("#desa-add").val() !== "") {
+                        $("#" + buttonId).prop("disabled", false);
+                    }
                     $("#" + inputId).removeClass("is-invalid");
                     $("#" + inputId).addClass("is-valid");
                     $("#feedback-" + inputId).remove();
@@ -591,7 +596,9 @@ var MahasiswaModule = (function() {
 
                 if (!has_number) {
                     // Jika tidak ada angka dalam input, maka input valid
-                    $("#" + buttonId).prop("disabled", false);
+                    if ($("#kode-add").val() !== "" && $("#name-add").val() !== "" && $("#gender-add").val() !== "" && $("#provinsi-add").val() !== "" && $("#kabupaten-add").val() !== "" && $("#kecamatan-add").val() !== "" && $("#desa-add").val() !== "") {
+                        $("#" + buttonId).prop("disabled", false);
+                    }
                     $("#" + inputId).removeClass("is-invalid");
                     $("#" + inputId).addClass("is-valid");
                     $("#feedback-" + inputId).remove();
@@ -630,13 +637,30 @@ var MahasiswaModule = (function() {
         }, 1000);
     }
 
+    function validatorGender(buttonId) {
+        if ($("#kode-add").val() !== "" && $("#name-add").val() !== "" && $("#gender-add").val() !== "" && $("#provinsi-add").val() !== "" && $("#kabupaten-add").val() !== "" && $("#kecamatan-add").val() !== "" && $("#desa-add").val() !== "") {
+            $("#" + buttonId).prop("disabled", false);
+        } else {
+            $("#" + buttonId).prop("disabled", true);
+        }
+    }
+    function validatorAddress(buttonId) {
+        if ($("#kode-add").val() !== "" && $("#name-add").val() !== "" && $("#gender-add").val() !== "" && $("#provinsi-add").val() !== "" && $("#kabupaten-add").val() !== "" && $("#kecamatan-add").val() !== "" && $("#desa-add").val() !== "") {
+            $("#" + buttonId).prop("disabled", false);
+        } else {
+            $("#" + buttonId).prop("disabled", true);
+        }
+    }
+    
     return {
         load: load,
         buildUrl: buildUrl,
         renderData: renderData,
         renderPagination: renderPagination,
         validatorCode: validatorCode,
-        validatorName: validatorName
+        validatorName: validatorName,
+        validatorGender: validatorGender,
+        validatorAddress: validatorAddress
     };
 
 })();

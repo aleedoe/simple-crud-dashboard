@@ -211,7 +211,7 @@
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Jenis Kelamin</label>
-                                                    <select class="form-control select2-default" id="gender-add">
+                                                    <select class="form-control select2-default" id="gender-add" onchange="">
                                                         <option selected="selected">Alabama</option>
                                                         <option>Alaska</option>
                                                         <option>California</option>
