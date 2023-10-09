@@ -23,10 +23,10 @@ var MahasiswaRequest = (function() {
         formData.append("kode_add", $("#kode-add").val());
         formData.append("name_add", $("#name-add").val());
         formData.append("gender_add", $("#gender-add").val());
-        formData.append("provinsi_add", $("#provinsi-add").val());
-        formData.append("kabupaten_add", $("#kabupaten-add").val());
-        formData.append("kecamatan_add", $("#kecamatan-add").val());
-        formData.append("desa_add", $("#desa-add").val());
+        formData.append("provinsi_id", $("#provinsi-add").val());
+        formData.append("kabupaten_id", $("#kabupaten-add").val());
+        formData.append("kecamatan_id", $("#kecamatan-add").val());
+        formData.append("desa_id", $("#desa-add").val());
         formData.append("image_add", $("#image-add")[0].files[0]);
 
         $.ajax({
