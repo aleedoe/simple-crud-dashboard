@@ -58,12 +58,7 @@ var MahasiswaModule = (function() {
                                             <label>Jenis Kelamin</label>
                                             <select class="form-control select2-default-add" id="gender-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                                <option value="Laki-laki">Laki-laki</option>
                                             </select>
                                         </div>
                                     </div>
@@ -76,12 +71,7 @@ var MahasiswaModule = (function() {
                                             <label>Provinsi</label>
                                             <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                                <option value="5">Jawa Tengah</option>
                                             </select>
                                         </div>
                                     </div>
@@ -90,12 +80,7 @@ var MahasiswaModule = (function() {
                                             <label>Kabupaten</label>
                                             <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                                <option value="31">Banjarnegara</option>
                                             </select>
                                         </div>
                                     </div>
@@ -107,12 +92,7 @@ var MahasiswaModule = (function() {
                                             <label>Kecamatan</label>
                                             <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                                <option value="38">Batur</option>
                                             </select>
                                         </div>
                                     </div>
@@ -121,12 +101,7 @@ var MahasiswaModule = (function() {
                                             <label>Desa</label>
                                             <select class="form-control select2-search-box-add" id="desa-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option>Alaska</option>
-                                                <option>California</option>
-                                                <option>Delaware</option>
-                                                <option>Tennessee</option>
-                                                <option>Texas</option>
-                                                <option>Washington</option>
+                                                <option value="53">kalijajar</option>
                                             </select>
                                         </div>
                                     </div>
@@ -193,12 +168,6 @@ var MahasiswaModule = (function() {
                                         <label>Jenis Kelamin</label>
                                         <select class="form-control select2-default-edit" id="gender-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
                                         </select>
                                     </div>
                                 </div>
@@ -211,12 +180,6 @@ var MahasiswaModule = (function() {
                                         <label>Provinsi</label>
                                         <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
                                         </select>
                                     </div>
                                 </div>
@@ -225,12 +188,6 @@ var MahasiswaModule = (function() {
                                         <label>Kabupaten</label>
                                         <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
                                         </select>
                                     </div>
                                 </div>
@@ -242,12 +199,6 @@ var MahasiswaModule = (function() {
                                         <label>Kecamatan</label>
                                         <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
                                         </select>
                                     </div>
                                 </div>
@@ -256,12 +207,6 @@ var MahasiswaModule = (function() {
                                         <label>Desa</label>
                                         <select class="form-control select2-search-box-edit" id="desa-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
-                                            <option>Alaska</option>
-                                            <option>California</option>
-                                            <option>Delaware</option>
-                                            <option>Tennessee</option>
-                                            <option>Texas</option>
-                                            <option>Washington</option>
                                         </select>
                                     </div>
                                 </div>
@@ -513,7 +458,7 @@ var MahasiswaModule = (function() {
 
     // validation function //
 
-    function validatorCode(inputId, buttonId) {
+    function validatorCode(input_id, button_id) {
         let kode;
         let name;
         let gender;
@@ -522,7 +467,7 @@ var MahasiswaModule = (function() {
         let kecamatan;
         let desa;
     
-        if (inputId === 'kode-add' || inputId === 'name-add') {
+        if (input_id === 'kode-add' || input_id === 'name-add') {
             kode = "kode-add";
             name = "name-add";
             gender = "gender-add";
@@ -530,7 +475,7 @@ var MahasiswaModule = (function() {
             kabupaten = "kabupaten-add";
             kecamatan = "kecamatan-add";
             desa = "desa-add";
-        } else if (inputId === 'kode-edit' || inputId === 'name-edit') {
+        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
             kode = "kode-edit";
             name = "name-edit";
             gender = "gender-edit";
@@ -540,7 +485,7 @@ var MahasiswaModule = (function() {
             desa = "desa-edit";
         }
     
-        const inputElement = $("#" + inputId);
+        const inputElement = $("#" + input_id);
     
         inputElement.on("input", function () {
             const input_value = inputElement.val();
@@ -551,38 +496,38 @@ var MahasiswaModule = (function() {
     
                 if (has_number) {
                     if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                        $("#" + buttonId).prop("disabled", false);
+                        $("#" + button_id).prop("disabled", false);
                     }
                     inputElement.removeClass("is-invalid");
                     inputElement.addClass("is-valid");
-                    $("#feedback-" + inputId).remove();
+                    $("#feedback-" + input_id).remove();
                 } else {
-                    $("#" + buttonId).prop("disabled", true);
+                    $("#" + button_id).prop("disabled", true);
                     inputElement.removeClass("is-valid");
                     inputElement.addClass("is-invalid");
-                    if ($("#feedback-" + inputId).length > 0) {
-                        $("#feedback-" + inputId).remove();
+                    if ($("#feedback-" + input_id).length > 0) {
+                        $("#feedback-" + input_id).remove();
                     }
                     inputElement.after(`
-                        <div id="feedback-${inputId}" class="invalid-feedback">
+                        <div id="feedback-${input_id}" class="invalid-feedback">
                         Kode harus berupa angka.
                         </div>
                     `);
                     if (input_value == "") {
                         inputElement.removeClass("is-valid");
                         inputElement.removeClass("is-invalid");
-                        $("#feedback-" + inputId).remove();
+                        $("#feedback-" + input_id).remove();
                     }
                 }
             } else {
-                $("#" + buttonId).prop("disabled", true);
+                $("#" + button_id).prop("disabled", true);
                 inputElement.removeClass("is-valid");
                 inputElement.addClass("is-invalid");
-                if ($("#feedback-" + inputId).length > 0) {
-                    $("#feedback-" + inputId).remove();
+                if ($("#feedback-" + input_id).length > 0) {
+                    $("#feedback-" + input_id).remove();
                 }
                 inputElement.after(`
-                    <div id="feedback-${inputId}" class="invalid-feedback">
+                    <div id="feedback-${input_id}" class="invalid-feedback">
                     Kode tidak diperbolehkan mengandung karakter unik.
                     </div>
                 `);
@@ -590,7 +535,7 @@ var MahasiswaModule = (function() {
         });
     }
     
-    function validatorName(inputId, buttonId) {
+    function validatorName(input_id, button_id) {
         let kode;
         let name;
         let gender;
@@ -599,7 +544,7 @@ var MahasiswaModule = (function() {
         let kecamatan;
         let desa;
     
-        if (inputId === 'kode-add' || inputId === 'name-add') {
+        if (input_id === 'kode-add' || input_id === 'name-add') {
             kode = "kode-add";
             name = "name-add";
             gender = "gender-add";
@@ -607,7 +552,7 @@ var MahasiswaModule = (function() {
             kabupaten = "kabupaten-add";
             kecamatan = "kecamatan-add";
             desa = "desa-add";
-        } else if (inputId === 'kode-edit' || inputId === 'name-edit') {
+        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
             kode = "kode-edit";
             name = "name-edit";
             gender = "gender-edit";
@@ -617,7 +562,7 @@ var MahasiswaModule = (function() {
             desa = "desa-edit";
         }
     
-        const inputElement = $("#" + inputId);
+        const inputElement = $("#" + input_id);
     
         inputElement.on("input", function () {
             const input_value = inputElement.val();
@@ -628,37 +573,37 @@ var MahasiswaModule = (function() {
     
                 if (!has_number) {
                     if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                        $("#" + buttonId).prop("disabled", false);
+                        $("#" + button_id).prop("disabled", false);
                     }
                     inputElement.removeClass("is-invalid");
                     inputElement.addClass("is-valid");
-                    $("#feedback-" + inputId).remove();
+                    $("#feedback-" + input_id).remove();
                     if (input_value == "") {
                         inputElement.removeClass("is-valid");
-                        $("#" + buttonId).prop("disabled", true);
+                        $("#" + button_id).prop("disabled", true);
                     }
                 } else {
-                    $("#" + buttonId).prop("disabled", true);
+                    $("#" + button_id).prop("disabled", true);
                     inputElement.removeClass("is-valid");
                     inputElement.addClass("is-invalid");
-                    if ($("#feedback-" + inputId).length > 0) {
-                        $("#feedback-" + inputId).remove();
+                    if ($("#feedback-" + input_id).length > 0) {
+                        $("#feedback-" + input_id).remove();
                     }
                     inputElement.after(`
-                        <div id="feedback-${inputId}" class="invalid-feedback">
+                        <div id="feedback-${input_id}" class="invalid-feedback">
                         Nama tidak boleh mengandung angka.
                         </div>
                     `);
                 }
             } else {
-                $("#" + buttonId).prop("disabled", true);
+                $("#" + button_id).prop("disabled", true);
                 inputElement.removeClass("is-valid");
                 inputElement.addClass("is-invalid");
-                if ($("#feedback-" + inputId).length > 0) {
-                    $("#feedback-" + inputId).remove();
+                if ($("#feedback-" + input_id).length > 0) {
+                    $("#feedback-" + input_id).remove();
                 }
                 inputElement.after(`
-                    <div id="feedback-${inputId}" class="invalid-feedback">
+                    <div id="feedback-${input_id}" class="invalid-feedback">
                     Nama tidak diperbolehkan mengandung karakter unik.
                     </div>
                 `);
@@ -667,7 +612,11 @@ var MahasiswaModule = (function() {
     }
     
 
-    function validatorSelect(inputId, buttonId) {
+    function validatorSelect(input_id, load = "", button_id) {
+
+        if (load === "") {
+            loadKabupaten();
+        }
 
         let kode;
         let name;
@@ -677,7 +626,7 @@ var MahasiswaModule = (function() {
         let kecamatan;
         let desa;
 
-        if (inputId === 'add') {
+        if (input_id === 'add') {
             kode = "kode-add";
             name = "name-add";
             gender = "gender-add";
@@ -685,7 +634,7 @@ var MahasiswaModule = (function() {
             kabupaten = "kabupaten-add";
             kecamatan = "kecamatan-add";
             desa = "desa-add";
-        } else if (inputId === 'edit') {
+        } else if (input_id === 'edit') {
             kode = "kode-edit";
             name = "name-edit";
             gender = "gender-edit";
@@ -696,9 +645,9 @@ var MahasiswaModule = (function() {
         }
         
         if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-            $("#" + buttonId).prop("disabled", false);
+            $("#" + button_id).prop("disabled", false);
         } else {
-            $("#" + buttonId).prop("disabled", true);
+            $("#" + button_id).prop("disabled", true);
         }
     }
     
