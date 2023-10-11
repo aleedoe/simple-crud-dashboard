@@ -19,3 +19,4 @@ if ($table === 'kabupaten') {
 
 $data = get_data($query);
 echo json_encode($data);
+?>

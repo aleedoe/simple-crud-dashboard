@@ -71,16 +71,14 @@ var MahasiswaModule = (function() {
                                             <label>Provinsi</label>
                                             <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
                                                 <option></option>
-                                                <option value="5">Jawa Tengah</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
+                                            <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
                                                 <option></option>
-                                                <option value="31">Banjarnegara</option>
                                             </select>
                                         </div>
                                     </div>
@@ -90,9 +88,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
+                                            <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
                                                 <option></option>
-                                                <option value="38">Batur</option>
                                             </select>
                                         </div>
                                     </div>
@@ -101,7 +98,6 @@ var MahasiswaModule = (function() {
                                             <label>Desa</label>
                                             <select class="form-control select2-search-box-add" id="desa-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
-                                                <option value="53">kalijajar</option>
                                             </select>
                                         </div>
                                     </div>
@@ -636,10 +632,28 @@ var MahasiswaModule = (function() {
 
     function validatorSelect(input_id, button_id, load = "") {
 
+        const resetSelectOptions = (target_select) => {
+            target_select.html('<option value=""></option>');
+        }
 
         if (load === "provinsi-add") {
+            const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
+            const target_select = $("#kabupaten-add");
+            MahasiswaRequest.loadSelectOptions(url, target_select);
+            resetSelectOptions($("#kecamatan-add"));
+            resetSelectOptions($("#desa-add"));
             
-            MahasiswaRequest.loadSelectOptions();
+        } else if (load === "kabupaten-add") {
+            const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
+            const target_select = $("#kecamatan-add"); 
+            MahasiswaRequest.loadSelectOptions(url, target_select);
+            resetSelectOptions($("#desa-add"));
+
+        } else if (load === "kecamatan-add") {
+            const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
+            const target_select = $("#desa-add");
+            MahasiswaRequest.loadSelectOptions(url, target_select);
+
         }
         
         let kode;

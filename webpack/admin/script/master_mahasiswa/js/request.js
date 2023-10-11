@@ -18,22 +18,23 @@ var MahasiswaRequest = (function() {
         });
     };
 
-    function loadSelectOptions(url, target_select, update_options) {
+    function loadSelectOptions(url, target_select) {
         $.ajax({
             url: url,
             type: "GET",
             dataType: "json",
-            success: function(response) {
-                MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
-                MahasiswaModule.renderPagination(response.totalPages, page);
-                $(".content-wrapper").LoadingOverlay("hide", true);
+            success: function(data) {
+                target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                target_select.append($("<option value=''></option>"));
+                $.each(data, function(index, option) {
+                    target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                });
             },
             error: function() {
                 console.error("Failed to fetch data.");
             }
         });
-    };
-    
+    }
 
     function dataAdd() {
         const kode_add = $("#kode-add").val();
@@ -76,4 +77,4 @@ var MahasiswaRequest = (function() {
         loadSelectOptions: loadSelectOptions,
         dataAdd: dataAdd
     };
-})(); 
+})();
