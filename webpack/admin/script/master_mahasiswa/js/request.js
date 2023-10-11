@@ -2,9 +2,9 @@
 
 var MahasiswaRequest = (function() {
 
-    function fetchDataAndRender(page, keyword = "", jenisKelamin = "", imageProfile = "", provinsi = "", kabupaten = "", kecamatan = "", desa = "", matkulFilter = "") {
+    function fetchDataAndRender(page, keyword_filter = "", gender_filter = "", image_filter = "", provinsi_filter = "", kabupaten_filter = "", kecamatan_filter = "", desa_filter = "", matkul_filter = "") {
         $.ajax({
-            url: MahasiswaModule.buildUrl(page, keyword, jenisKelamin, imageProfile, provinsi, kabupaten, kecamatan, desa, matkulFilter),
+            url: MahasiswaModule.buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter),
             type: "GET",
             dataType: "json",
             success: function(response) {

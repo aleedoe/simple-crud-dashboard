@@ -320,41 +320,41 @@ var MahasiswaModule = (function() {
         });
     }
 
-    function buildUrl(page, keyword, jenisKelamin, imageProfile, provinsi, kabupaten, kecamatan, desa, matkulFilter) {
+    function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
         let url = `script/master_mahasiswa/php/get_data.php?page=${page}`;
-        if (keyword) {
-            url += `&keyword=${encodeURIComponent(keyword)}`;
+        if (keyword_filter) {
+            url += `&keyword_filter=${encodeURIComponent(keyword_filter)}`;
         }
-        if (jenisKelamin) {
-            url += `&jenis_kelamin=${encodeURIComponent(jenisKelamin)}`;
+        if (gender_filter) {
+            url += `&gender_filter=${encodeURIComponent(gender_filter)}`;
         }
-        if (imageProfile) {
-            url += `&image_profile=${encodeURIComponent(imageProfile)}`;
+        if (image_filter) {
+            url += `&image_filter=${encodeURIComponent(image_filter)}`;
         }
-        if (provinsi) {
-            url += `&provinsiFilter=${encodeURIComponent(provinsi)}`;
+        if (provinsi_filter) {
+            url += `&provinsi_filter=${encodeURIComponent(provinsi_filter)}`;
         }
-        if (kabupaten) {
-            url += `&kabupatenFilter=${encodeURIComponent(kabupaten)}`;
+        if (kabupaten_filter) {
+            url += `&kabupaten_filter=${encodeURIComponent(kabupaten_filter)}`;
         }
-        if (kecamatan) {
-            url += `&kecamatanFilter=${encodeURIComponent(kecamatan)}`;
+        if (kecamatan_filter) {
+            url += `&kecamatan_filter=${encodeURIComponent(kecamatan_filter)}`;
         }
-        if (desa) {
-            url += `&desaFilter=${encodeURIComponent(desa)}`;
+        if (desa_filter) {
+            url += `&desa_filter=${encodeURIComponent(desa_filter)}`;
         }
-        if (matkulFilter) {
-            url += `&matkulFilter=${encodeURIComponent(matkulFilter)}`;
+        if (matkul_filter) {
+            url += `&matkul_filter=${encodeURIComponent(matkul_filter)}`;
         }
         return url;
     }
 
-    function renderData(data, currentPage) {
+    function renderData(data, current_page) {
         const table = document.getElementById("data-table");
         const tbody = table.querySelector("tbody");
         tbody.innerHTML = ""; // Clear the existing table body content
 
-        const startNumber = (currentPage - 1) * 5;
+        const startNumber = (current_page - 1) * 5;
 
         data.forEach(function (row, index) {
             const newRow = document.createElement("tr");
@@ -386,7 +386,7 @@ var MahasiswaModule = (function() {
         });
     }
 
-    function renderPagination(totalPages, currentPage) {
+    function renderPagination(total_pages, current_page) {
         const paginationLinks = document.getElementById("pagination-links");
         paginationLinks.innerHTML = "";
 
@@ -395,7 +395,7 @@ var MahasiswaModule = (function() {
 
         const prevLi = document.createElement("li");
         prevLi.classList.add("page-item");
-        if (currentPage === 1) {
+        if (current_page === 1) {
             prevLi.classList.add("disabled");
         }
         const prevLink = document.createElement("a");
@@ -405,10 +405,10 @@ var MahasiswaModule = (function() {
         prevLi.appendChild(prevLink);
         ul.appendChild(prevLi);
 
-        for (let i = 1; i <= totalPages; i++) {
+        for (let i = 1; i <= total_pages; i++) {
             const li = document.createElement("li");
             li.classList.add("page-item");
-            if (i === currentPage) {
+            if (i === current_page) {
                 li.classList.add("active");
             }
             const link = document.createElement("a");
@@ -427,7 +427,7 @@ var MahasiswaModule = (function() {
 
         const nextLi = document.createElement("li");
         nextLi.classList.add("page-item");
-        if (currentPage === totalPages) {
+        if (current_page === total_pages) {
             nextLi.classList.add("disabled");
         }
         const nextLink = document.createElement("a");
@@ -438,18 +438,18 @@ var MahasiswaModule = (function() {
         ul.appendChild(nextLi);
 
         prevLink.addEventListener("click", function () {
-            if (currentPage > 1) {
+            if (current_page > 1) {
                 // $.LoadingOverlay("show", {background  : "rgba(0, 0, 0, 0.5)"});
                 // loadingBerhenti1Seccond();
-                MahasiswaRequest.fetchDataAndRender(currentPage - 1);
+                MahasiswaRequest.fetchDataAndRender(current_page - 1);
             }
         });
 
         nextLink.addEventListener("click", function () {
-            if (currentPage < totalPages) {
+            if (current_page < total_pages) {
                 // $.LoadingOverlay("show", {background  : "rgba(0, 0, 0, 0.5)"});
                 // loadingBerhenti1Seccond();
-                MahasiswaRequest.fetchDataAndRender(currentPage + 1);
+                MahasiswaRequest.fetchDataAndRender(current_page + 1);
             }
         });
 
