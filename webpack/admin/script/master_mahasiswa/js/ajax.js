@@ -37,8 +37,8 @@ var MahasiswaModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tambahKode">Kode</label>
-                                            <input type="email" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-add', 'button-add')">
+                                            <input type="text" class="form-control" id="kode-add"
+                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-add', 'button-add')" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -46,9 +46,9 @@ var MahasiswaModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tambahNama">Nama</label>
-                                            <input type="email" class="form-control" id="name-add"
+                                            <input type="text" class="form-control" id="name-add"
                                                 placeholder="Nama Mahasiswa" oninput="MahasiswaModule.validatorName('name-add', 'button-add')"
-                                                maxlength="12">
+                                                maxlength="12" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -69,7 +69,7 @@ var MahasiswaModule = (function() {
                                     <div class="col-6">
                                         <div class="form-group">
                                             <label>Provinsi</label>
-                                            <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
+                                            <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
                                                 <option></option>
                                                 <option value="5">Jawa Tengah</option>
                                             </select>
@@ -148,7 +148,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="tambahKode">Kode</label>
-                                        <input type="email" class="form-control" id="kode-edit"
+                                        <input type="text" class="form-control" id="kode-edit"
                                             placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-edit', 'button-edit')">
                                     </div>
                                 </div>
@@ -157,7 +157,7 @@ var MahasiswaModule = (function() {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="tambahNama">Nama</label>
-                                        <input type="email" class="form-control" id="name-edit"
+                                        <input type="text" class="form-control" id="name-edit"
                                             placeholder="Nama Mahasiswa" oninput="MahasiswaModule.validatorName('name-edit', 'button-edit')">
                                     </div>
                                 </div>
@@ -296,10 +296,12 @@ var MahasiswaModule = (function() {
         // definition for modal add
         $('.select2-search-box-add').select2({
             theme: 'bootstrap4',
+            placeholder: "Pilih",
             dropdownParent: $("#staticBackdrop-add"),
         })
         $('.select2-default-add').select2({
             theme: 'bootstrap4',
+            placeholder: "Pilih",
             dropdownParent: $("#staticBackdrop-add"),
             minimumResultsForSearch: -1
         })
@@ -307,10 +309,12 @@ var MahasiswaModule = (function() {
         // definition for modal edit
         $('.select2-search-box-edit').select2({
             theme: 'bootstrap4',
+            placeholder: "Pilih",
             dropdownParent: $("#staticBackdrop-edit"),
         })
         $('.select2-default-edit').select2({
             theme: 'bootstrap4',
+            placeholder: "Pilih",
             dropdownParent: $("#staticBackdrop-edit"),
             minimumResultsForSearch: -1
         })
@@ -349,7 +353,7 @@ var MahasiswaModule = (function() {
         return url;
     }
 
-    function renderData(data, current_page) {
+    function renderData(data, provinsi_select, current_page) {
         const table = document.getElementById("data-table");
         const tbody = table.querySelector("tbody");
         tbody.innerHTML = ""; // Clear the existing table body content
@@ -357,17 +361,17 @@ var MahasiswaModule = (function() {
         const startNumber = (current_page - 1) * 5;
 
         data.forEach(function (row, index) {
-            const newRow = document.createElement("tr");
-            const bacColorNumberClass = row.total_rows > 0 ? "badge badge-warning" : "badge badge-danger" ;
+            const new_row = document.createElement("tr");
+            const bac_color_number_class = row.total_rows > 0 ? "badge badge-warning" : "badge badge-danger" ;
             
-            newRow.innerHTML = `
+            new_row.innerHTML = `
                 <td class="text-center align-middle">${startNumber + index + 1}</td>
                 <td class="text-center align-middle"><img class="img-thumbnail" src="docs/img/${row.image_profile}" alt="" width="40px"></td>
                 <td class="text-center align-middle">${row.kode}</td>
                 <td class="text-center align-middle">${row.nama}</td>
                 <td class="text-center align-middle">${row.jenis_kelamin}</td>
                 <td class="text-center align-middle">
-                <a href="javascript:void(0)" class="${bacColorNumberClass}" onclick="tampilModalMahasiswaSubPage(${row.id_personal_name})">${row.total_rows}</a>
+                <a href="javascript:void(0)" class="${bac_color_number_class}" onclick="tampilModalMahasiswaSubPage(${row.id_personal_name})">${row.total_rows}</a>
                 </td>
                 <td class="text-center align-middle">${row.nama_desa}, ${row.nama_kecamatan}, ${row.nama_kabupaten}, ${row.nama_provinsi}</td>
                 <td class="p-sm-2 text-center align-middle">
@@ -382,8 +386,26 @@ var MahasiswaModule = (function() {
                 </td>
             `;
             
-            tbody.appendChild(newRow);
+            tbody.appendChild(new_row);
         });
+
+        const provinsi_select_add = $("#provinsi-add");
+        provinsi_select_add.html('<option value=""></option>');
+        provinsi_select.forEach((row) => {
+            const new_option = $("<option></option>");
+            new_option.val(row.id);
+            new_option.text(row.name);
+            provinsi_select_add.append(new_option);
+        });        
+
+        const provinsi_select_edit = $("#provinsi-edit");
+        provinsi_select_edit.html('<option value=""></option>');
+        provinsi_select.forEach((row) => {
+            const new_option = $("<option></option>");
+            new_option.val(row.id);
+            new_option.text(row.name);
+            provinsi_select_edit.append(new_option);
+        });        
     }
 
     function renderPagination(total_pages, current_page) {
@@ -612,12 +634,14 @@ var MahasiswaModule = (function() {
     }
     
 
-    function validatorSelect(input_id, load = "", button_id) {
+    function validatorSelect(input_id, button_id, load = "") {
 
-        if (load === "") {
-            loadKabupaten();
+
+        if (load === "provinsi-add") {
+            
+            MahasiswaRequest.loadSelectOptions();
         }
-
+        
         let kode;
         let name;
         let gender;

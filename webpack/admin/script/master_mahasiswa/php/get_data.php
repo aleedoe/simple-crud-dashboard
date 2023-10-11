@@ -79,11 +79,15 @@ $data = get_data($query);
 
 $query_matkul_name = "SELECT * FROM matkul_name ORDER BY matkul_name.`name` ASC";
 $data_matkul = get_data($query_matkul_name);
+
+$query_provinsi = "SELECT * FROM provinsi ORDER BY provinsi.`name` ASC";
+$data_provinsi = get_data($query_provinsi);
 // Format respons dalam bentuk JSON
 $response = [
     "data" => $data,
     "totalPages" => $total_pages,
-    "dataMatkul" => $data_matkul
+    "dataMatkul" => $data_matkul,
+    "dataProvinsi" => $data_provinsi
 
 ];
 

@@ -8,7 +8,23 @@ var MahasiswaRequest = (function() {
             type: "GET",
             dataType: "json",
             success: function(response) {
-                MahasiswaModule.renderData(response.data, page);
+                MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
+                MahasiswaModule.renderPagination(response.totalPages, page);
+                $(".content-wrapper").LoadingOverlay("hide", true);
+            },
+            error: function() {
+                console.error("Failed to fetch data.");
+            }
+        });
+    };
+
+    function loadSelectOptions(url, target_select, update_options) {
+        $.ajax({
+            url: url,
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
                 MahasiswaModule.renderPagination(response.totalPages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
@@ -18,6 +34,7 @@ var MahasiswaRequest = (function() {
         });
     };
     
+
     function dataAdd() {
         const kode_add = $("#kode-add").val();
         const name_add = $("#name-add").val();
@@ -56,6 +73,7 @@ var MahasiswaRequest = (function() {
 
     return {
         fetchDataAndRender: fetchDataAndRender,
+        loadSelectOptions: loadSelectOptions,
         dataAdd: dataAdd
     };
 })(); 
