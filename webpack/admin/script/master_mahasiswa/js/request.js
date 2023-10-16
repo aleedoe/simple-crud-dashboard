@@ -36,6 +36,20 @@ var MahasiswaRequest = (function() {
         });
     }
 
+    function loadDataEdit(data_id) {
+        $.ajax({
+            url: `script/master_mahasiswa/php/get_data_edit.php?id=${data_id}`,
+            type: "GET",
+            dataType: "json",
+            success: function(response) {
+                MahasiswaModule.aplyValueModalEdit(response.data);
+            },
+            error: function() {
+                console.error("Failed to fetch data.");
+            }
+        });
+    }
+    
     function dataAdd() {
         const kode_add = $("#kode-add").val();
         const name_add = $("#name-add").val();
@@ -75,6 +89,7 @@ var MahasiswaRequest = (function() {
     return {
         fetchDataAndRender: fetchDataAndRender,
         loadSelectOptions: loadSelectOptions,
+        loadDataEdit: loadDataEdit,
         dataAdd: dataAdd
     };
 })();
