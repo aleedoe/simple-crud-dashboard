@@ -1,18 +1,18 @@
 // test request master_mahasiswa
 
-var MahasiswaRequest = (function() {
+var MahasiswaRequest = (function () {
 
     function fetchDataAndRender(page, keyword_filter = "", gender_filter = "", image_filter = "", provinsi_filter = "", kabupaten_filter = "", kecamatan_filter = "", desa_filter = "", matkul_filter = "") {
         $.ajax({
             url: MahasiswaModule.buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter),
             type: "GET",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
                 MahasiswaModule.renderPagination(response.totalPages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
-            error: function() {
+            error: function () {
                 console.error("Failed to fetch data.");
             }
         });
@@ -23,14 +23,14 @@ var MahasiswaRequest = (function() {
             url: url,
             type: "GET",
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
                 target_select.append($("<option value=''></option>"));
-                $.each(data, function(index, option) {
+                $.each(data, function (index, option) {
                     target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                 });
             },
-            error: function() {
+            error: function () {
                 console.error("Failed to fetch data.");
             }
         });
@@ -41,15 +41,41 @@ var MahasiswaRequest = (function() {
             url: `script/master_mahasiswa/php/get_data_edit.php?id=${data_id}`,
             type: "GET",
             dataType: "json",
-            success: function(response) {
+            success: function (response) {
                 MahasiswaModule.aplyValueModalEdit(response.data);
+                $('#kabupaten-edit').select2({
+                    ajax: {
+                        url: `script/master_mahasiswa/php/load_address.php?table=kabupaten&id=${response}`
+                    }
+                });
+        
+                // Fetch the preselected item, and add to the control
+                var studentSelect = $('#kabupaten-edit');
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/students/s/' + studentId
+                }).then(function (data) {
+                    // create the option and append to Select2
+                    var option = new Option(data.full_name, data.id, true, true);
+                    studentSelect.append(option).trigger('change');
+        
+                    // manually trigger the `select2:select` event
+                    studentSelect.trigger({
+                        type: 'select2:select',
+                        params: {
+                            data: data
+                        }
+                    });
+                });
             },
-            error: function() {
+            error: function () {
                 console.error("Failed to fetch data.");
             }
         });
+        // Set up the Select2 control
+
     }
-    
+
     function dataAdd() {
         const kode_add = $("#kode-add").val();
         const name_add = $("#name-add").val();
@@ -58,7 +84,7 @@ var MahasiswaRequest = (function() {
         const kabupaten_id = $("#kabupaten-add").val();
         const kecamatan_id = $("#kecamatan-add").val();
         const desa_id = $("#desa-add").val();
-    
+
         var formData = new FormData();
         formData.append("kode_add", kode_add);
         formData.append("name_add", name_add);
@@ -68,7 +94,7 @@ var MahasiswaRequest = (function() {
         formData.append("kecamatan_id", kecamatan_id);
         formData.append("desa_id", desa_id);
         formData.append("image_add", $("#image-add")[0].files[0]);
-    
+
         $.ajax({
             url: `script/master_mahasiswa/php/add.php`,
             type: "POST",
@@ -84,7 +110,7 @@ var MahasiswaRequest = (function() {
             }
         });
     }
-    
+
 
     return {
         fetchDataAndRender: fetchDataAndRender,

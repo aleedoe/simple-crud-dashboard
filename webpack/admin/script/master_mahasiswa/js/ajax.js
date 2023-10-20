@@ -177,7 +177,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Provinsi</label>
-                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')">
+                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -185,7 +185,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kabupaten</label>
-                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')">
+                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -196,7 +196,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kecamatan</label>
-                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')">
+                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
