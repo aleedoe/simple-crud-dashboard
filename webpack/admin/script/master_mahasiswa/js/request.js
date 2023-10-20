@@ -85,7 +85,6 @@ var MahasiswaRequest = (function() {
         });
     }
     
-
     return {
         fetchDataAndRender: fetchDataAndRender,
         loadSelectOptions: loadSelectOptions,
