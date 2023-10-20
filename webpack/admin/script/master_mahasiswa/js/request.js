@@ -35,6 +35,67 @@ var MahasiswaRequest = (function() {
             }
         });
     }
+    function loadSelectOptionsEdit(url, target_select, id, describe) {
+        if (describe == "kabupaten") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function(index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#kabupaten-edit').val(id);
+                    $('#kabupaten-edit').trigger('change');
+                    $('#kabupaten-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
+                    
+                },
+                error: function() {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "kecamatan") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function(index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#kecamatan-edit').val(id);
+                    $('#kecamatan-edit').trigger('change');
+                    $('#kecamatan-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
+                },
+                error: function() {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "desa") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function(index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#desa-edit').val(id);
+                    $('#desa-edit').trigger('change');
+                    $('#desa-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit')");
+                },
+                error: function() {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        }
+    }
 
     function loadDataEdit(data_id) {
         $.ajax({
@@ -88,6 +149,7 @@ var MahasiswaRequest = (function() {
     return {
         fetchDataAndRender: fetchDataAndRender,
         loadSelectOptions: loadSelectOptions,
+        loadSelectOptionsEdit: loadSelectOptionsEdit,
         loadDataEdit: loadDataEdit,
         dataAdd: dataAdd
     };

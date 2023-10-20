@@ -177,7 +177,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Provinsi</label>
-                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')">
+                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -185,7 +185,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kabupaten</label>
-                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')">
+                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -196,7 +196,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Kecamatan</label>
-                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')">
+                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -204,7 +204,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-6">
                                     <div class="form-group">
                                         <label>Desa</label>
-                                        <select class="form-control select2-search-box-edit" id="desa-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
+                                        <select class="form-control select2-search-box-edit" id="desa-edit" onchange="">
                                             <option></option>
                                         </select>
                                     </div>
@@ -380,7 +380,7 @@ var MahasiswaModule = (function () {
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="MahasiswaModule.getValueModalEdit(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="MahasiswaRequest.loadDataEdit(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
                     <i class="nav-icon fas fa-pen fa-sm"></i>
                 </button>
                 </td>
@@ -499,30 +499,12 @@ var MahasiswaModule = (function () {
         });
     }
 
-    function getValueModalEdit(data_id) {
-        // Select all input elements inside the modal
-        $('#staticBackdrop-edit input').each(function () {
-            // Clear the input value
-            $(this).val('');
-        });
-        // $("#feedback-kode-edit").remove();
-        // $("#kode-edit").removeClass("is-valid");
-        // $("#kode-edit").removeClass("is-invalid");
-        // $("#feedback-name-edit").remove();
-        // $("#name-edit").removeClass("is-valid");
-        // $("#name-edit").removeClass("is-invalid");
-
-        // Select all select elements inside the modal
-        $('#staticBackdrop-edit select').each(function () {
-            // Reset the selected option
-            $(this).val(0);
-            $(this).trigger('change');
-        });
-
-        MahasiswaRequest.loadDataEdit(data_id);
-    }
-
     function aplyValueModalEdit(data) {
+
+        $("#provinsi-edit").removeAttr("onchange");
+        $("#kabupaten-edit").removeAttr("onchange");
+        $("#kecamatan-edit").removeAttr("onchange");
+        $("#desa-edit").removeAttr("onchange");
         const kodeValidator = (kode, name) => {
 
             const inputElement = $("#kode-edit");
@@ -632,9 +614,19 @@ var MahasiswaModule = (function () {
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
+        $('#provinsi-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
+        
+        var url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
+        var target_select = $("#kabupaten-edit");
+        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
-        $('#kabupaten-edit').val(data[0].id_kabupaten);
-        $('#kabupaten-edit').trigger('change');
+        var url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
+        var target_select = $("#kecamatan-edit");
+        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
+
+        var url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
+        var target_select = $("#desa-edit");
+        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
     }
 
     // validation function //
@@ -837,7 +829,6 @@ var MahasiswaModule = (function () {
             const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
             const target_select = $("#desa-edit");
             MahasiswaRequest.loadSelectOptions(url, target_select);
-
         }
 
         let kode;
@@ -879,7 +870,6 @@ var MahasiswaModule = (function () {
         renderData: renderData,
         renderPagination: renderPagination,
         resetModalAdd: resetModalAdd,
-        getValueModalEdit: getValueModalEdit,
         aplyValueModalEdit: aplyValueModalEdit,
         validatorCode: validatorCode,
         validatorName: validatorName,
