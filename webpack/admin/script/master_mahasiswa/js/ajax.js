@@ -225,7 +225,7 @@ var MahasiswaModule = (function () {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick=""  id="button-edit" disabled><i
+                        <button type="button" class="btn btn-primary" onclick="MahasiswaRequest.dataEdit()"  id="button-edit" disabled><i
                                 class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>

@@ -111,19 +111,19 @@ $kabupaten_id = $_POST["kabupaten_id"];
 $kecamatan_id = $_POST["kecamatan_id"];
 $desa_id = $_POST["desa_id"];
 if ($provinsi_id == "") {
-    echo "Harap isi bagian provinsi.";
+    echo "error_value_prov";
     die;
 }
 if ($kabupaten_id == "") {
-    echo "Harap isi bagian kabupaten.";
+    echo "error_value_kab";
     die;
 }
 if ($kecamatan_id == "") {
-    echo "Harap isi bagian kecamatan.";
+    echo "error_value_kec";
     die;
 }
 if ($desa_id == "") {
-    echo "Harap isi bagian desa.";
+    echo "error_value_des";
     die;
 }
 
@@ -174,13 +174,13 @@ if (
     !isIdExist('kecamatan', $kecamatan_id) ||
     !isIdExist('desa', $desa_id)
 ) {
-    echo "Alamat tidak tersedia.";
+    echo "address_not_found";
     die;
 }
 
 // Memeriksa relasi antara tabel-tabel alamat
 if (!isValidAddress($provinsi_id, $kabupaten_id, $kecamatan_id, $desa_id)) {
-    echo "Alamat tidak sesuai.";
+    echo "address_not_found";
     die;
 }
 
@@ -188,15 +188,15 @@ $image_add = isset($_FILES['image_add']) ? $_FILES['image_add'] : "";
 if ($image_add != "") {
     $image_add = addImage();
     if (!$image_add) {
-        echo "Gagal mengupload gambar profil.";
+        // echo "error_upload_image";
         die;
     }
 }
 
 // Panggil fungsi tambah() untuk menambahkan data ke database
 if (addForm(["kode_add" => $kode_add, "name_add" => $name_add, "gender_add" => $gender_add, "image_add" => $image_add, "desa_id" => $desa_id])) {
-    echo "Data berhasil ditambahkan.";
+    echo "success_add_data";
 } else {
-    echo "Gagal menambahkan data.";
+    echo "failed_add_data";
 }
 ?>
