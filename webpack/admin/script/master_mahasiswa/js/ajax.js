@@ -492,12 +492,17 @@ var MahasiswaModule = (function () {
         $("#feedback-name-add").remove();
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
-
+        
         // Select all select elements inside the modal
         $('#staticBackdrop-add select').each(function () {
             // Reset the selected option
             $(this).val(0);
             $(this).trigger('change');
+            $("#gender-add").removeClass("is-valid");
+            $("#provinsi-add").removeClass("is-valid");
+            $("#kabupaten-add").removeClass("is-valid");
+            $("#kecamatan-add").removeClass("is-valid");
+            $("#desa-add").removeClass("is-valid");
         });
     }
 
@@ -619,7 +624,7 @@ var MahasiswaModule = (function () {
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
         $('#provinsi-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
-        
+
         var url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");
         MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
@@ -631,6 +636,13 @@ var MahasiswaModule = (function () {
         var url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
         var target_select = $("#desa-edit");
         MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
+
+        $("#button-edit").prop("disabled", false);
+        $("#gender-edit").addClass("is-valid");
+        $("#provinsi-edit").addClass("is-valid");
+        $("#kabupaten-edit").addClass("is-valid");
+        $("#kecamatan-edit").addClass("is-valid");
+        $("#desa-edit").addClass("is-valid");
     }
 
     // validation function //
@@ -793,11 +805,13 @@ var MahasiswaModule = (function () {
 
         const resetSelectOptions = (target_select) => {
             target_select.html('<option value=""></option>');
+            target_select.removeClass("is-valid");
         }
 
         if (load === "provinsi-add") {
             const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-add"));
             resetSelectOptions($("#desa-add"));
@@ -805,12 +819,14 @@ var MahasiswaModule = (function () {
         } else if (load === "kabupaten-add") {
             const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
             const target_select = $("#kecamatan-add");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-add"));
 
         } else if (load === "kecamatan-add") {
             const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
             const target_select = $("#desa-add");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
 
         }
@@ -819,6 +835,7 @@ var MahasiswaModule = (function () {
         if (load === "provinsi-edit") {
             const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-edit"));
             resetSelectOptions($("#desa-edit"));
@@ -826,12 +843,14 @@ var MahasiswaModule = (function () {
         } else if (load === "kabupaten-edit") {
             const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
             const target_select = $("#kecamatan-edit");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-edit"));
 
         } else if (load === "kecamatan-edit") {
             const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
             const target_select = $("#desa-edit");
+            target_select.removeClass("is-valid");
             MahasiswaRequest.loadSelectOptions(url, target_select);
         }
 
@@ -860,6 +879,23 @@ var MahasiswaModule = (function () {
             kecamatan = "kecamatan-edit";
             desa = "desa-edit";
         }
+
+        $("#" + gender).on('change', function () {
+            $("#" + gender).addClass('is-valid');
+        });
+        $("#" + provinsi).on('change', function () {
+            $("#" + provinsi).addClass('is-valid');
+        });
+        $("#" + kabupaten).on('change', function () {
+            $("#" + kabupaten).addClass('is-valid');
+        });
+        $("#" + kecamatan).on('change', function () {
+            $("#" + kecamatan).addClass('is-valid');
+        });
+        $("#" + desa).on('change', function () {
+            $("#" + desa).addClass('is-valid');
+        });
+
 
         if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
             $("#" + button_id).prop("disabled", false);

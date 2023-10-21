@@ -166,11 +166,11 @@ var MahasiswaRequest = (function () {
         formData.append("kecamatan_id", kecamatan_id);
         formData.append("desa_id", desa_id);
         formData.append("old_image", old_image);
-        if ($("#image-edit").files.length > 0) {
-            formData.append("image_edit", $("#image-edit").files[0]);
+        if ($("#image-edit")[0].files.length > 0) {
+            formData.append("image_edit", $("#image-edit")[0].files[0]);
         } else {
             formData.append("image_edit", "");
-        }
+        }        
 
         $.ajax({
             url: `script/master_mahasiswa/php/update.php`,
