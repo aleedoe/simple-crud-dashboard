@@ -146,6 +146,7 @@ var MahasiswaRequest = (function () {
         });
     }
     function dataEdit() {
+        const mahasiswa_id = $("#mahasiswa-id").val();
         const kode_edit = $("#kode-edit").val();
         const name_edit = $("#name-edit").val();
         const gender_edit = $("#gender-edit").val();
@@ -153,8 +154,10 @@ var MahasiswaRequest = (function () {
         const kabupaten_id = $("#kabupaten-edit").val();
         const kecamatan_id = $("#kecamatan-edit").val();
         const desa_id = $("#desa-edit").val();
+        const old_image = $("#old-image").val();
 
         var formData = new FormData();
+        formData.append("mahasiswa_id", mahasiswa_id);
         formData.append("kode_edit", kode_edit);
         formData.append("name_edit", name_edit);
         formData.append("gender_edit", gender_edit);
@@ -162,6 +165,7 @@ var MahasiswaRequest = (function () {
         formData.append("kabupaten_id", kabupaten_id);
         formData.append("kecamatan_id", kecamatan_id);
         formData.append("desa_id", desa_id);
+        formData.append("old_image", old_image);
         if ($("#image-edit").files.length > 0) {
             formData.append("image_edit", $("#image-edit").files[0]);
         } else {
@@ -176,7 +180,7 @@ var MahasiswaRequest = (function () {
             processData: false, // Tambahkan ini
             success: function (responsText) {
                 alert("Success");
-                $("#staticBackdrop-add").modal('hide');
+                $("#staticBackdrop-edit").modal('hide');
             },
             error: function () {
                 console.error("Failed to fetch data.");

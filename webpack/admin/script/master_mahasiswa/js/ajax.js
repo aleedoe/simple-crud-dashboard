@@ -154,6 +154,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="tambahNama">Nama</label>
+                                        <input type="hidden" class="form-control" id="mahasiswa-id">
                                         <input type="text" class="form-control" id="name-edit"
                                             placeholder="Nama Mahasiswa" oninput="MahasiswaModule.validatorName('name-edit', 'button-edit')">
                                     </div>
@@ -214,6 +215,7 @@ var MahasiswaModule = (function () {
                                 <div class="col-12">
                                     <div class="form-group m-0">
                                         <label for="exampleFormControlInput1" class="m-0">Foto Profile</label>
+                                        <input type="hidden" class="form-control" id="old-image">
                                     </div>
                                     <span class="fileinput-wrapper file-selected mt-2">
                                         <input type="file" name="file" id="image-edit">
@@ -603,7 +605,9 @@ var MahasiswaModule = (function () {
         }
 
         $("#kode-edit").val(data[0].kode);
+        $("#mahasiswa-id").val(data[0].id);
         $("#name-edit").val(data[0].nama);
+        $("#old-image").val(data[0].image_profile);
         const kode = $("#kode-edit").val();
         const name = $("#name-edit").val();
         kodeValidator(kode, name);

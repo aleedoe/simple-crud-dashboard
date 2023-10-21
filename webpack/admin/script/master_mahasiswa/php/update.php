@@ -6,12 +6,12 @@ function editForm($data)
 {
     // ambil data dari tiap elemen dalam form
     global $conn;
-    $id = $data['id'];
-    $kode = htmlspecialchars($data["kode"]);
-    $nama = htmlspecialchars($data["nama"]);
-    $jenis_kelamin = htmlspecialchars($data["jenis_kelamin"]);
-    $image_profile = $data["image_profile"];
-    $id_desa = $data["id_desa"];
+    $mahasiswa_id = $data['mahasiswa_id'];
+    $kode_edit = htmlspecialchars($data["kode_edit"]);
+    $name_edit = htmlspecialchars($data["name_edit"]);
+    $gender_edit = htmlspecialchars($data["gender_edit"]);
+    $image_edit = $data["image_edit"];
+    $desa_id = $data["desa_id"];
     // $image_profile_lama = htmlspecialchars($data["gambar_lama"]);
 
     // if ($_FILES['image_profile']['error'] === 4) {
@@ -19,19 +19,19 @@ function editForm($data)
     // } else {
     //     $image_profile = upload_gambar();
     // }
-    $query = "UPDATE data SET  kode='$kode', nama='$nama', jenis_kelamin='$jenis_kelamin', image_profile='$image_profile', id_desa='$id_desa' WHERE id='$id'";
+    $query = "UPDATE data SET  kode='$kode_edit', nama='$name_edit', jenis_kelamin='$gender_edit', image_profile='$image_edit', id_desa='$desa_id' WHERE id='$mahasiswa_id'";
     //var_dump($query);
     mysqli_query($conn, $query);
     return mysqli_affected_rows($conn);
 }
-function addImage()
+function editImage()
 {
     $file_name = '';
-    if (isset($_FILES['image_add'])) {
-        $file_name = $_FILES['image_add']['name'];
-        $file_size = $_FILES['image_add']['size'];
-        $error_file = $_FILES['image_add']['error'];
-        $temporary_file_storage = $_FILES['image_add']['tmp_name'];
+    if (isset($_FILES['image_edit'])) {
+        $file_name = $_FILES['image_edit']['name'];
+        $file_size = $_FILES['image_edit']['size'];
+        $error_file = $_FILES['image_edit']['error'];
+        $temporary_file_storage = $_FILES['image_edit']['tmp_name'];
 
         // Cek apakah yang diupload adalah gambar
         $Valid_Image_extension = ['jpg', 'jpeg', 'png'];
@@ -61,48 +61,51 @@ function addImage()
     return $file_name;
 }
 
-$kode_add = $_POST["kode_add"];
-if ($kode_add == "") {
+$mahasiswa_id = $_POST["mahasiswa_id"];
+$old_image = $_POST["old_image"];
+
+$kode_edit = $_POST["kode_edit"];
+if ($kode_edit == "") {
     echo "error_value_kode";
     die;
 }
 
 // Validasi kode hanya angka
-if (!is_numeric($kode_add)) {
+if (!is_numeric($kode_edit)) {
     echo "error_number_kode";
     die;
 }
 
 // Validasi panjang kode maksimal 10 digit
-if (strlen($kode_add) > 10) {
+if (strlen($kode_edit) > 10) {
     echo "error_length_kode";
     die;
 }
 
-$name_add = $_POST["name_add"];
-if ($name_add == "") {
+$name_edit = $_POST["name_edit"];
+if ($name_edit == "") {
     echo "error_value_name";
     die;
 }
 
 // Validasi nama hanya boleh 0-9a-zA-Z spasi, max 10 karakter
-if (preg_match('/[^\w\s]/', $name_add)) {
+if (preg_match('/[^\w\s]/', $name_edit)) {
     echo "error_unique_name";
     die;
 }
 
-if (strlen($name_add) > 10) {
+if (strlen($name_edit) > 10) {
     echo "error_length_name";
     die;
 }
 
-$gender_add = $_POST["gender_add"];
-if ($gender_add == "") {
+$gender_edit = $_POST["gender_edit"];
+if ($gender_edit == "") {
     echo "error_gender_value";
     die;
 }
 
-if ($gender_add != "Laki-laki" && $gender_add != "Perempuan") {
+if ($gender_edit != "Laki-laki" && $gender_edit != "Perempuan") {
     echo "error_gender_species";
     die;
 }
@@ -185,17 +188,19 @@ if (!isValidAddress($provinsi_id, $kabupaten_id, $kecamatan_id, $desa_id)) {
     die;
 }
 
-$image_add = isset($_FILES['image_add']) ? $_FILES['image_add'] : "";
-if ($image_add != "") {
-    $image_add = addImage();
-    if (!$image_add) {
-        // echo "error_upload_image";
-        die;
+$image_edit = isset($_FILES['image_edit']) ? $_FILES['image_edit'] : "";
+if ($image_edit != "") {
+    $path_to_image = '../../../docs/img/' . $old_image;
+    if (file_exists($path_to_image)) {
+        unlink($path_to_image);
     }
+    $image_edit = editImage();
+} else {
+    $image_edit = $old_image;
 }
 
 // Panggil fungsi tambah() untuk menambahkan data ke database
-if (editForm(["kode_edit" => $kode_edit, "name_edit" => $name_edit, "gender_edit" => $gender_edit, "image_edit" => $image_edit, "desa_id" => $desa_id])) {
+if (editForm(["mahasiswa_id" => $mahasiswa_id, "old_image" => $old_image, "kode_edit" => $kode_edit, "name_edit" => $name_edit, "gender_edit" => $gender_edit, "image_edit" => $image_edit, "desa_id" => $desa_id])) {
     echo "success_edit_data";
 } else {
     echo "failed_edit_data";
