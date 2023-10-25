@@ -492,7 +492,7 @@ var MahasiswaModule = (function () {
         $("#feedback-name-add").remove();
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
-        
+
         // Select all select elements inside the modal
         $('#staticBackdrop-add select').each(function () {
             // Reset the selected option
@@ -676,38 +676,19 @@ var MahasiswaModule = (function () {
 
         const inputElement = $("#" + input_id);
 
-        inputElement.on("input", function () {
-            const input_value = inputElement.val();
-            const regex = /[^A-Za-z0-9\s]/;
+        const input_value = inputElement.val();
+        const regex = /[^A-Za-z0-9\s]/;
 
-            if (!regex.test(input_value)) {
-                const has_number = /^[0-9]+$/.test(input_value);
+        if (!regex.test(input_value)) {
+            const has_number = /^[0-9]+$/.test(input_value);
 
-                if (has_number) {
-                    if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                        $("#" + button_id).prop("disabled", false);
-                    }
-                    inputElement.removeClass("is-invalid");
-                    inputElement.addClass("is-valid");
-                    $("#feedback-" + input_id).remove();
-                } else {
-                    $("#" + button_id).prop("disabled", true);
-                    inputElement.removeClass("is-valid");
-                    inputElement.addClass("is-invalid");
-                    if ($("#feedback-" + input_id).length > 0) {
-                        $("#feedback-" + input_id).remove();
-                    }
-                    inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Kode harus berupa angka.
-                        </div>
-                    `);
-                    if (input_value == "") {
-                        inputElement.removeClass("is-valid");
-                        inputElement.removeClass("is-invalid");
-                        $("#feedback-" + input_id).remove();
-                    }
+            if (has_number) {
+                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                    $("#" + button_id).prop("disabled", false);
                 }
+                inputElement.removeClass("is-invalid");
+                inputElement.addClass("is-valid");
+                $("#feedback-" + input_id).remove();
             } else {
                 $("#" + button_id).prop("disabled", true);
                 inputElement.removeClass("is-valid");
@@ -716,12 +697,29 @@ var MahasiswaModule = (function () {
                     $("#feedback-" + input_id).remove();
                 }
                 inputElement.after(`
+                        <div id="feedback-${input_id}" class="invalid-feedback">
+                        Kode harus berupa angka.
+                        </div>
+                    `);
+                if (input_value == "") {
+                    inputElement.removeClass("is-valid");
+                    inputElement.removeClass("is-invalid");
+                    $("#feedback-" + input_id).remove();
+                }
+            }
+        } else {
+            $("#" + button_id).prop("disabled", true);
+            inputElement.removeClass("is-valid");
+            inputElement.addClass("is-invalid");
+            if ($("#feedback-" + input_id).length > 0) {
+                $("#feedback-" + input_id).remove();
+            }
+            inputElement.after(`
                     <div id="feedback-${input_id}" class="invalid-feedback">
                     Kode tidak diperbolehkan mengandung karakter unik.
                     </div>
                 `);
-            }
-        });
+        }
     }
 
     function validatorName(input_id, button_id) {
@@ -753,36 +751,22 @@ var MahasiswaModule = (function () {
 
         const inputElement = $("#" + input_id);
 
-        inputElement.on("input", function () {
-            const input_value = inputElement.val();
-            const regex = /[^A-Za-z0-9\.\s]/;
+        const input_value = inputElement.val();
+        const regex = /[^A-Za-z0-9\.\s]/;
 
-            if (!regex.test(input_value)) {
-                const has_number = /[0-9]/.test(input_value);
+        if (!regex.test(input_value)) {
+            const has_number = /[0-9]/.test(input_value);
 
-                if (!has_number) {
-                    if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                        $("#" + button_id).prop("disabled", false);
-                    }
-                    inputElement.removeClass("is-invalid");
-                    inputElement.addClass("is-valid");
-                    $("#feedback-" + input_id).remove();
-                    if (input_value == "") {
-                        inputElement.removeClass("is-valid");
-                        $("#" + button_id).prop("disabled", true);
-                    }
-                } else {
-                    $("#" + button_id).prop("disabled", true);
+            if (!has_number) {
+                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                    $("#" + button_id).prop("disabled", false);
+                }
+                inputElement.removeClass("is-invalid");
+                inputElement.addClass("is-valid");
+                $("#feedback-" + input_id).remove();
+                if (input_value == "") {
                     inputElement.removeClass("is-valid");
-                    inputElement.addClass("is-invalid");
-                    if ($("#feedback-" + input_id).length > 0) {
-                        $("#feedback-" + input_id).remove();
-                    }
-                    inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Nama tidak boleh mengandung angka.
-                        </div>
-                    `);
+                    $("#" + button_id).prop("disabled", true);
                 }
             } else {
                 $("#" + button_id).prop("disabled", true);
@@ -792,12 +776,24 @@ var MahasiswaModule = (function () {
                     $("#feedback-" + input_id).remove();
                 }
                 inputElement.after(`
+                        <div id="feedback-${input_id}" class="invalid-feedback">
+                        Nama tidak boleh mengandung angka.
+                        </div>
+                    `);
+            }
+        } else {
+            $("#" + button_id).prop("disabled", true);
+            inputElement.removeClass("is-valid");
+            inputElement.addClass("is-invalid");
+            if ($("#feedback-" + input_id).length > 0) {
+                $("#feedback-" + input_id).remove();
+            }
+            inputElement.after(`
                     <div id="feedback-${input_id}" class="invalid-feedback">
                     Nama tidak diperbolehkan mengandung karakter unik.
                     </div>
                 `);
-            }
-        });
+        }
     }
 
 
