@@ -145,6 +145,7 @@ var MahasiswaRequest = (function () {
             }
         });
     }
+
     function dataEdit() {
         const mahasiswa_id = $("#mahasiswa-id").val();
         const kode_edit = $("#kode-edit").val();
@@ -188,12 +189,29 @@ var MahasiswaRequest = (function () {
         });
     }
 
+    function dataDelete(id) {
+        $.ajax({
+            url: `script/master_mahasiswa/php/delete.php?id=${id}`,
+            type: "GET",
+            dataType: "json",
+            success: function (response) {
+                alert(response);
+                $('#staticBackdrop-delete').modal('hide');
+            },
+            error: function () {
+                alert(response);
+                $('#staticBackdrop-delete').modal('hide');
+            }
+        });
+    }
+
     return {
         fetchDataAndRender: fetchDataAndRender,
         loadSelectOptions: loadSelectOptions,
         loadSelectOptionsEdit: loadSelectOptionsEdit,
         loadDataEdit: loadDataEdit,
         dataAdd: dataAdd,
-        dataEdit: dataEdit
+        dataEdit: dataEdit,
+        dataDelete: dataDelete,
     };
 })();

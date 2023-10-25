@@ -235,6 +235,32 @@ var MahasiswaModule = (function () {
         </div>
         <!-- /.modal edit mahasiswa -->
 
+        <!-- modal hapus mahasiswa -->
+        <div class="modal fade" id="staticBackdrop-delete" data-backdrop="static" data-keyboard="false"
+            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
+            <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="staticBackdropLabel">Hapus title</h5>
+                        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button> -->
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+                        <!-- Stack the columns on mobile by making one full-width and the other half-width -->
+                        yakin akan dihapus?
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
+                            class="nav-icon fas fa-times mr-1"></i> Close</button>
+                        <button type="button" class="btn btn-primary" id="button-delete"><i class="nav-icon fas fa-trash-alt mr-1"></i> Hapus</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal hapus mahasiswa -->
+        
+        <!-- main content -->
         <div class="row" id="row-1-dev">
             <div class="col-12">
                 <div class="card card-primary card-outline">
@@ -292,6 +318,8 @@ var MahasiswaModule = (function () {
                 </div>
             </div>
         </div>
+        <!-- /.main content -->
+
         `);
 
 
@@ -378,7 +406,7 @@ var MahasiswaModule = (function () {
                 <td class="text-center align-middle">${row.nama_desa}, ${row.nama_kecamatan}, ${row.nama_kabupaten}, ${row.nama_provinsi}</td>
                 <td class="p-sm-2 text-center align-middle">
                 <!-- Button with a click event to open the modal -->
-                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="tampilModalMahasiswa(${row.id_personal_name})" data-placement="top" title="hapus">
+                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="MahasiswaModule.showModalDelete(${row.id_personal_name})" data-placement="top" title="hapus">
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
@@ -645,6 +673,12 @@ var MahasiswaModule = (function () {
         $("#desa-edit").addClass("is-valid");
     }
 
+    function showModalDelete(id) {
+        $("#button-delete").attr("onclick", "MahasiswaRequest.dataDelete(" + id + ")");
+        $('#staticBackdrop-delete').modal('show');
+    }
+    
+
     // validation function //
 
     function validatorCode(input_id, button_id) {
@@ -907,6 +941,7 @@ var MahasiswaModule = (function () {
         renderPagination: renderPagination,
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
+        showModalDelete: showModalDelete,
         validatorCode: validatorCode,
         validatorName: validatorName,
         validatorSelect: validatorSelect
