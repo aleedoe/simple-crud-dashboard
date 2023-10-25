@@ -4,7 +4,7 @@ require '../../config.php';
 
 $id = $_GET["id"];
 
-function delete($id)
+function deleteData($id)
 {
     global $conn;
     $student_id = $id;
@@ -27,9 +27,10 @@ function delete($id)
 }
 
 
-if (delete($id)) {
-    echo 'success';
+if (deleteData($id)) {
+    echo json_encode(['status' => 'success']);
 } else {
-    echo 'failed';
+    echo json_encode(['status' => 'failed']);
 }
+
 ?>

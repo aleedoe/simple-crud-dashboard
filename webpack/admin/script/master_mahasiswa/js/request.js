@@ -137,7 +137,7 @@ var MahasiswaRequest = (function () {
             contentType: false, // Tambahkan ini
             processData: false, // Tambahkan ini
             success: function (responsText) {
-                alert("Success");
+                alert(responsText);
                 $("#staticBackdrop-add").modal('hide');
             },
             error: function () {
@@ -171,7 +171,7 @@ var MahasiswaRequest = (function () {
             formData.append("image_edit", $("#image-edit")[0].files[0]);
         } else {
             formData.append("image_edit", "");
-        }        
+        }
 
         $.ajax({
             url: `script/master_mahasiswa/php/update.php`,
@@ -193,14 +193,13 @@ var MahasiswaRequest = (function () {
         $.ajax({
             url: `script/master_mahasiswa/php/delete.php?id=${id}`,
             type: "GET",
-            dataType: "json",
+            dataType: "text",
             success: function (response) {
-                alert(response);
+                alert("Data berhasil dihapus!");
                 $('#staticBackdrop-delete').modal('hide');
             },
-            error: function () {
-                alert(response);
-                $('#staticBackdrop-delete').modal('hide');
+            error: function (xhr, status, error) {
+                alert("Terjadi kesalahan: " + error);
             }
         });
     }
