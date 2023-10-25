@@ -830,7 +830,6 @@ var MahasiswaModule = (function () {
         }
     }
 
-
     function validatorSelect(input_id, button_id, load = "") {
 
         const resetSelectOptions = (target_select) => {

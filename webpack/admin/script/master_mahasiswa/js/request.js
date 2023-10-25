@@ -193,9 +193,10 @@ var MahasiswaRequest = (function () {
         $.ajax({
             url: `script/master_mahasiswa/php/delete.php?id=${id}`,
             type: "GET",
-            dataType: "text",
+            contentType: false, // Tambahkan ini
+            processData: false, // Tambahkan ini
             success: function (response) {
-                alert("Data berhasil dihapus!");
+                alert("succes!");
                 $('#staticBackdrop-delete').modal('hide');
             },
             error: function (xhr, status, error) {

@@ -19,18 +19,12 @@ function deleteData($id)
         unlink($path_to_image);
     }
 
-    $hapus = "DELETE FROM data WHERE id=$student_id";
-    $hapus_kontainer = "DELETE FROM matkul_container WHERE data_id=$student_id";
-    mysqli_query($conn, $hapus);
-    mysqli_query($conn, $hapus_kontainer);
+    $delete = "DELETE FROM data WHERE id=$student_id";
+    $kontainer_delete = "DELETE FROM matkul_container WHERE data_id=$student_id";
+    mysqli_query($conn, $delete);
+    mysqli_query($conn, $kontainer_delete);
     return mysqli_affected_rows($conn);
 }
 
-
-if (deleteData($id)) {
-    echo json_encode(['status' => 'success']);
-} else {
-    echo json_encode(['status' => 'failed']);
-}
-
+deleteData($id)
 ?>
