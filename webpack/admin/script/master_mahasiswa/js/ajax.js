@@ -471,8 +471,11 @@ var MahasiswaModule = (function () {
             ul.appendChild(li);
 
             link.addEventListener("click", function () {
-                // $.LoadingOverlay("show", {background  : "rgba(0, 0, 0, 0.5)"});
-                // loadingBerhenti1Seccond();
+                $(".content-wrapper").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.5)",
+                    image: "",
+                    fontawesome: "fa fa-cog fa-spin"
+                });
                 MahasiswaRequest.fetchDataAndRender(i);
             });
         }
@@ -491,16 +494,22 @@ var MahasiswaModule = (function () {
 
         prevLink.addEventListener("click", function () {
             if (current_page > 1) {
-                // $.LoadingOverlay("show", {background  : "rgba(0, 0, 0, 0.5)"});
-                // loadingBerhenti1Seccond();
+                $(".content-wrapper").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.5)",
+                    image: "",
+                    fontawesome: "fa fa-cog fa-spin"
+                });
                 MahasiswaRequest.fetchDataAndRender(current_page - 1);
             }
         });
 
         nextLink.addEventListener("click", function () {
             if (current_page < total_pages) {
-                // $.LoadingOverlay("show", {background  : "rgba(0, 0, 0, 0.5)"});
-                // loadingBerhenti1Seccond();
+                $(".content-wrapper").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.5)",
+                    image: "",
+                    fontawesome: "fa fa-cog fa-spin"
+                });
                 MahasiswaRequest.fetchDataAndRender(current_page + 1);
             }
         });
