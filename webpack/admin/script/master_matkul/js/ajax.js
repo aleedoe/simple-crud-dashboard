@@ -25,7 +25,7 @@ var MatkulModule = (function () {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Mahasiswa Test</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Matakuliah</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -36,82 +36,11 @@ var MatkulModule = (function () {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="tambahKode">Kode</label>
-                                            <input type="text" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa" oninput="MatkulModule.validatorCode('kode-add', 'button-add')" autocomplete="off">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
                                             <label for="tambahNama">Nama</label>
                                             <input type="text" class="form-control" id="name-add"
                                                 placeholder="Nama Mahasiswa" oninput="MatkulModule.validatorName('name-add', 'button-add')"
                                                 maxlength="12" autocomplete="off">
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Jenis Kelamin</label>
-                                            <select class="form-control select2-default-add" id="gender-add" onchange="MatkulModule.validatorSelect('add', 'button-add')">
-                                                <option></option>
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Columns are always 50% wide, on mobile and desktop -->
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Provinsi</label>
-                                            <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MatkulModule.validatorSelect('add', 'button-add', 'provinsi-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MatkulModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MatkulModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Desa</label>
-                                            <select class="form-control select2-search-box-add" id="desa-add" onchange="MatkulModule.validatorSelect('add', 'button-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group m-0">
-                                            <label for="exampleFormControlInput1" class="m-0">Foto
-                                                Profile</label>
-                                        </div>
-                                        <span class="fileinput-wrapper file-selected mt-2">
-                                            <input type="file" name="file" id="image-add">
-                                        </span>
                                     </div>
                                 </div>
                             </form>
@@ -134,7 +63,7 @@ var MatkulModule = (function () {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Mahasiswa</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Matakuliah</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -144,82 +73,11 @@ var MatkulModule = (function () {
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label for="tambahKode">Kode</label>
-                                        <input type="text" class="form-control" id="kode-edit"
-                                            placeholder="Kode Mahasiswa" oninput="MatkulModule.validatorCode('kode-edit', 'button-edit')">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
                                         <label for="tambahNama">Nama</label>
                                         <input type="hidden" class="form-control" id="mahasiswa-id">
                                         <input type="text" class="form-control" id="name-edit"
                                             placeholder="Nama Mahasiswa" oninput="MatkulModule.validatorName('name-edit', 'button-edit')">
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Jenis Kelamin</label>
-                                        <select class="form-control select2-default-edit" id="gender-edit" onchange="MatkulModule.validatorSelect('edit', 'button-edit')">
-                                            <option></option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Columns are always 50% wide, on mobile and desktop -->
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Provinsi</label>
-                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Kabupaten</label>
-                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Kecamatan</label>
-                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Desa</label>
-                                        <select class="form-control select2-search-box-edit" id="desa-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group m-0">
-                                        <label for="exampleFormControlInput1" class="m-0">Foto Profile</label>
-                                        <input type="hidden" class="form-control" id="old-image">
-                                    </div>
-                                    <span class="fileinput-wrapper file-selected mt-2">
-                                        <input type="file" name="file" id="image-edit">
-                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -241,7 +99,7 @@ var MatkulModule = (function () {
             <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Hapus title</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Hapus Matakuiah</h5>
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button> -->
                     </div>
                     <div class="modal-body">
@@ -632,107 +490,13 @@ var MatkulModule = (function () {
 
 
     // validation function //
-
-    function validatorCode(input_id, button_id) {
-        let kode;
-        let name;
-        let gender;
-        let provinsi;
-        let kabupaten;
-        let kecamatan;
-        let desa;
-
-        if (input_id === 'kode-add' || input_id === 'name-add') {
-            kode = "kode-add";
-            name = "name-add";
-            gender = "gender-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
-            desa = "desa-add";
-        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            kode = "kode-edit";
-            name = "name-edit";
-            gender = "gender-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
-        }
-
-        const inputElement = $("#" + input_id);
-
-        const input_value = inputElement.val();
-        const regex = /[^A-Za-z0-9\s]/;
-
-        if (!regex.test(input_value)) {
-            const has_number = /^[0-9]+$/.test(input_value);
-
-            if (has_number) {
-                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                    $("#" + button_id).prop("disabled", false);
-                }
-                inputElement.removeClass("is-invalid");
-                inputElement.addClass("is-valid");
-                $("#feedback-" + input_id).remove();
-            } else {
-                $("#" + button_id).prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-" + input_id).length > 0) {
-                    $("#feedback-" + input_id).remove();
-                }
-                inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Kode harus berupa angka.
-                        </div>
-                    `);
-                if (input_value == "") {
-                    inputElement.removeClass("is-valid");
-                    inputElement.removeClass("is-invalid");
-                    $("#feedback-" + input_id).remove();
-                }
-            }
-        } else {
-            $("#" + button_id).prop("disabled", true);
-            inputElement.removeClass("is-valid");
-            inputElement.addClass("is-invalid");
-            if ($("#feedback-" + input_id).length > 0) {
-                $("#feedback-" + input_id).remove();
-            }
-            inputElement.after(`
-                    <div id="feedback-${input_id}" class="invalid-feedback">
-                    Kode tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-        }
-    }
-
     function validatorName(input_id, button_id) {
-        let kode;
         let name;
-        let gender;
-        let provinsi;
-        let kabupaten;
-        let kecamatan;
-        let desa;
 
         if (input_id === 'kode-add' || input_id === 'name-add') {
-            kode = "kode-add";
             name = "name-add";
-            gender = "gender-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
-            desa = "desa-add";
         } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            kode = "kode-edit";
             name = "name-edit";
-            gender = "gender-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
         }
 
         const inputElement = $("#" + input_id);
@@ -744,7 +508,7 @@ var MatkulModule = (function () {
             const has_number = /[0-9]/.test(input_value);
 
             if (!has_number) {
-                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                if ($("#" + name).val() !== "") {
                     $("#" + button_id).prop("disabled", false);
                 }
                 inputElement.removeClass("is-invalid");
@@ -782,110 +546,6 @@ var MatkulModule = (function () {
         }
     }
 
-
-    function validatorSelect(input_id, button_id, load = "") {
-
-        const resetSelectOptions = (target_select) => {
-            target_select.html('<option value=""></option>');
-            target_select.removeClass("is-valid");
-        }
-
-        if (load === "provinsi-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
-            const target_select = $("#kabupaten-add");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-add"));
-            resetSelectOptions($("#desa-add"));
-
-        } else if (load === "kabupaten-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
-            const target_select = $("#kecamatan-add");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#desa-add"));
-
-        } else if (load === "kecamatan-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
-            const target_select = $("#desa-add");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-
-        }
-
-
-        if (load === "provinsi-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
-            const target_select = $("#kabupaten-edit");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-edit"));
-            resetSelectOptions($("#desa-edit"));
-
-        } else if (load === "kabupaten-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
-            const target_select = $("#kecamatan-edit");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#desa-edit"));
-
-        } else if (load === "kecamatan-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
-            const target_select = $("#desa-edit");
-            target_select.removeClass("is-valid");
-            MatkulRequest.loadSelectOptions(url, target_select);
-        }
-
-        let kode;
-        let name;
-        let gender;
-        let provinsi;
-        let kabupaten;
-        let kecamatan;
-        let desa;
-
-        if (input_id === 'add') {
-            kode = "kode-add";
-            name = "name-add";
-            gender = "gender-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
-            desa = "desa-add";
-        } else if (input_id === 'edit') {
-            kode = "kode-edit";
-            name = "name-edit";
-            gender = "gender-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
-        }
-
-        $("#" + gender).on('change', function () {
-            $("#" + gender).addClass('is-valid');
-        });
-        $("#" + provinsi).on('change', function () {
-            $("#" + provinsi).addClass('is-valid');
-        });
-        $("#" + kabupaten).on('change', function () {
-            $("#" + kabupaten).addClass('is-valid');
-        });
-        $("#" + kecamatan).on('change', function () {
-            $("#" + kecamatan).addClass('is-valid');
-        });
-        $("#" + desa).on('change', function () {
-            $("#" + desa).addClass('is-valid');
-        });
-
-
-        if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-            $("#" + button_id).prop("disabled", false);
-        } else {
-            $("#" + button_id).prop("disabled", true);
-        }
-    }
-
     return {
         load: load,
         buildUrl: buildUrl,
@@ -894,8 +554,6 @@ var MatkulModule = (function () {
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
-        validatorCode: validatorCode,
         validatorName: validatorName,
-        validatorSelect: validatorSelect
     };
 })();

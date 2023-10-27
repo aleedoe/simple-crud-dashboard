@@ -189,112 +189,12 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="tambahKode">Kode</label>
-                                                    <input type="email" class="form-control" id="kode-add"
-                                                        placeholder="Kode Mahasiswa"
-                                                        oninput="validatorCode('kode-add', 'button-add')">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
                                                     <label for="tambahNama">Nama</label>
                                                     <input type="email" class="form-control" id="name-add"
                                                         placeholder="Nama Mahasiswa"
                                                         oninput="validatorName('name-add', 'button-add')"
                                                         maxlength="12">
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <div class="form-group">
-                                                    <label>Jenis Kelamin</label>
-                                                    <select class="form-control select2-default" id="gender-add" onchange="">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Columns are always 50% wide, on mobile and desktop -->
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Provinsi</label>
-                                                    <select class="form-control select2-search-box" id="provinsi-add">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Kabupaten</label>
-                                                    <select class="form-control select2-search-box" id="kabupaten-add">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Kecamatan</label>
-                                                    <select class="form-control select2-search-box" id="kecamatan-add">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <div class="form-group">
-                                                    <label>Desa</label>
-                                                    <select class="form-control select2-search-box" id="desa-add">
-                                                        <option selected="selected">Alabama</option>
-                                                        <option>Alaska</option>
-                                                        <option>California</option>
-                                                        <option>Delaware</option>
-                                                        <option>Tennessee</option>
-                                                        <option>Texas</option>
-                                                        <option>Washington</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div class="form-group m-0">
-                                                    <label for="exampleFormControlInput1" class="m-0">Foto
-                                                        Profile</label>
-                                                </div>
-                                                <span class="fileinput-wrapper file-selected mt-2">
-                                                    <input type="file" name="file" id="image-add">
-                                                </span>
                                             </div>
                                         </div>
                                     </form>
