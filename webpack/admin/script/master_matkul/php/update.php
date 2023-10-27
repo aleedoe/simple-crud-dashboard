@@ -1,6 +1,6 @@
 <?php
 // relasi ke file fungtions_connect
-require '../fungtions.php';
+require '../../config.php';
 
 function edit_Data_matkul($data)
 {
@@ -14,15 +14,29 @@ function edit_Data_matkul($data)
     return mysqli_affected_rows($conn);
 }
 
-if (isset($_POST["id"]) && isset($_POST["nama_matkul"])) {
-    $id = $_POST["id"];
-    $matkul_name = $_POST["nama_matkul"];
+if (isset($_POST["matkul_id"]) && isset($_POST["name_edit"])) {
+    $id = $_POST["matkul_id"];
+    $matkul_name = $_POST["name_edit"];
+    if ($matkul_name == "") {
+        echo "error_value_name";
+        die;
+    }
+
+    if (preg_match('/[^\w\s\.]/', $matkul_name)) {
+        echo "error_unique_name";
+        die;
+    }
+
+    if (strlen($matkul_name) > 20) {
+        echo "error_length_name";
+        die;
+    }
 
     // Panggil fungsi edit_Data_matkul() untuk mengupdate data di database
     if (edit_Data_matkul(["id" => $id, "nama_matkul" => $matkul_name])) {
-        echo "Data berhasil diupdate.";
+        echo "success";
     } else {
-        echo "Gagal mengupdate data.";
+        echo "failed";
     }
 }
 ?>
