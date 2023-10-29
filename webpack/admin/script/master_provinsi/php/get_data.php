@@ -16,7 +16,10 @@ FROM provinsi
     LEFT JOIN kecamatan ON kabupaten.`id` = kecamatan.`id_kabupaten`
     LEFT JOIN desa ON kecamatan.`id` = desa.`id_kecamatan`
     LEFT JOIN DATA ON desa.`id` = data.`id_desa`
-GROUP BY provinsi.`id`";
+GROUP BY
+    provinsi.`id`
+ORDER BY
+    provinsi.name ASC";
 
 $total_data = count(get_data($query));
 $total_pages = ceil($total_data / $limit);

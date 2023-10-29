@@ -25,7 +25,7 @@ var ProvinsiModule = (function() {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Matakuliah</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Provinsi</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -38,8 +38,8 @@ var ProvinsiModule = (function() {
                                         <div class="form-group">
                                             <label for="tambahNama">Nama</label>
                                             <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Mahasiswa" oninput="ProvinsiModule.validatorName('name-add', 'button-add')"
-                                                maxlength="12" autocomplete="off">
+                                                placeholder="Nama Provinsi" oninput="ProvinsiModule.validatorName('name-add', 'button-add')"
+                                                maxlength="25" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>

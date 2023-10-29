@@ -40,7 +40,7 @@ const ProvinsiRequest = (() => {
         formData.append("name_add", name_add);
 
         $.ajax({
-            url: `script/master_matkul/php/add.php`,
+            url: `script/master_provinsi/php/add.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
