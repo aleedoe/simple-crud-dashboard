@@ -4,8 +4,8 @@ var ProvinsiModule = (function() {
 
     function load() {
         buildStructure();
-        MatkulRequest.fetchDataAndRender(1);
-        console.log('mahasiswa module loaded');
+        ProvinsiRequest.fetchDataAndRender(1);
+        console.log('provinsi module loaded');
     }
 
     function buildStructure() {

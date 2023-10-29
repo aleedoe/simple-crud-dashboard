@@ -5,7 +5,7 @@ var MatkulModule = (function () {
     function load() {
         buildStructure();
         MatkulRequest.fetchDataAndRender(1);
-        console.log('mahasiswa module loaded');
+        console.log('matkul module loaded');
     }
 
     function buildStructure() {
