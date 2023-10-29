@@ -80,7 +80,7 @@ const ProvinsiRequest = (() => {
 
     function dataDelete(id) {
         $.ajax({
-            url: `script/master_matkul/php/delete.php?id=${id}`,
+            url: `script/master_provinsi/php/delete.php?id=${id}`,
             type: "GET",
             contentType: false, // Tambahkan ini
             processData: false, // Tambahkan ini
