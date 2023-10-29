@@ -6,17 +6,17 @@ $limit = 5;
 $offset = ($page - 1) * $limit;
 
 $query = "SELECT 
-    matkul_name.id,
-    matkul_name.name,
-    COUNT(matkul_container.`matkul_name`) AS jumlah_pengambil
-FROM 
-    matkul_name
-LEFT JOIN 
-    matkul_container ON matkul_name.id = matkul_container.`matkul_name`
-GROUP BY 
-    matkul_name.id, matkul_name.name
-ORDER BY
-    matkul_name.name ASC";
+    provinsi.*,
+    COUNT(DISTINCT kabupaten.`id`) AS total_kabupaten,
+    COUNT(DISTINCT kecamatan.`id`) AS total_kecamatan,
+    COUNT(DISTINCT desa.`id`) AS total_desa,
+    COUNT(data.`id`) AS total_data
+FROM provinsi
+    LEFT JOIN kabupaten ON provinsi.`id` = kabupaten.`id_provinsi`
+    LEFT JOIN kecamatan ON kabupaten.`id` = kecamatan.`id_kabupaten`
+    LEFT JOIN desa ON kecamatan.`id` = desa.`id_kecamatan`
+    LEFT JOIN DATA ON desa.`id` = data.`id_desa`
+GROUP BY provinsi.`id`";
 
 $total_data = count(get_data($query));
 $total_pages = ceil($total_data / $limit);

@@ -4,12 +4,12 @@ const ProvinsiRequest = (() => {
     
     function fetchDataAndRender(page) {
         $.ajax({
-            url: MatkulModule.buildUrl(page),
+            url: ProvinsiModule.buildUrl(page),
             type: "GET",
             dataType: "json",
             success: function (response) {
-                MatkulModule.renderData(response.data, page);
-                MatkulModule.renderPagination(response.total_pages, page);
+                ProvinsiModule.renderData(response.data, page);
+                ProvinsiModule.renderPagination(response.total_pages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
             error: function () {
@@ -24,7 +24,7 @@ const ProvinsiRequest = (() => {
             type: "GET",
             dataType: "json",
             success: function (response) {
-                MatkulModule.aplyValueModalEdit(response.data);
+                ProvinsiModule.aplyValueModalEdit(response.data);
                 console.log(response.data);
             },
             error: function () {

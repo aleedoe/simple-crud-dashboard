@@ -10,7 +10,7 @@ var ProvinsiModule = (function() {
 
     function buildStructure() {
         $(".head-name-title-dev").removeClass("d-none");
-        $(".head-name-title-dev h1").text("Tabel Matkul");
+        $(".head-name-title-dev h1").text("Tabel Provinsi");
         $(".content-wrapper").LoadingOverlay("show", {
             background: "rgba(0, 0, 0, 0.5)",
             image: "",
@@ -38,7 +38,7 @@ var ProvinsiModule = (function() {
                                         <div class="form-group">
                                             <label for="tambahNama">Nama</label>
                                             <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Mahasiswa" oninput="MatkulModule.validatorName('name-add', 'button-add')"
+                                                placeholder="Nama Mahasiswa" oninput="ProvinsiModule.validatorName('name-add', 'button-add')"
                                                 maxlength="12" autocomplete="off">
                                         </div>
                                     </div>
@@ -49,7 +49,7 @@ var ProvinsiModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                             class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="MatkulRequest.dataAdd()"
+                        <button type="button" class="btn btn-primary" onclick="ProvinsiRequest.dataAdd()"
                             id="button-add" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
@@ -63,7 +63,7 @@ var ProvinsiModule = (function() {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Matakuliah</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Provinsi</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -76,7 +76,7 @@ var ProvinsiModule = (function() {
                                         <label for="tambahNama">Nama</label>
                                         <input type="hidden" class="form-control" id="matkul-id">
                                         <input type="text" class="form-control" id="name-edit"
-                                            placeholder="Nama Matakuliah" oninput="MatkulModule.validatorName('name-edit', 'button-edit')">
+                                            placeholder="Nama Provinsi" oninput="ProvinsiModule.validatorName('name-edit', 'button-edit')">
                                     </div>
                                 </div>
                             </div>
@@ -85,7 +85,7 @@ var ProvinsiModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="MatkulRequest.dataEdit()"  id="button-edit" disabled><i
+                        <button type="button" class="btn btn-primary" onclick="ProvinsiRequest.dataEdit()"  id="button-edit" disabled><i
                                 class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
@@ -126,7 +126,7 @@ var ProvinsiModule = (function() {
                         <h5 class="card-title m-0">
                             <div class="d-flex flex-wrap align-items-center">
                                 <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="MatkulModule.resetModalAdd()">
+                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="ProvinsiModule.resetModalAdd()">
                                     <i class="nav-icon fas fa-plus mr-1"></i>
                                     Tambah
                                 </button>
@@ -140,8 +140,11 @@ var ProvinsiModule = (function() {
                                 id="data-table">
                                 <thead style="color: #3d3d3d;">
                                     <th>No</th>
-                                    <th>Nama Matkul</th>
-                                    <th>Total Pengambil</th>
+                                    <th>Nama Provinsi</th>
+                                    <th>Total Kabupaten</th>
+                                    <th>Total Kecamatan</th>
+                                    <th>Total Desa</th>
+                                    <th>Total Data</th>
                                     <th>Aksi</th>
                                 </thead>
                                 <tbody>
@@ -173,7 +176,7 @@ var ProvinsiModule = (function() {
     }
 
     function buildUrl(page) {
-        let url = `script/master_matkul/php/get_data.php?page=${page}`;
+        let url = `script/master_provinsi/php/get_data.php?page=${page}`;
         return url;
     }
 
@@ -191,14 +194,17 @@ var ProvinsiModule = (function() {
             new_row.innerHTML = `
                 <td class="text-center align-middle">${startNumber + index + 1}</td>
                 <td class="text-center align-middle">${row.name}</td>
-                <td class="text-center align-middle">${row.jumlah_pengambil}</td>
+                <td class="text-center align-middle">${row.total_kabupaten}</td>
+                <td class="text-center align-middle">${row.total_kecamatan}</td>
+                <td class="text-center align-middle">${row.total_desa}</td>
+                <td class="text-center align-middle">${row.total_data}</td>
                 <td class="p-sm-2 text-center align-middle">
                 <!-- Button with a click event to open the modal -->
-                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="MatkulModule.showModalDelete(${row.id})" data-placement="top" title="hapus">
+                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="ProvinsiModule.showModalDelete(${row.id})" data-placement="top" title="hapus">
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="MatkulRequest.loadDataEdit(${row.id})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="ProvinsiRequest.loadDataEdit(${row.id})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
                     <i class="nav-icon fas fa-pen fa-sm"></i>
                 </button>
                 </td>
@@ -246,7 +252,7 @@ var ProvinsiModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MatkulRequest.fetchDataAndRender(i);
+                ProvinsiRequest.fetchDataAndRender(i);
             });
         }
 
@@ -269,7 +275,7 @@ var ProvinsiModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MatkulRequest.fetchDataAndRender(current_page - 1);
+                ProvinsiRequest.fetchDataAndRender(current_page - 1);
             }
         });
 
@@ -280,7 +286,7 @@ var ProvinsiModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MatkulRequest.fetchDataAndRender(current_page + 1);
+                ProvinsiRequest.fetchDataAndRender(current_page + 1);
             }
         });
 
@@ -358,7 +364,7 @@ var ProvinsiModule = (function() {
     }
 
     function showModalDelete(id) {
-        $("#button-delete").attr("onclick", "MatkulRequest.dataDelete(" + id + ")");
+        $("#button-delete").attr("onclick", "ProvinsiRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
 
