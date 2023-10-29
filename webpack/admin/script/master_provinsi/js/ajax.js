@@ -74,7 +74,7 @@ var ProvinsiModule = (function() {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label for="tambahNama">Nama</label>
-                                        <input type="hidden" class="form-control" id="matkul-id">
+                                        <input type="hidden" class="form-control" id="provinsi-id">
                                         <input type="text" class="form-control" id="name-edit"
                                             placeholder="Nama Provinsi" oninput="ProvinsiModule.validatorName('name-edit', 'button-edit')">
                                     </div>
@@ -303,7 +303,6 @@ var ProvinsiModule = (function() {
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
     }
-
     function aplyValueModalEdit(data) {
 
         const nameValidator = (name) => {
@@ -355,7 +354,7 @@ var ProvinsiModule = (function() {
 
         }
 
-        $("#matkul-id").val(data[0].id);
+        $("#provinsi-id").val(data[0].id);
         $("#name-edit").val(data[0].name);
         const name = $("#name-edit").val();
         nameValidator(name);
@@ -367,7 +366,6 @@ var ProvinsiModule = (function() {
         $("#button-delete").attr("onclick", "ProvinsiRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
-
 
     // validation function //
     function validatorName(input_id, button_id) {

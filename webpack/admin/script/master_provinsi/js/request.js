@@ -20,12 +20,11 @@ const ProvinsiRequest = (() => {
 
     function loadDataEdit(data_id) {
         $.ajax({
-            url: `script/master_matkul/php/get_data_edit.php?id=${data_id}`,
+            url: `script/master_provinsi/php/get_data_edit.php?id=${data_id}`,
             type: "GET",
             dataType: "json",
             success: function (response) {
                 ProvinsiModule.aplyValueModalEdit(response.data);
-                console.log(response.data);
             },
             error: function () {
                 console.error("Failed to fetch data.");
@@ -56,7 +55,7 @@ const ProvinsiRequest = (() => {
     }
 
     function dataEdit() {
-        const matkul_id = $("#matkul-id").val();
+        const matkul_id = $("#provinsi-id").val();
         const name_edit = $("#name-edit").val();
 
         var formData = new FormData();
@@ -64,7 +63,7 @@ const ProvinsiRequest = (() => {
         formData.append("name_edit", name_edit);
 
         $.ajax({
-            url: `script/master_matkul/php/update.php`,
+            url: `script/master_provinsi/php/update.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
