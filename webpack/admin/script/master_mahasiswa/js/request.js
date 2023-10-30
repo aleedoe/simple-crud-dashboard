@@ -1,6 +1,6 @@
 // test request master_mahasiswa
 
-var MahasiswaRequest = (function () {
+const MahasiswaRequest = (function () {
 
     function fetchDataAndRender(page, keyword_filter = "", gender_filter = "", image_filter = "", provinsi_filter = "", kabupaten_filter = "", kecamatan_filter = "", desa_filter = "", matkul_filter = "") {
         $.ajax({

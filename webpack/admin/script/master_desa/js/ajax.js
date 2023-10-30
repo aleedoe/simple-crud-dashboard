@@ -354,32 +354,8 @@ const DesaModule = (function() {
         });
     }
 
-    function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
-        let url = `script/master_mahasiswa/php/get_data.php?page=${page}`;
-        if (keyword_filter) {
-            url += `&keyword_filter=${encodeURIComponent(keyword_filter)}`;
-        }
-        if (gender_filter) {
-            url += `&gender_filter=${encodeURIComponent(gender_filter)}`;
-        }
-        if (image_filter) {
-            url += `&image_filter=${encodeURIComponent(image_filter)}`;
-        }
-        if (provinsi_filter) {
-            url += `&provinsi_filter=${encodeURIComponent(provinsi_filter)}`;
-        }
-        if (kabupaten_filter) {
-            url += `&kabupaten_filter=${encodeURIComponent(kabupaten_filter)}`;
-        }
-        if (kecamatan_filter) {
-            url += `&kecamatan_filter=${encodeURIComponent(kecamatan_filter)}`;
-        }
-        if (desa_filter) {
-            url += `&desa_filter=${encodeURIComponent(desa_filter)}`;
-        }
-        if (matkul_filter) {
-            url += `&matkul_filter=${encodeURIComponent(matkul_filter)}`;
-        }
+    function buildUrl(page) {
+        let url = `script/master_desa/php/get_data.php?page=${page}`;
         return url;
     }
 

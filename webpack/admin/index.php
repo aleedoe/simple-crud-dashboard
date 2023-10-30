@@ -62,7 +62,9 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
-                <span class="brand-text font-weight-light">AdminLTE 3</span>
+                <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle ml-5"
+                    style="opacity: .8">
+                <span class="brand-text font-weight-light">Webzet.Dev</span>
             </a>
 
             <!-- Sidebar -->

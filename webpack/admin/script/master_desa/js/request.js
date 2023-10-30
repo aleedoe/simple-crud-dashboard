@@ -2,9 +2,9 @@
 
 const DesaRequest = (() => {
 
-    function fetchDataAndRender(page, keyword_filter = "", gender_filter = "", image_filter = "", provinsi_filter = "", kabupaten_filter = "", kecamatan_filter = "", desa_filter = "", matkul_filter = "") {
+    function fetchDataAndRender(page) {
         $.ajax({
-            url: MahasiswaModule.buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter),
+            url: MahasiswaModule.buildUrl(page),
             type: "GET",
             dataType: "json",
             success: function (response) {

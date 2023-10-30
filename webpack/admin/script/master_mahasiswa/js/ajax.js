@@ -1,6 +1,6 @@
 // modul master_mahasiswa
 
-var MahasiswaModule = (function () {
+const MahasiswaModule = (function () {
 
     function load() {
         buildStructure();
