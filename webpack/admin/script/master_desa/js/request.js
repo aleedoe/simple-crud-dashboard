@@ -4,12 +4,12 @@ const DesaRequest = (() => {
 
     function fetchDataAndRender(page) {
         $.ajax({
-            url: MahasiswaModule.buildUrl(page),
+            url: DesaModule.buildUrl(page),
             type: "GET",
             dataType: "json",
             success: function (response) {
-                MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
-                MahasiswaModule.renderPagination(response.totalPages, page);
+                DesaModule.renderData(response.data, response.dataProvinsi, page);
+                DesaModule.renderPagination(response.totalPages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
             error: function () {
@@ -49,7 +49,7 @@ const DesaRequest = (() => {
                     });
                     $('#kabupaten-edit').val(id);
                     $('#kabupaten-edit').trigger('change');
-                    $('#kabupaten-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
+                    $('#kabupaten-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
 
                 },
                 error: function () {
@@ -69,7 +69,7 @@ const DesaRequest = (() => {
                     });
                     $('#kecamatan-edit').val(id);
                     $('#kecamatan-edit').trigger('change');
-                    $('#kecamatan-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
+                    $('#kecamatan-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -88,7 +88,7 @@ const DesaRequest = (() => {
                     });
                     $('#desa-edit').val(id);
                     $('#desa-edit').trigger('change');
-                    $('#desa-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit')");
+                    $('#desa-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -103,7 +103,7 @@ const DesaRequest = (() => {
             type: "GET",
             dataType: "json",
             success: function (response) {
-                MahasiswaModule.aplyValueModalEdit(response.data);
+                DesaModule.aplyValueModalEdit(response.data);
             },
             error: function () {
                 console.error("Failed to fetch data.");

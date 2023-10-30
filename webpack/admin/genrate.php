@@ -172,13 +172,13 @@
 
             <!-- Main content -->
             <div class="px-3" id="main-content-dev">
-                <!-- modal add mahasiswa -->
+                <!-- modal add Desa -->
                 <div class="modal fade" id="staticBackdrop-add" data-backdrop="static" data-keyboard="false"
                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Tambah Mahasiswa Test</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Tambah Desa</h5>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                         class="fas fa-times"></i></button>
                             </div>
@@ -189,11 +189,47 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label for="tambahNama">Nama</label>
-                                                    <input type="email" class="form-control" id="name-add"
-                                                        placeholder="Nama Mahasiswa"
-                                                        oninput="validatorName('name-add', 'button-add')"
-                                                        maxlength="12">
+                                                    <label>Provinsi</label>
+                                                    <select class="form-control select2-search-box-add"
+                                                        id="provinsi-add"
+                                                        onchange="DesaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Kabupaten</label>
+                                                    <select class="form-control select2-search-box-add"
+                                                        id="kabupaten-add"
+                                                        onchange="DesaModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Kecamatan</label>
+                                                    <select class="form-control select2-search-box-add"
+                                                        id="kecamatan-add"
+                                                        onchange="DesaModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="tambahNama">Nama Desa</label>
+                                                    <input type="text" class="form-control" id="name-add"
+                                                        placeholder="Nama Desa"
+                                                        oninput="DesaModule.validatorName('name-add', 'button-add')"
+                                                        maxlength="12" autocomplete="off">
                                                 </div>
                                             </div>
                                         </div>
@@ -203,13 +239,13 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                         class="nav-icon fas fa-times mr-1"></i> Close</button>
-                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"
-                                    id="button-add"><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                                <button type="button" class="btn btn-primary" onclick="DesaRequest.dataAdd()"
+                                    id="button-add" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.modal add mahasiswa -->
+                <!-- /.modal add Desa -->
 
                 <!-- modal edit mahasiswa -->
                 <div class="modal fade" id="staticBackdrop-edit" data-backdrop="static" data-keyboard="false"

@@ -4,7 +4,7 @@ const DesaModule = (function() {
 
     function load() {
         buildStructure();
-        MahasiswaRequest.fetchDataAndRender(1);
+        DesaRequest.fetchDataAndRender(1);
         console.log('mahasiswa module loaded');
     }
 
@@ -19,13 +19,13 @@ const DesaModule = (function() {
 
         $("#main-content-dev").html('');
         $("#main-content-dev").append(`
-        <!-- modal add mahasiswa -->
+        <!-- modal add Desa -->
         <div class="modal fade" id="staticBackdrop-add" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Mahasiswa Test</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Desa</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -36,82 +36,48 @@ const DesaModule = (function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label for="tambahKode">Kode</label>
-                                            <input type="text" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-add', 'button-add')" autocomplete="off">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tambahNama">Nama</label>
-                                            <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Mahasiswa" oninput="MahasiswaModule.validatorName('name-add', 'button-add')"
-                                                maxlength="12" autocomplete="off">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label>Jenis Kelamin</label>
-                                            <select class="form-control select2-default-add" id="gender-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
-                                                <option></option>
-                                                <option value="Laki-laki">Laki-laki</option>
-                                                <option value="Perempuan">Perempuan</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Columns are always 50% wide, on mobile and desktop -->
-                                <div class="row">
-                                    <div class="col-6">
-                                        <div class="form-group">
                                             <label>Provinsi</label>
-                                            <select class="form-control select2-search-box-add" id="provinsi-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
+                                            <select class="form-control select2-search-box-add"
+                                                id="provinsi-add"
+                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
                                                 <option></option>
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-6">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-add" id="kabupaten-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
+                                            <select class="form-control select2-search-box-add"
+                                                id="kabupaten-add"
+                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
                                                 <option></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="row">
-                                    <div class="col-6">
+                                    <div class="col-md-12">
                                         <div class="form-group">
                                             <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-add" id="kecamatan-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="form-group">
-                                            <label>Desa</label>
-                                            <select class="form-control select2-search-box-add" id="desa-add" onchange="MahasiswaModule.validatorSelect('add', 'button-add')">
+                                            <select class="form-control select2-search-box-add"
+                                                id="kecamatan-add"
+                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
                                                 <option></option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
-                                        <div class="form-group m-0">
-                                            <label for="exampleFormControlInput1" class="m-0">Foto
-                                                Profile</label>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="tambahNama">Nama Desa</label>
+                                            <input type="text" class="form-control" id="name-add"
+                                                placeholder="Nama Desa"
+                                                oninput="DesaModule.validatorName('name-add', 'button-add')"
+                                                maxlength="12" autocomplete="off">
                                         </div>
-                                        <span class="fileinput-wrapper file-selected mt-2">
-                                            <input type="file" name="file" id="image-add">
-                                        </span>
                                     </div>
                                 </div>
                             </form>
@@ -119,22 +85,22 @@ const DesaModule = (function() {
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
-                            class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="MahasiswaRequest.dataAdd()"
+                                class="nav-icon fas fa-times mr-1"></i> Close</button>
+                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataAdd()"
                             id="button-add" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.modal add mahasiswa -->
+        <!-- /.modal add Desa -->
 
-        <!-- modal edit mahasiswa -->
+        <!-- modal edit Desa -->
         <div class="modal fade" id="staticBackdrop-edit" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Mahasiswa</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Desa</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -146,7 +112,7 @@ const DesaModule = (function() {
                                     <div class="form-group">
                                         <label for="tambahKode">Kode</label>
                                         <input type="text" class="form-control" id="kode-edit"
-                                            placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-edit', 'button-edit')">
+                                            placeholder="Kode Mahasiswa" oninput="DesaModule.validatorCode('kode-edit', 'button-edit')">
                                     </div>
                                 </div>
                             </div>
@@ -156,7 +122,7 @@ const DesaModule = (function() {
                                         <label for="tambahNama">Nama</label>
                                         <input type="hidden" class="form-control" id="mahasiswa-id">
                                         <input type="text" class="form-control" id="name-edit"
-                                            placeholder="Nama Mahasiswa" oninput="MahasiswaModule.validatorName('name-edit', 'button-edit')">
+                                            placeholder="Nama Mahasiswa" oninput="DesaModule.validatorName('name-edit', 'button-edit')">
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +130,7 @@ const DesaModule = (function() {
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Jenis Kelamin</label>
-                                        <select class="form-control select2-default-edit" id="gender-edit" onchange="MahasiswaModule.validatorSelect('edit', 'button-edit')">
+                                        <select class="form-control select2-default-edit" id="gender-edit" onchange="DesaModule.validatorSelect('edit', 'button-edit')">
                                             <option></option>
                                             <option value="Laki-laki">Laki-laki</option>
                                             <option value="Perempuan">Perempuan</option>
@@ -227,21 +193,21 @@ const DesaModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="MahasiswaRequest.dataEdit()"  id="button-edit" disabled><i
+                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataEdit()"  id="button-edit" disabled><i
                                 class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.modal edit mahasiswa -->
+        <!-- /.modal edit Desa -->
 
-        <!-- modal hapus mahasiswa -->
+        <!-- modal hapus Desa -->
         <div class="modal fade" id="staticBackdrop-delete" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
             <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Hapus title</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Hapus Desa</h5>
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button> -->
                     </div>
                     <div class="modal-body">
@@ -258,7 +224,7 @@ const DesaModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal hapus mahasiswa -->
+        <!-- /.modal hapus Desa -->
         
         <!-- main content -->
         <div class="row" id="row-1-dev">
@@ -268,7 +234,7 @@ const DesaModule = (function() {
                         <h5 class="card-title m-0">
                             <div class="d-flex flex-wrap align-items-center">
                                 <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="MahasiswaModule.resetModalAdd()">
+                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="DesaModule.resetModalAdd()">
                                     <i class="nav-icon fas fa-plus mr-1"></i>
                                     Tambah
                                 </button>
@@ -287,12 +253,11 @@ const DesaModule = (function() {
                                 id="data-table">
                                 <thead style="color: #3d3d3d;">
                                     <th>No</th>
-                                    <th>Foto Profile</th>
-                                    <th>kode</th>
-                                    <th>Nama</th>
-                                    <th>Jenis kelamin</th>
-                                    <th>Matkul</th>
-                                    <th>Alamat</th>
+                                    <th>Nama Provinsi</th>
+                                    <th>Nama Kabupaten</th>
+                                    <th>Nama Kecamatan</th>
+                                    <th>Nama Desa</th>
+                                    <th>Total Data</th>
                                     <th>Aksi</th>
                                 </thead>
                                 <tbody>
@@ -372,21 +337,18 @@ const DesaModule = (function() {
 
             new_row.innerHTML = `
                 <td class="text-center align-middle">${startNumber + index + 1}</td>
-                <td class="text-center align-middle"><img class="img-thumbnail" src="docs/img/${row.image_profile}" alt="" width="40px"></td>
-                <td class="text-center align-middle">${row.kode}</td>
-                <td class="text-center align-middle">${row.nama}</td>
-                <td class="text-center align-middle">${row.jenis_kelamin}</td>
-                <td class="text-center align-middle">
-                <a href="javascript:void(0)" class="${bac_color_number_class}" onclick="tampilModalMahasiswaSubPage(${row.id_personal_name})">${row.total_rows}</a>
-                </td>
-                <td class="text-center align-middle">${row.nama_desa}, ${row.nama_kecamatan}, ${row.nama_kabupaten}, ${row.nama_provinsi}</td>
+                <td class="text-center align-middle">${row.nama_provinsi}</td>
+                <td class="text-center align-middle">${row.nama_kabupaten}</td>
+                <td class="text-center align-middle">${row.nama_kecamatan}</td>
+                <td class="text-center align-middle">${row.name}</td>
+                <td class="text-center align-middle">${row.total_data}</td>
                 <td class="p-sm-2 text-center align-middle">
                 <!-- Button with a click event to open the modal -->
-                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="MahasiswaModule.showModalDelete(${row.id_personal_name})" data-placement="top" title="hapus">
+                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="DesaModule.showModalDelete(${row.id})" data-placement="top" title="hapus">
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="MahasiswaRequest.loadDataEdit(${row.id_personal_name})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="DesaRequest.loadDataEdit(${row.id})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
                     <i class="nav-icon fas fa-pen fa-sm"></i>
                 </button>
                 </td>
@@ -452,7 +414,7 @@ const DesaModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(i);
+                DesaRequest.fetchDataAndRender(i);
             });
         }
 
@@ -475,7 +437,7 @@ const DesaModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page - 1);
+                DesaRequest.fetchDataAndRender(current_page - 1);
             }
         });
 
@@ -486,7 +448,7 @@ const DesaModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page + 1);
+                DesaRequest.fetchDataAndRender(current_page + 1);
             }
         });
 
@@ -636,19 +598,19 @@ const DesaModule = (function() {
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
-        $('#provinsi-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
+        $('#provinsi-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
 
         var url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");
-        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
+        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
         var url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
         var target_select = $("#kecamatan-edit");
-        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
+        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
 
         var url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
         var target_select = $("#desa-edit");
-        MahasiswaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
+        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
 
         $("#button-edit").prop("disabled", false);
         $("#gender-edit").addClass("is-valid");
@@ -659,7 +621,7 @@ const DesaModule = (function() {
     }
 
     function showModalDelete(id) {
-        $("#button-delete").attr("onclick", "MahasiswaRequest.dataDelete(" + id + ")");
+        $("#button-delete").attr("onclick", "DesaRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
     
@@ -826,7 +788,7 @@ const DesaModule = (function() {
             const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-add"));
             resetSelectOptions($("#desa-add"));
 
@@ -834,14 +796,14 @@ const DesaModule = (function() {
             const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
             const target_select = $("#kecamatan-add");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-add"));
 
         } else if (load === "kecamatan-add") {
             const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
             const target_select = $("#desa-add");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
 
         }
 
@@ -850,7 +812,7 @@ const DesaModule = (function() {
             const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-edit"));
             resetSelectOptions($("#desa-edit"));
 
@@ -858,14 +820,14 @@ const DesaModule = (function() {
             const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
             const target_select = $("#kecamatan-edit");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-edit"));
 
         } else if (load === "kecamatan-edit") {
             const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
             const target_select = $("#desa-edit");
             target_select.removeClass("is-valid");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
         }
 
         let kode;
