@@ -5,7 +5,7 @@ const DesaModule = (function() {
     function load() {
         buildStructure();
         DesaRequest.fetchDataAndRender(1);
-        console.log('mahasiswa module loaded');
+        console.log('Desa module loaded');
     }
 
     function buildStructure() {
