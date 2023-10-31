@@ -426,9 +426,6 @@ const DesaModule = (function() {
             // Clear the input value
             $(this).val('');
         });
-        $("#feedback-kode-add").remove();
-        $("#kode-add").removeClass("is-valid");
-        $("#kode-add").removeClass("is-invalid");
         $("#feedback-name-add").remove();
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
@@ -438,11 +435,9 @@ const DesaModule = (function() {
             // Reset the selected option
             $(this).val(0);
             $(this).trigger('change');
-            $("#gender-add").removeClass("is-valid");
             $("#provinsi-add").removeClass("is-valid");
             $("#kabupaten-add").removeClass("is-valid");
             $("#kecamatan-add").removeClass("is-valid");
-            $("#desa-add").removeClass("is-valid");
         });
     }
 
@@ -451,56 +446,8 @@ const DesaModule = (function() {
         $("#provinsi-edit").removeAttr("onchange");
         $("#kabupaten-edit").removeAttr("onchange");
         $("#kecamatan-edit").removeAttr("onchange");
-        $("#desa-edit").removeAttr("onchange");
-        const kodeValidator = (kode, name) => {
 
-            const inputElement = $("#kode-edit");
-            const regex = /[^A-Za-z0-9\s]/;
-
-            if (!regex.test(kode)) {
-                const has_number = /^[0-9]+$/.test(kode);
-
-                if (has_number) {
-                    if (kode !== "" && name !== "") {
-                        $("#button-edit").prop("disabled", false);
-                    }
-                    inputElement.removeClass("is-invalid");
-                    inputElement.addClass("is-valid");
-                    $("#feedback-kode-edit").remove();
-                } else {
-                    $("#button-edit").prop("disabled", true);
-                    inputElement.removeClass("is-valid");
-                    inputElement.addClass("is-invalid");
-                    if ($("#feedback-kode-edit").length > 0) {
-                        $("#feedback-kode-edit").remove();
-                    }
-                    inputElement.after(`
-                        <div id="feedback-kode-edit" class="invalid-feedback">
-                        Kode harus berupa angka.
-                        </div>
-                    `);
-                    if (kode == "") {
-                        inputElement.removeClass("is-valid");
-                        inputElement.removeClass("is-invalid");
-                        $("#feedback-kode-edit").remove();
-                    }
-                }
-            } else {
-                $("#button-edit").prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-kode-edit").length > 0) {
-                    $("#feedback-kode-edit").remove();
-                }
-                inputElement.after(`
-                    <div id="feedback-kode-edit" class="invalid-feedback">
-                    Kode tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-            }
-        }
-
-        const nameValidator = (kode, name) => {
+        const nameValidator = (name) => {
 
             const inputElement = $("#name-edit");
 
@@ -510,7 +457,7 @@ const DesaModule = (function() {
                 const has_number = /[0-9]/.test(name);
 
                 if (!has_number) {
-                    if (kode !== "" && name !== "") {
+                    if (name !== "") {
                         $("#button-edit").prop("disabled", false);
                     }
                     inputElement.removeClass("is-invalid");
@@ -549,17 +496,10 @@ const DesaModule = (function() {
 
         }
 
-        $("#kode-edit").val(data[0].kode);
         $("#mahasiswa-id").val(data[0].id);
         $("#name-edit").val(data[0].nama);
-        $("#old-image").val(data[0].image_profile);
-        const kode = $("#kode-edit").val();
         const name = $("#name-edit").val();
-        kodeValidator(kode, name);
-        nameValidator(kode, name);
-
-        $('#gender-edit').val(data[0].jenis_kelamin);
-        $('#gender-edit').trigger('change');
+        nameValidator(name);
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
@@ -573,16 +513,10 @@ const DesaModule = (function() {
         var target_select = $("#kecamatan-edit");
         DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
 
-        var url = "script/master_desa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
-        var target_select = $("#desa-edit");
-        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
-
         $("#button-edit").prop("disabled", false);
-        $("#gender-edit").addClass("is-valid");
         $("#provinsi-edit").addClass("is-valid");
         $("#kabupaten-edit").addClass("is-valid");
         $("#kecamatan-edit").addClass("is-valid");
-        $("#desa-edit").addClass("is-valid");
     }
 
     function showModalDelete(id) {
@@ -592,81 +526,6 @@ const DesaModule = (function() {
     
 
     // validation function //
-
-    function validatorCode(input_id, button_id) {
-        let kode;
-        let name;
-        let gender;
-        let provinsi;
-        let kabupaten;
-        let kecamatan;
-        let desa;
-
-        if (input_id === 'kode-add' || input_id === 'name-add') {
-            kode = "kode-add";
-            name = "name-add";
-            gender = "gender-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
-            desa = "desa-add";
-        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            kode = "kode-edit";
-            name = "name-edit";
-            gender = "gender-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
-        }
-
-        const inputElement = $("#" + input_id);
-
-        const input_value = inputElement.val();
-        const regex = /[^A-Za-z0-9\s]/;
-
-        if (!regex.test(input_value)) {
-            const has_number = /^[0-9]+$/.test(input_value);
-
-            if (has_number) {
-                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-                    $("#" + button_id).prop("disabled", false);
-                }
-                inputElement.removeClass("is-invalid");
-                inputElement.addClass("is-valid");
-                $("#feedback-" + input_id).remove();
-            } else {
-                $("#" + button_id).prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-" + input_id).length > 0) {
-                    $("#feedback-" + input_id).remove();
-                }
-                inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Kode harus berupa angka.
-                        </div>
-                    `);
-                if (input_value == "") {
-                    inputElement.removeClass("is-valid");
-                    inputElement.removeClass("is-invalid");
-                    $("#feedback-" + input_id).remove();
-                }
-            }
-        } else {
-            $("#" + button_id).prop("disabled", true);
-            inputElement.removeClass("is-valid");
-            inputElement.addClass("is-invalid");
-            if ($("#feedback-" + input_id).length > 0) {
-                $("#feedback-" + input_id).remove();
-            }
-            inputElement.after(`
-                    <div id="feedback-${input_id}" class="invalid-feedback">
-                    Kode tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-        }
-    }
 
     function validatorName(input_id, button_id) {
         let kode;
@@ -755,21 +614,14 @@ const DesaModule = (function() {
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-add"));
-            resetSelectOptions($("#desa-add"));
+            
 
         } else if (load === "kabupaten-add") {
             const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
             const target_select = $("#kecamatan-add");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#desa-add"));
-
-        } else if (load === "kecamatan-add") {
-            const url = "script/master_desa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
-            const target_select = $("#desa-add");
-            target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
-
+            
         }
 
 
@@ -779,51 +631,33 @@ const DesaModule = (function() {
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-edit"));
-            resetSelectOptions($("#desa-edit"));
+            
 
         } else if (load === "kabupaten-edit") {
             const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
             const target_select = $("#kecamatan-edit");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#desa-edit"));
-
-        } else if (load === "kecamatan-edit") {
-            const url = "script/master_desa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
-            const target_select = $("#desa-edit");
-            target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
+            
         }
 
-        let kode;
         let name;
-        let gender;
         let provinsi;
         let kabupaten;
         let kecamatan;
-        let desa;
 
         if (input_id === 'add') {
-            kode = "kode-add";
             name = "name-add";
-            gender = "gender-add";
             provinsi = "provinsi-add";
             kabupaten = "kabupaten-add";
             kecamatan = "kecamatan-add";
-            desa = "desa-add";
         } else if (input_id === 'edit') {
-            kode = "kode-edit";
             name = "name-edit";
-            gender = "gender-edit";
             provinsi = "provinsi-edit";
             kabupaten = "kabupaten-edit";
             kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
         }
 
-        $("#" + gender).on('change', function () {
-            $("#" + gender).addClass('is-valid');
-        });
         $("#" + provinsi).on('change', function () {
             $("#" + provinsi).addClass('is-valid');
         });
@@ -833,12 +667,9 @@ const DesaModule = (function() {
         $("#" + kecamatan).on('change', function () {
             $("#" + kecamatan).addClass('is-valid');
         });
-        $("#" + desa).on('change', function () {
-            $("#" + desa).addClass('is-valid');
-        });
 
 
-        if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+        if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
             $("#" + button_id).prop("disabled", false);
         } else {
             $("#" + button_id).prop("disabled", true);
@@ -853,7 +684,6 @@ const DesaModule = (function() {
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
-        validatorCode: validatorCode,
         validatorName: validatorName,
         validatorSelect: validatorSelect
     };

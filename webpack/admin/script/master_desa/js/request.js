@@ -99,7 +99,7 @@ const DesaRequest = (() => {
 
     function loadDataEdit(data_id) {
         $.ajax({
-            url: `script/master_mahasiswa/php/get_data_edit.php?id=${data_id}`,
+            url: `script/master_desa/php/get_data_edit.php?id=${data_id}`,
             type: "GET",
             dataType: "json",
             success: function (response) {
@@ -112,26 +112,19 @@ const DesaRequest = (() => {
     }
 
     function dataAdd() {
-        const kode_add = $("#kode-add").val();
         const name_add = $("#name-add").val();
-        const gender_add = $("#gender-add").val();
         const provinsi_id = $("#provinsi-add").val();
         const kabupaten_id = $("#kabupaten-add").val();
         const kecamatan_id = $("#kecamatan-add").val();
-        const desa_id = $("#desa-add").val();
 
         var formData = new FormData();
-        formData.append("kode_add", kode_add);
         formData.append("name_add", name_add);
-        formData.append("gender_add", gender_add);
         formData.append("provinsi_id", provinsi_id);
         formData.append("kabupaten_id", kabupaten_id);
         formData.append("kecamatan_id", kecamatan_id);
-        formData.append("desa_id", desa_id);
-        formData.append("image_add", $("#image-add")[0].files[0]);
 
         $.ajax({
-            url: `script/master_mahasiswa/php/add.php`,
+            url: `script/master_desa/php/add.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
@@ -174,7 +167,7 @@ const DesaRequest = (() => {
         }
 
         $.ajax({
-            url: `script/master_mahasiswa/php/update.php`,
+            url: `script/master_desa/php/update.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
@@ -191,7 +184,7 @@ const DesaRequest = (() => {
 
     function dataDelete(id) {
         $.ajax({
-            url: `script/master_mahasiswa/php/delete.php?id=${id}`,
+            url: `script/master_desa/php/delete.php?id=${id}`,
             type: "GET",
             contentType: false, // Tambahkan ini
             processData: false, // Tambahkan ini

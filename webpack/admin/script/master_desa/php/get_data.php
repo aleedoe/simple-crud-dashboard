@@ -18,7 +18,9 @@ FROM desa AS des
     LEFT JOIN kabupaten AS kab ON kc.`id_kabupaten` = kab.`id`
     LEFT JOIN provinsi AS prov ON kab.`id_provinsi` = prov.`id`
     LEFT JOIN DATA ON des.`id` = data.`id_desa`
-GROUP BY des.`id`";
+GROUP BY des.`id`
+ORDER BY prov.name ASC, des.name ASC
+";
 
 $total_data = count(get_data($query));
 $total_pages = ceil($total_data / $limit);
