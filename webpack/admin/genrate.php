@@ -247,140 +247,77 @@
                 </div>
                 <!-- /.modal add Desa -->
 
-                <!-- modal edit mahasiswa -->
+                <!-- modal edit Desa -->
                 <div class="modal fade" id="staticBackdrop-edit" data-backdrop="static" data-keyboard="false"
                     tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="staticBackdropLabel">Edit Mahasiswa</h5>
+                                <h5 class="modal-title" id="staticBackdropLabel">Edit Desa</h5>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                         class="fas fa-times"></i></button>
                             </div>
                             <div class="modal-body">
                                 <div class="container">
                                     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="tambahKode">Kode</label>
-                                                <input type="email" class="form-control" id="kode-edit"
-                                                    placeholder="Kode Mahasiswa"
-                                                    oninput="validatorCode('kode-edit', 'button-edit')">
+                                    <form action="">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Provinsi</label>
+                                                    <select class="form-control select2-search-box-edit"
+                                                        id="provinsi-edit" onchange="">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label for="tambahNama">Nama</label>
-                                                <input type="email" class="form-control" id="name-edit"
-                                                    placeholder="Nama Mahasiswa"
-                                                    oninput="validatorName('name-edit', 'button-edit')">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Kabupaten</label>
+                                                    <select class="form-control select2-search-box-edit"
+                                                        id="kabupaten-edit" onchange="">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group">
-                                                <label>Jenis Kelamin</label>
-                                                <select class="form-control select2-default" id="gender-edit">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
-                                                </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Kecamatan</label>
+                                                    <select class="form-control select2-search-box-edit"
+                                                        id="kecamatan-edit" onchange="">
+                                                        <option></option>
+                                                    </select>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <!-- Columns are always 50% wide, on mobile and desktop -->
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label>Provinsi</label>
-                                                <select class="form-control select2-search-box" id="provinsi-edit">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
-                                                </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label for="tambahNama">Nama Desa</label>
+                                                    <input type="hidden" class="form-control" id="mahasiswa-id">
+                                                    <input type="text" class="form-control" id="name-edit"
+                                                        placeholder="Nama Desa"
+                                                        oninput="DesaModule.validatorName('name-edit', 'button-edit')">
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label>Kabupaten</label>
-                                                <select class="form-control select2-search-box" id="kabupaten-edit">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label>Kecamatan</label>
-                                                <select class="form-control select2-search-box" id="kecamatan-edit">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-6">
-                                            <div class="form-group">
-                                                <label>Desa</label>
-                                                <select class="form-control select2-search-box" id="desa-edit">
-                                                    <option selected="selected">Alabama</option>
-                                                    <option>Alaska</option>
-                                                    <option>California</option>
-                                                    <option>Delaware</option>
-                                                    <option>Tennessee</option>
-                                                    <option>Texas</option>
-                                                    <option>Washington</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group m-0">
-                                                <label for="exampleFormControlInput1" class="m-0">Foto Profile</label>
-                                            </div>
-                                            <span class="fileinput-wrapper file-selected mt-2">
-                                                <input type="file" name="file" id="image-edit">
-                                            </span>
-                                        </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                         class="nav-icon fas fa-times mr-1"></i> Close</button>
-                                <button type="button" class="btn btn-primary" onclick="tambahDataPersonal()"
-                                    id="button-edit"><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                                <button type="button" class="btn btn-primary" onclick="DesaRequest.dataEdit()"
+                                    id="button-edit" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- /.modal edit mahasiswa -->
+                <!-- /.modal edit Desa -->
 
                 <div class="row">
                     <div class="col-12">

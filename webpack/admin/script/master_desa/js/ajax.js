@@ -107,94 +107,59 @@ const DesaModule = (function() {
                     <div class="modal-body">
                         <div class="container">
                             <!-- Stack the columns on mobile by making one full-width and the other half-width -->
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="tambahKode">Kode</label>
-                                        <input type="text" class="form-control" id="kode-edit"
-                                            placeholder="Kode Mahasiswa" oninput="DesaModule.validatorCode('kode-edit', 'button-edit')">
+                            <form action="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Provinsi</label>
+                                            <select class="form-control select2-search-box-edit"
+                                                id="provinsi-edit" onchange="">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label for="tambahNama">Nama</label>
-                                        <input type="hidden" class="form-control" id="mahasiswa-id">
-                                        <input type="text" class="form-control" id="name-edit"
-                                            placeholder="Nama Mahasiswa" oninput="DesaModule.validatorName('name-edit', 'button-edit')">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Kabupaten</label>
+                                            <select class="form-control select2-search-box-edit"
+                                                id="kabupaten-edit" onchange="">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="form-group">
-                                        <label>Jenis Kelamin</label>
-                                        <select class="form-control select2-default-edit" id="gender-edit" onchange="DesaModule.validatorSelect('edit', 'button-edit')">
-                                            <option></option>
-                                            <option value="Laki-laki">Laki-laki</option>
-                                            <option value="Perempuan">Perempuan</option>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label>Kecamatan</label>
+                                            <select class="form-control select2-search-box-edit"
+                                                id="kecamatan-edit" onchange="">
+                                                <option></option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <!-- Columns are always 50% wide, on mobile and desktop -->
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Provinsi</label>
-                                        <select class="form-control select2-search-box-edit" id="provinsi-edit" onchange="">
-                                            <option></option>
-                                        </select>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <label for="tambahNama">Nama Desa</label>
+                                            <input type="hidden" class="form-control" id="mahasiswa-id">
+                                            <input type="text" class="form-control" id="name-edit"
+                                                placeholder="Nama Desa"
+                                                oninput="DesaModule.validatorName('name-edit', 'button-edit')">
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Kabupaten</label>
-                                        <select class="form-control select2-search-box-edit" id="kabupaten-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Kecamatan</label>
-                                        <select class="form-control select2-search-box-edit" id="kecamatan-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label>Desa</label>
-                                        <select class="form-control select2-search-box-edit" id="desa-edit" onchange="">
-                                            <option></option>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="form-group m-0">
-                                        <label for="exampleFormControlInput1" class="m-0">Foto Profile</label>
-                                        <input type="hidden" class="form-control" id="old-image">
-                                    </div>
-                                    <span class="fileinput-wrapper file-selected mt-2">
-                                        <input type="file" name="file" id="image-edit">
-                                    </span>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataEdit()"  id="button-edit" disabled><i
-                                class="nav-icon fas fa-save mr-1"></i> Simpan</button>
+                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataEdit()"
+                            id="button-edit" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
             </div>
