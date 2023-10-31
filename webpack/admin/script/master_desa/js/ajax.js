@@ -565,15 +565,15 @@ const DesaModule = (function() {
         $('#provinsi-edit').trigger('change');
         $('#provinsi-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
 
-        var url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
+        var url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");
         DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
-        var url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
+        var url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
         var target_select = $("#kecamatan-edit");
         DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
 
-        var url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
+        var url = "script/master_desa/php/load_address.php?table=desa&id=" + data[0].id_kecamatan;
         var target_select = $("#desa-edit");
         DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_desa, "desa");
 
@@ -750,7 +750,7 @@ const DesaModule = (function() {
         }
 
         if (load === "provinsi-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
+            const url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
@@ -758,14 +758,14 @@ const DesaModule = (function() {
             resetSelectOptions($("#desa-add"));
 
         } else if (load === "kabupaten-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
+            const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
             const target_select = $("#kecamatan-add");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-add"));
 
         } else if (load === "kecamatan-add") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
+            const url = "script/master_desa/php/load_address.php?table=desa&id=" + $("#kecamatan-add").val();
             const target_select = $("#desa-add");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
@@ -774,7 +774,7 @@ const DesaModule = (function() {
 
 
         if (load === "provinsi-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
+            const url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
@@ -782,14 +782,14 @@ const DesaModule = (function() {
             resetSelectOptions($("#desa-edit"));
 
         } else if (load === "kabupaten-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
+            const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
             const target_select = $("#kecamatan-edit");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#desa-edit"));
 
         } else if (load === "kecamatan-edit") {
-            const url = "script/master_mahasiswa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
+            const url = "script/master_desa/php/load_address.php?table=desa&id=" + $("#kecamatan-edit").val();
             const target_select = $("#desa-edit");
             target_select.removeClass("is-valid");
             DesaRequest.loadSelectOptions(url, target_select);
