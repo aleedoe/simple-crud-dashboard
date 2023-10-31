@@ -33,3 +33,15 @@ subMenuLinks.forEach(function (subMenuLink) {
         document.querySelector(".nav-item.menu-open .nav-custom-dev").classList.add("active");
     });
 });
+
+// loading home page
+const loadHomePage = () => {
+    $(".head-name-title-dev").addClass("d-none");
+    $("#main-content-dev").html('');
+    $("#main-content-dev").append(`
+    <div class="callout callout-info">
+        <h5><i class="fas fa-bullhorn"></i> Welcome!</h5>
+        Hallo Alexander Pierce, selamat datang di portofolio Dashboard admin.
+    </div>
+    `);
+}

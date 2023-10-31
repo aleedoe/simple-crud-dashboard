@@ -9,7 +9,7 @@ const DesaRequest = (() => {
             dataType: "json",
             success: function (response) {
                 DesaModule.renderData(response.data, response.dataProvinsi, page);
-                DesaModule.renderPagination(response.totalPages, page);
+                DesaModule.renderPagination(response.total_pages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
             error: function () {
