@@ -145,7 +145,7 @@ const DesaModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tambahNama">Nama Desa</label>
-                                            <input type="hidden" class="form-control" id="mahasiswa-id">
+                                            <input type="hidden" class="form-control" id="desa-id">
                                             <input type="text" class="form-control" id="name-edit"
                                                 placeholder="Nama Desa"
                                                 oninput="DesaModule.validatorName('name-edit', 'button-edit')">
@@ -496,8 +496,8 @@ const DesaModule = (function() {
 
         }
 
-        $("#mahasiswa-id").val(data[0].id);
-        $("#name-edit").val(data[0].nama);
+        $("#desa-id").val(data[0].id);
+        $("#name-edit").val(data[0].name);
         const name = $("#name-edit").val();
         nameValidator(name);
 
