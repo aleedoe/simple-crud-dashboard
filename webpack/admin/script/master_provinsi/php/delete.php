@@ -2,7 +2,7 @@
 // relasi ke file fungtions_connect
 require '../../config.php';
 
-function hausProvinsi($id) {
+function hapus($id) {
 
     global $conn;
     $query = "DELETE FROM provinsi WHERE id='$id'";
@@ -13,7 +13,7 @@ function hausProvinsi($id) {
 if (isset($_GET["id"])) {
     $id = $_GET["id"];
 
-    if (hausProvinsi($id)) {
+    if (hapus($id)) {
         echo 'success';
     } else {
         echo 'failed';
