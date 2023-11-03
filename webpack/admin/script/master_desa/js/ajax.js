@@ -375,8 +375,8 @@ const DesaModule = (function() {
 
             link.addEventListener("click", function () {
                 $("#main-content-dev #row-1-dev td").html('');
-                $("#row-1-dev").LoadingOverlay("show", {
-                    background: "rgba(0, 0, 0, 0)",
+                $("#row-1-dev .table-responsive").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.1)",
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
@@ -399,8 +399,8 @@ const DesaModule = (function() {
         prevLink.addEventListener("click", function () {
             if (current_page > 1) {
                 $("#main-content-dev #row-1-dev td").html('');
-                $("#row-1-dev").LoadingOverlay("show", {
-                    background: "rgba(0, 0, 0, 0)",
+                $("#row-1-dev .table-responsive").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.1)",
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
@@ -411,8 +411,8 @@ const DesaModule = (function() {
         nextLink.addEventListener("click", function () {
             if (current_page < total_pages) {
                 $("#main-content-dev #row-1-dev td").html('');
-                $("#row-1-dev").LoadingOverlay("show", {
-                    background: "rgba(0, 0, 0, 0)",
+                $("#row-1-dev .table-responsive").LoadingOverlay("show", {
+                    background: "rgba(0, 0, 0, 0.1)",
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });

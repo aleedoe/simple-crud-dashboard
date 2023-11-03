@@ -26,3 +26,11 @@
 .get-fixed-dev {
     opacity: 0;
 }
+
+#main-content-dev #row-1-dev .card-footer {
+    overflow-x: auto;
+}
+
+#main-content-dev #row-1-dev .card-footer .d-flex{
+    min-width: 400px;
+}
