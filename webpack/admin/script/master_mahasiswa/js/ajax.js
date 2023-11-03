@@ -934,12 +934,13 @@ const MahasiswaModule = (function () {
             $("#" + desa).addClass('is-valid');
         });
 
-
-        if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
-            $("#" + button_id).prop("disabled", false);
-        } else {
-            $("#" + button_id).prop("disabled", true);
-        }
+        setTimeout(function () {
+            if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                $("#" + button_id).prop("disabled", false);
+            } else {
+                $("#" + button_id).prop("disabled", true);
+            }
+        }, 100);
     }
 
     return {

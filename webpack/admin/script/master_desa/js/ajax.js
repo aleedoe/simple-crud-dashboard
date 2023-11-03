@@ -671,12 +671,15 @@ const DesaModule = (function() {
             $("#" + kecamatan).addClass('is-valid');
         });
 
-
-        if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
-            $("#" + button_id).prop("disabled", false);
-        } else {
-            $("#" + button_id).prop("disabled", true);
-        }
+        console.log($("#kecamatan-edit").val());
+        
+        setTimeout(function () {
+            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
+                $("#" + button_id).prop("disabled", false);
+            } else {
+                $("#" + button_id).prop("disabled", true);
+            }
+        }, 100);
     }
 
     return {
