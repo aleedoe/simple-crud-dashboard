@@ -671,8 +671,6 @@ const DesaModule = (function() {
             $("#" + kecamatan).addClass('is-valid');
         });
 
-        console.log($("#kecamatan-edit").val());
-        
         setTimeout(function () {
             if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
                 $("#" + button_id).prop("disabled", false);
