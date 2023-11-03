@@ -4,12 +4,12 @@ const KecamatanRequest = (() => {
 
     function fetchDataAndRender(page) {
         $.ajax({
-            url: DesaModule.buildUrl(page),
+            url: KecamatanModule.buildUrl(page),
             type: "GET",
             dataType: "json",
             success: function (response) {
-                DesaModule.renderData(response.data, response.dataProvinsi, page);
-                DesaModule.renderPagination(response.total_pages, page);
+                KecamatanModule.renderData(response.data, response.dataProvinsi, page);
+                KecamatanModule.renderPagination(response.total_pages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
                 $("#row-1-dev .table-responsive").LoadingOverlay("hide", true);
             },
@@ -50,7 +50,7 @@ const KecamatanRequest = (() => {
                     });
                     $('#kabupaten-edit').val(id);
                     $('#kabupaten-edit').trigger('change');
-                    $('#kabupaten-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
+                    $('#kabupaten-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
 
                 },
                 error: function () {
@@ -70,7 +70,7 @@ const KecamatanRequest = (() => {
                     });
                     $('#kecamatan-edit').val(id);
                     $('#kecamatan-edit').trigger('change');
-                    $('#kecamatan-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
+                    $('#kecamatan-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -89,7 +89,7 @@ const KecamatanRequest = (() => {
                     });
                     $('#desa-edit').val(id);
                     $('#desa-edit').trigger('change');
-                    $('#desa-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit')");
+                    $('#desa-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -100,11 +100,11 @@ const KecamatanRequest = (() => {
 
     function loadDataEdit(data_id) {
         $.ajax({
-            url: `script/master_desa/php/get_data_edit.php?id=${data_id}`,
+            url: `script/master_kecamatan/php/get_data_edit.php?id=${data_id}`,
             type: "GET",
             dataType: "json",
             success: function (response) {
-                DesaModule.aplyValueModalEdit(response.data);
+                KecamatanModule.aplyValueModalEdit(response.data);
             },
             error: function () {
                 console.error("Failed to fetch data.");
@@ -125,7 +125,7 @@ const KecamatanRequest = (() => {
         formData.append("kecamatan_id", kecamatan_id);
 
         $.ajax({
-            url: `script/master_desa/php/add.php`,
+            url: `script/master_kecamatan/php/add.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
@@ -155,7 +155,7 @@ const KecamatanRequest = (() => {
         formData.append("kecamatan_id", kecamatan_id);
 
         $.ajax({
-            url: `script/master_desa/php/update.php`,
+            url: `script/master_kecamatan/php/update.php`,
             type: "POST",
             data: formData,
             contentType: false, // Tambahkan ini
@@ -172,7 +172,7 @@ const KecamatanRequest = (() => {
 
     function dataDelete(id) {
         $.ajax({
-            url: `script/master_desa/php/delete.php?id=${id}`,
+            url: `script/master_kecamatan/php/delete.php?id=${id}`,
             type: "GET",
             contentType: false, // Tambahkan ini
             processData: false, // Tambahkan ini

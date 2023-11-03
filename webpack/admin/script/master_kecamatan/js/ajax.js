@@ -4,7 +4,7 @@ const KecamatanModule = (function() {
 
     function load() {
         buildStructure();
-        DesaRequest.fetchDataAndRender(1);
+        KecamatanRequest.fetchDataAndRender(1);
         console.log('Desa module loaded');
     }
 
@@ -39,7 +39,7 @@ const KecamatanModule = (function() {
                                             <label>Provinsi</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="provinsi-add"
-                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'provinsi-add')">
+                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'provinsi-add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -51,7 +51,7 @@ const KecamatanModule = (function() {
                                             <label>Kabupaten</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="kabupaten-add"
-                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
+                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -63,7 +63,7 @@ const KecamatanModule = (function() {
                                             <label>Kecamatan</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="kecamatan-add"
-                                                onchange="DesaModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
+                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -75,7 +75,7 @@ const KecamatanModule = (function() {
                                             <label for="tambahNama">Nama Desa</label>
                                             <input type="text" class="form-control" id="name-add"
                                                 placeholder="Nama Desa"
-                                                oninput="DesaModule.validatorName('name-add', 'button-add')"
+                                                oninput="KecamatanModule.validatorName('name-add', 'button-add')"
                                                 maxlength="12" autocomplete="off">
                                         </div>
                                     </div>
@@ -86,7 +86,7 @@ const KecamatanModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataAdd()"
+                        <button type="button" class="btn btn-primary" onclick="KecamatanRequest.dataAdd()"
                             id="button-add" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
@@ -148,7 +148,7 @@ const KecamatanModule = (function() {
                                             <input type="hidden" class="form-control" id="desa-id">
                                             <input type="text" class="form-control" id="name-edit"
                                                 placeholder="Nama Desa"
-                                                oninput="DesaModule.validatorName('name-edit', 'button-edit')">
+                                                oninput="KecamatanModule.validatorName('name-edit', 'button-edit')">
                                         </div>
                                     </div>
                                 </div>
@@ -158,7 +158,7 @@ const KecamatanModule = (function() {
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"> <i
                                 class="nav-icon fas fa-times mr-1"></i> Close</button>
-                        <button type="button" class="btn btn-primary" onclick="DesaRequest.dataEdit()"
+                        <button type="button" class="btn btn-primary" onclick="KecamatanRequest.dataEdit()"
                             id="button-edit" disabled><i class="nav-icon fas fa-save mr-1"></i> Simpan</button>
                     </div>
                 </div>
@@ -199,7 +199,7 @@ const KecamatanModule = (function() {
                         <h5 class="card-title m-0">
                             <div class="d-flex flex-wrap align-items-center">
                                 <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="DesaModule.resetModalAdd()">
+                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="KecamatanModule.resetModalAdd()">
                                     <i class="nav-icon fas fa-plus mr-1"></i>
                                     Tambah
                                 </button>
@@ -285,7 +285,7 @@ const KecamatanModule = (function() {
     }
 
     function buildUrl(page) {
-        let url = `script/master_desa/php/get_data.php?page=${page}`;
+        let url = `script/master_kecamatan/php/get_data.php?page=${page}`;
         return url;
     }
 
@@ -309,11 +309,11 @@ const KecamatanModule = (function() {
                 <td class="text-center align-middle">${row.total_data}</td>
                 <td class="p-sm-2 text-center align-middle">
                 <!-- Button with a click event to open the modal -->
-                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="DesaModule.showModalDelete(${row.id})" data-placement="top" title="hapus">
+                <button type="button" class="btn btn-secondary btn-sm bg-primary border-0" onclick="KecamatanModule.showModalDelete(${row.id})" data-placement="top" title="hapus">
                 <i class="nav-icon fas fa-trash fa-sm"></i>
                 </button>
         
-                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="DesaRequest.loadDataEdit(${row.id})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
+                <button type="button" class="btn btn-secondary btn-sm ml-sm-1 bg-primary border-0" onclick="KecamatanRequest.loadDataEdit(${row.id})" data-toggle="modal" data-target="#staticBackdrop-edit" data-placement="top" title="edit">
                     <i class="nav-icon fas fa-pen fa-sm"></i>
                 </button>
                 </td>
@@ -380,7 +380,7 @@ const KecamatanModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                DesaRequest.fetchDataAndRender(i);
+                KecamatanRequest.fetchDataAndRender(i);
             });
         }
 
@@ -404,7 +404,7 @@ const KecamatanModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                DesaRequest.fetchDataAndRender(current_page - 1);
+                KecamatanRequest.fetchDataAndRender(current_page - 1);
             }
         });
 
@@ -416,7 +416,7 @@ const KecamatanModule = (function() {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                DesaRequest.fetchDataAndRender(current_page + 1);
+                KecamatanRequest.fetchDataAndRender(current_page + 1);
             }
         });
 
@@ -506,15 +506,15 @@ const KecamatanModule = (function() {
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
-        $('#provinsi-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
+        $('#provinsi-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
 
-        var url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
+        var url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");
-        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
+        KecamatanRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
-        var url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
+        var url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
         var target_select = $("#kecamatan-edit");
-        DesaRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
+        KecamatanRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
 
         $("#button-edit").prop("disabled", false);
         $("#provinsi-edit").addClass("is-valid");
@@ -523,7 +523,7 @@ const KecamatanModule = (function() {
     }
 
     function showModalDelete(id) {
-        $("#button-delete").attr("onclick", "DesaRequest.dataDelete(" + id + ")");
+        $("#button-delete").attr("onclick", "KecamatanRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
     
@@ -612,35 +612,35 @@ const KecamatanModule = (function() {
         }
 
         if (load === "provinsi-add") {
-            const url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
+            const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
+            KecamatanRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-add"));
             
 
         } else if (load === "kabupaten-add") {
-            const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
+            const url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
             const target_select = $("#kecamatan-add");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
+            KecamatanRequest.loadSelectOptions(url, target_select);
             
         }
 
 
         if (load === "provinsi-edit") {
-            const url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
+            const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
+            KecamatanRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-edit"));
             
 
         } else if (load === "kabupaten-edit") {
-            const url = "script/master_desa/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
+            const url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
             const target_select = $("#kecamatan-edit");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
+            KecamatanRequest.loadSelectOptions(url, target_select);
             
         }
 
