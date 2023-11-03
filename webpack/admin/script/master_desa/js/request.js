@@ -11,6 +11,7 @@ const DesaRequest = (() => {
                 DesaModule.renderData(response.data, response.dataProvinsi, page);
                 DesaModule.renderPagination(response.total_pages, page);
                 $(".content-wrapper").LoadingOverlay("hide", true);
+                $("#row-1-dev").LoadingOverlay("hide", true);
             },
             error: function () {
                 console.error("Failed to fetch data.");

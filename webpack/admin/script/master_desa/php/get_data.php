@@ -2,7 +2,7 @@
 require '../../config.php';
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 5;
+$limit = 10;
 $offset = ($page - 1) * $limit;
 
 $query = "SELECT 
