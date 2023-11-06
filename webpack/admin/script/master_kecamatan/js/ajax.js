@@ -513,21 +513,13 @@ const KecamatanModule = (function() {
         let kabupaten;
 
         if (input_id === 'kode-add' || input_id === 'name-add') {
-            kode = "kode-add";
             name = "name-add";
-            gender = "gender-add";
             provinsi = "provinsi-add";
             kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
-            desa = "desa-add";
         } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            kode = "kode-edit";
             name = "name-edit";
-            gender = "gender-edit";
             provinsi = "provinsi-edit";
             kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
         }
 
         const inputElement = $("#" + input_id);
@@ -539,7 +531,7 @@ const KecamatanModule = (function() {
             const has_number = /[0-9]/.test(input_value);
 
             if (!has_number) {
-                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
                     $("#" + button_id).prop("disabled", false);
                 }
                 inputElement.removeClass("is-invalid");
@@ -588,50 +580,32 @@ const KecamatanModule = (function() {
             const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
             target_select.removeClass("is-valid");
-            KecamatanRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-add"));
-            
 
-        } else if (load === "kabupaten-add") {
-            const url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
-            const target_select = $("#kecamatan-add");
-            target_select.removeClass("is-valid");
-            KecamatanRequest.loadSelectOptions(url, target_select);
-            
         }
-
 
         if (load === "provinsi-edit") {
             const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
             target_select.removeClass("is-valid");
-            KecamatanRequest.loadSelectOptions(url, target_select);
+            DesaRequest.loadSelectOptions(url, target_select);
             resetSelectOptions($("#kecamatan-edit"));
-            
 
-        } else if (load === "kabupaten-edit") {
-            const url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-edit").val();
-            const target_select = $("#kecamatan-edit");
-            target_select.removeClass("is-valid");
-            KecamatanRequest.loadSelectOptions(url, target_select);
-            
         }
 
         let name;
         let provinsi;
         let kabupaten;
-        let kecamatan;
 
         if (input_id === 'add') {
             name = "name-add";
             provinsi = "provinsi-add";
             kabupaten = "kabupaten-add";
-            kecamatan = "kecamatan-add";
         } else if (input_id === 'edit') {
             name = "name-edit";
             provinsi = "provinsi-edit";
             kabupaten = "kabupaten-edit";
-            kecamatan = "kecamatan-edit";
         }
 
         $("#" + provinsi).on('change', function () {
@@ -640,12 +614,9 @@ const KecamatanModule = (function() {
         $("#" + kabupaten).on('change', function () {
             $("#" + kabupaten).addClass('is-valid');
         });
-        $("#" + kecamatan).on('change', function () {
-            $("#" + kecamatan).addClass('is-valid');
-        });
 
         setTimeout(function () {
-            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
+            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
                 $("#" + button_id).prop("disabled", false);
             } else {
                 $("#" + button_id).prop("disabled", true);
