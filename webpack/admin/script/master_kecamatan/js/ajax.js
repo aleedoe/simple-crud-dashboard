@@ -64,7 +64,7 @@ const KecamatanModule = (function() {
                                             <input type="text" class="form-control" id="name-add"
                                                 placeholder="Nama Kecamatan"
                                                 oninput="KecamatanModule.validatorName('name-add', 'button-add')"
-                                                maxlength="12" autocomplete="off">
+                                                maxlength="25" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>

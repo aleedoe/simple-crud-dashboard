@@ -75,7 +75,7 @@ function isIdExist($table_name, $id)
 }
 
 // Fungsi untuk memeriksa relasi antara tabel-tabel dalam database
-function isValidAddress($provinsi_id, $kabupaten_id, $kecamatan_id)
+function isValidAddress($provinsi_id, $kabupaten_id)
 {
     global $conn;
     $query = "SELECT COUNT(*) AS total FROM kabupaten
@@ -85,36 +85,26 @@ function isValidAddress($provinsi_id, $kabupaten_id, $kecamatan_id)
     if ($row["total"] === "0") {
         return false;
     }
-
-    $query = "SELECT COUNT(*) AS total FROM kecamatan
-            WHERE id = $kecamatan_id AND id_kabupaten = $kabupaten_id";
-    $result = mysqli_query($conn, $query);
-    $row = mysqli_fetch_assoc($result);
-    if ($row["total"] === "0") {
-        return false;
-    }
-
     return true;
 }
 
 // Memeriksa apakah ID Provinsi, Kabupaten, Kecamatan, dan Desa ada dalam database
 if (
     !isIdExist('provinsi', $provinsi_id) ||
-    !isIdExist('kabupaten', $kabupaten_id) ||
-    !isIdExist('kecamatan', $kecamatan_id)
+    !isIdExist('kabupaten', $kabupaten_id)
 ) {
     echo "address_not_found";
     die;
 }
 
 // Memeriksa relasi antara tabel-tabel alamat
-if (!isValidAddress($provinsi_id, $kabupaten_id, $kecamatan_id)) {
+if (!isValidAddress($provinsi_id, $kabupaten_id)) {
     echo "address_not_found";
     die;
 }
 
 // Panggil fungsi tambah() untuk menambahkan data ke database
-if (addForm(["name_add" => $name_add, "kabupaten_id" => $kecamatan_id])) {
+if (addForm(["name_add" => $name_add, "kabupaten_id" => $kabupaten_id])) {
     echo "success_add_data";
 } else {
     echo "failed_add_data";
