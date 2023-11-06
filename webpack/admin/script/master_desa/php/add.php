@@ -45,6 +45,31 @@ if ($kecamatan_id == "") {
     echo "error_value_kec";
     die;
 }
+
+// Validasi kode hanya angka
+if (!is_numeric($provinsi_id)) {
+    echo "error_number_kode";
+    die;
+}
+
+// Validasi panjang kode maksimal 10 digit
+if (strlen($provinsi_id) > 10) {
+    echo "error_length_kode";
+    die;
+}
+
+// Validasi kode hanya angka
+if (!is_numeric($kabupaten_id)) {
+    echo "error_number_kode";
+    die;
+}
+
+// Validasi panjang kode maksimal 10 digit
+if (strlen($kabupaten_id) > 10) {
+    echo "error_length_kode";
+    die;
+}
+
 // Validasi kode hanya angka
 if (!is_numeric($kecamatan_id)) {
     echo "error_number_kode";

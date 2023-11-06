@@ -503,7 +503,6 @@ const KecamatanModule = (function() {
         $("#button-delete").attr("onclick", "KecamatanRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
-    
 
     // validation function //
 

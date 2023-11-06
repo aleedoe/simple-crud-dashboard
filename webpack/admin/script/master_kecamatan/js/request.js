@@ -116,13 +116,11 @@ const KecamatanRequest = (() => {
         const name_add = $("#name-add").val();
         const provinsi_id = $("#provinsi-add").val();
         const kabupaten_id = $("#kabupaten-add").val();
-        const kecamatan_id = $("#kecamatan-add").val();
 
         var formData = new FormData();
         formData.append("name_add", name_add);
         formData.append("provinsi_id", provinsi_id);
         formData.append("kabupaten_id", kabupaten_id);
-        formData.append("kecamatan_id", kecamatan_id);
 
         $.ajax({
             url: `script/master_kecamatan/php/add.php`,
