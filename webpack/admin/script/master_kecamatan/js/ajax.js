@@ -508,13 +508,9 @@ const KecamatanModule = (function() {
     // validation function //
 
     function validatorName(input_id, button_id) {
-        let kode;
         let name;
-        let gender;
         let provinsi;
         let kabupaten;
-        let kecamatan;
-        let desa;
 
         if (input_id === 'kode-add' || input_id === 'name-add') {
             kode = "kode-add";

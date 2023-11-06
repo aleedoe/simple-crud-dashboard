@@ -531,30 +531,21 @@ const DesaModule = (function() {
     // validation function //
 
     function validatorName(input_id, button_id) {
-        let kode;
         let name;
-        let gender;
         let provinsi;
         let kabupaten;
         let kecamatan;
-        let desa;
 
         if (input_id === 'kode-add' || input_id === 'name-add') {
-            kode = "kode-add";
             name = "name-add";
-            gender = "gender-add";
             provinsi = "provinsi-add";
             kabupaten = "kabupaten-add";
             kecamatan = "kecamatan-add";
-            desa = "desa-add";
         } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            kode = "kode-edit";
             name = "name-edit";
-            gender = "gender-edit";
             provinsi = "provinsi-edit";
             kabupaten = "kabupaten-edit";
             kecamatan = "kecamatan-edit";
-            desa = "desa-edit";
         }
 
         const inputElement = $("#" + input_id);
@@ -566,7 +557,7 @@ const DesaModule = (function() {
             const has_number = /[0-9]/.test(input_value);
 
             if (!has_number) {
-                if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+                if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "") {
                     $("#" + button_id).prop("disabled", false);
                 }
                 inputElement.removeClass("is-invalid");
