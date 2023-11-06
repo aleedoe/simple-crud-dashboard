@@ -19,13 +19,13 @@ const KecamatanModule = (function() {
 
         $("#main-content-dev").html('');
         $("#main-content-dev").append(`
-        <!-- modal add Desa -->
+        <!-- modal add Kecamatan -->
         <div class="modal fade" id="staticBackdrop-add" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Desa</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Tambah Kecamatan</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -60,21 +60,9 @@ const KecamatanModule = (function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-add"
-                                                id="kecamatan-add"
-                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'kecamatan-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tambahNama">Nama Desa</label>
+                                            <label for="tambahNama">Nama Kecamatan</label>
                                             <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Desa"
+                                                placeholder="Nama Kecamatan"
                                                 oninput="KecamatanModule.validatorName('name-add', 'button-add')"
                                                 maxlength="12" autocomplete="off">
                                         </div>
@@ -92,15 +80,15 @@ const KecamatanModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal add Desa -->
+        <!-- /.modal add Kecamatan -->
 
-        <!-- modal edit Desa -->
+        <!-- modal edit Kecamatan -->
         <div class="modal fade" id="staticBackdrop-edit" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Desa</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Kecamatan</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -133,19 +121,8 @@ const KecamatanModule = (function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Kecamatan</label>
-                                            <select class="form-control select2-search-box-edit"
-                                                id="kecamatan-edit" onchange="">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tambahNama">Nama Desa</label>
-                                            <input type="hidden" class="form-control" id="desa-id">
+                                            <label for="tambahNama">Nama Kecamatan</label>
+                                            <input type="hidden" class="form-control" id="kecamatan-id">
                                             <input type="text" class="form-control" id="name-edit"
                                                 placeholder="Nama Desa"
                                                 oninput="KecamatanModule.validatorName('name-edit', 'button-edit')">
@@ -164,15 +141,15 @@ const KecamatanModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal edit Desa -->
+        <!-- /.modal edit Kecamatan -->
 
-        <!-- modal hapus Desa -->
+        <!-- modal hapus Kecamatan -->
         <div class="modal fade" id="staticBackdrop-delete" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
             <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Hapus Desa</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Hapus Kecamatan</h5>
                         <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i></button> -->
                     </div>
                     <div class="modal-body">
@@ -189,7 +166,7 @@ const KecamatanModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal hapus Desa -->
+        <!-- /.modal hapus Kecamatan -->
         
         <!-- main content -->
         <div class="row" id="row-1-dev">
