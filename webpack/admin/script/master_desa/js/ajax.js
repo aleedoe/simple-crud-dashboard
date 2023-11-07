@@ -203,11 +203,6 @@ const DesaModule = (function() {
                                     <i class="nav-icon fas fa-plus mr-1"></i>
                                     Tambah
                                 </button>
-                                <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    onclick="clearFilter()">
-                                    <i class="nav-icon fas fa-sync-alt mr-1"></i>
-                                    bersihkan filter
-                                </button>
                             </div>
                         </h5>
                     </div>
@@ -527,7 +522,6 @@ const DesaModule = (function() {
         $('#staticBackdrop-delete').modal('show');
     }
     
-
     // validation function //
 
     function validatorName(input_id, button_id) {
