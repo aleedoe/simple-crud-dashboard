@@ -417,7 +417,6 @@ const KecamatanModule = (function() {
             $(this).trigger('change');
             $("#provinsi-add").removeClass("is-valid");
             $("#kabupaten-add").removeClass("is-valid");
-            $("#kecamatan-add").removeClass("is-valid");
         });
     }
 
