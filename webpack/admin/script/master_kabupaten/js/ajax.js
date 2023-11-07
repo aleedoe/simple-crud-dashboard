@@ -197,7 +197,7 @@ var KabupatenModule = (function() {
                                     <th>No</th>
                                     <th>Nama Provinsi</th>
                                     <th>Nama Kabupaten</th>
-                                    <th>Nama Kecamatan</th>
+                                    <th>Total Kecamatan</th>
                                     <th>Total Desa</th>
                                     <th>Total Data</th>
                                     <th>Aksi</th>
@@ -280,8 +280,8 @@ var KabupatenModule = (function() {
             new_row.innerHTML = `
                 <td class="text-center align-middle">${startNumber + index + 1}</td>
                 <td class="text-center align-middle">${row.nama_provinsi}</td>
-                <td class="text-center align-middle">${row.nama_kabupaten}</td>
                 <td class="text-center align-middle">${row.name}</td>
+                <td class="text-center align-middle">${row.total_kecamatan}</td>
                 <td class="text-center align-middle">${row.total_desa}</td>
                 <td class="text-center align-middle">${row.total_data}</td>
                 <td class="p-sm-2 text-center align-middle">
