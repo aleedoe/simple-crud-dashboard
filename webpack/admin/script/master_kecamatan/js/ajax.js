@@ -5,7 +5,7 @@ const KecamatanModule = (function() {
     function load() {
         buildStructure();
         KecamatanRequest.fetchDataAndRender(1);
-        console.log('Desa module loaded');
+        console.log('kecamatan module loaded');
     }
 
     function buildStructure() {
