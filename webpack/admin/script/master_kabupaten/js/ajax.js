@@ -76,7 +76,7 @@ var KabupatenModule = (function() {
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Edit Kecamatan</h5>
+                        <h5 class="modal-title" id="staticBackdropLabel">Edit Kabupaten</h5>
                         <button type="button" class="btn btn-secondary" data-dismiss="modal"><i
                                 class="fas fa-times"></i></button>
                     </div>
@@ -99,7 +99,7 @@ var KabupatenModule = (function() {
                                     <div class="col-md-12">
                                         <div class="form-group">
                                             <label for="tambahNama">Nama Kabupaten</label>
-                                            <input type="hidden" class="form-control" id="kecamatan-id">
+                                            <input type="hidden" class="form-control" id="kabupaten-id">
                                             <input type="text" class="form-control" id="name-edit"
                                                 placeholder="Nama Kabupaten"
                                                 oninput="KabupatenModule.validatorName('name-edit', 'button-edit')">
@@ -399,8 +399,6 @@ var KabupatenModule = (function() {
     function aplyValueModalEdit(data) {
 
         $("#provinsi-edit").removeAttr("onchange");
-        $("#kabupaten-edit").removeAttr("onchange");
-        $("#kecamatan-edit").removeAttr("onchange");
 
         const nameValidator = (name) => {
 
@@ -451,7 +449,7 @@ var KabupatenModule = (function() {
 
         }
 
-        $("#kecamatan-id").val(data[0].id);
+        $("#kabupaten-id").val(data[0].id);
         $("#name-edit").val(data[0].name);
         const name = $("#name-edit").val();
         nameValidator(name);
@@ -460,13 +458,8 @@ var KabupatenModule = (function() {
         $('#provinsi-edit').trigger('change');
         $('#provinsi-edit').attr("onchange", "KabupatenModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
 
-        var url = "script/master_kabupaten/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
-        var target_select = $("#kabupaten-edit");
-        KabupatenRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
-
         $("#button-edit").prop("disabled", false);
         $("#provinsi-edit").addClass("is-valid");
-        $("#kabupaten-edit").addClass("is-valid");
     }
 
     function showModalDelete(id) {

@@ -137,16 +137,14 @@ const KabupatenRequest = (() => {
     }
 
     function dataEdit() {
-        const kecamatan_id = $("#kecamatan-id").val();
+        const kabupaten_id = $("#kabupaten-id").val();
         const name_edit = $("#name-edit").val();
         const provinsi_id = $("#provinsi-edit").val();
-        const kabupaten_id = $("#kabupaten-edit").val();
 
         var formData = new FormData();
-        formData.append("kecamatan_id", kecamatan_id);
+        formData.append("kabupaten_id", kabupaten_id);
         formData.append("name_edit", name_edit);
         formData.append("provinsi_id", provinsi_id);
-        formData.append("kabupaten_id", kabupaten_id);
 
         $.ajax({
             url: `script/master_kabupaten/php/update.php`,
