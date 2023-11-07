@@ -19,7 +19,7 @@ var KabupatenModule = (function() {
 
         $("#main-content-dev").html('');
         $("#main-content-dev").append(`
-        <!-- modal add Kecamatan -->
+        <!-- modal add Kabupaten -->
         <div class="modal fade" id="staticBackdrop-add" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -48,21 +48,9 @@ var KabupatenModule = (function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-add"
-                                                id="kabupaten-add"
-                                                onchange="KabupatenModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tambahNama">Nama Kecamatan</label>
+                                            <label for="tambahNama">Nama Kabupaten</label>
                                             <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Kecamatan"
+                                                placeholder="Nama Kabupaten"
                                                 oninput="KabupatenModule.validatorName('name-add', 'button-add')"
                                                 maxlength="25" autocomplete="off">
                                         </div>
@@ -80,9 +68,9 @@ var KabupatenModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal add Kecamatan -->
+        <!-- /.modal add Kabupaten -->
 
-        <!-- modal edit Kecamatan -->
+        <!-- modal edit Kabupaten -->
         <div class="modal fade" id="staticBackdrop-edit" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
@@ -110,21 +98,10 @@ var KabupatenModule = (function() {
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group">
-                                            <label>Kabupaten</label>
-                                            <select class="form-control select2-search-box-edit"
-                                                id="kabupaten-edit" onchange="">
-                                                <option></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group">
-                                            <label for="tambahNama">Nama Kecamatan</label>
+                                            <label for="tambahNama">Nama Kabupaten</label>
                                             <input type="hidden" class="form-control" id="kecamatan-id">
                                             <input type="text" class="form-control" id="name-edit"
-                                                placeholder="Nama Desa"
+                                                placeholder="Nama Kabupaten"
                                                 oninput="KabupatenModule.validatorName('name-edit', 'button-edit')">
                                         </div>
                                     </div>
@@ -141,9 +118,9 @@ var KabupatenModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal edit Kecamatan -->
+        <!-- /.modal edit Kabupaten -->
 
-        <!-- modal hapus Kecamatan -->
+        <!-- modal hapus Kabupaten -->
         <div class="modal fade" id="staticBackdrop-delete" data-backdrop="static" data-keyboard="false"
             tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="false">
             <div class="modal-dialog modal-sm modal-dialog-centered modal-dialog-scrollable">
@@ -166,7 +143,7 @@ var KabupatenModule = (function() {
                 </div>
             </div>
         </div>
-        <!-- /.modal hapus Kecamatan -->
+        <!-- /.modal hapus Kabupaten -->
         
         <!-- main content -->
         <div class="row" id="row-1-dev">
