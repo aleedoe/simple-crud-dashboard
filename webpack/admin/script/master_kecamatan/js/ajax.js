@@ -476,7 +476,7 @@ const KecamatanModule = (function() {
 
         }
 
-        $("#desa-id").val(data[0].id);
+        $("#kecamatan-id").val(data[0].id);
         $("#name-edit").val(data[0].name);
         const name = $("#name-edit").val();
         nameValidator(name);
@@ -489,14 +489,9 @@ const KecamatanModule = (function() {
         var target_select = $("#kabupaten-edit");
         KecamatanRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
-        var url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + data[0].id_kabupaten;
-        var target_select = $("#kecamatan-edit");
-        KecamatanRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kecamatan, "kecamatan");
-
         $("#button-edit").prop("disabled", false);
         $("#provinsi-edit").addClass("is-valid");
         $("#kabupaten-edit").addClass("is-valid");
-        $("#kecamatan-edit").addClass("is-valid");
     }
 
     function showModalDelete(id) {
