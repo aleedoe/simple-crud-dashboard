@@ -39,7 +39,7 @@ var KabupatenModule = (function() {
                                             <label>Provinsi</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="provinsi-add"
-                                                onchange="KabupatenModule.validatorSelect('add', 'button-add', 'provinsi-add')">
+                                                onchange="KabupatenModule.validatorSelect('add', 'button-add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -393,7 +393,6 @@ var KabupatenModule = (function() {
             $(this).val(0);
             $(this).trigger('change');
             $("#provinsi-add").removeClass("is-valid");
-            $("#kabupaten-add").removeClass("is-valid");
         });
     }
 
@@ -480,28 +479,26 @@ var KabupatenModule = (function() {
     function validatorName(input_id, button_id) {
         let name;
         let provinsi;
-        let kabupaten;
 
         if (input_id === 'kode-add' || input_id === 'name-add') {
             name = "name-add";
             provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
         } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
             name = "name-edit";
             provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
         }
 
+        
         const inputElement = $("#" + input_id);
-
+        
         const input_value = inputElement.val();
         const regex = /[^A-Za-z0-9\.\s]/;
-
+        
         if (!regex.test(input_value)) {
             const has_number = /[0-9]/.test(input_value);
-
+            
             if (!has_number) {
-                if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
+                if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== null) {
                     $("#" + button_id).prop("disabled", false);
                 }
                 inputElement.removeClass("is-invalid");
@@ -539,54 +536,25 @@ var KabupatenModule = (function() {
         }
     }
 
-    function validatorSelect(input_id, button_id, load = "") {
-
-        const resetSelectOptions = (target_select) => {
-            target_select.html('<option value=""></option>');
-            target_select.removeClass("is-valid");
-        }
-
-        if (load === "provinsi-add") {
-            const url = "script/master_kabupaten/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
-            const target_select = $("#kabupaten-add");
-            target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-add"));
-
-        }
-
-        if (load === "provinsi-edit") {
-            const url = "script/master_kabupaten/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
-            const target_select = $("#kabupaten-edit");
-            target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-edit"));
-
-        }
+    function validatorSelect(input_id, button_id) {
 
         let name;
         let provinsi;
-        let kabupaten;
 
         if (input_id === 'add') {
             name = "name-add";
             provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
         } else if (input_id === 'edit') {
             name = "name-edit";
             provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
         }
 
         $("#" + provinsi).on('change', function () {
             $("#" + provinsi).addClass('is-valid');
         });
-        $("#" + kabupaten).on('change', function () {
-            $("#" + kabupaten).addClass('is-valid');
-        });
 
         setTimeout(function () {
-            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
+            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== null) {
                 $("#" + button_id).prop("disabled", false);
             } else {
                 $("#" + button_id).prop("disabled", true);

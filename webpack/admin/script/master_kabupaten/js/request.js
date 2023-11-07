@@ -115,12 +115,10 @@ const KabupatenRequest = (() => {
     function dataAdd() {
         const name_add = $("#name-add").val();
         const provinsi_id = $("#provinsi-add").val();
-        const kabupaten_id = $("#kabupaten-add").val();
 
         var formData = new FormData();
         formData.append("name_add", name_add);
         formData.append("provinsi_id", provinsi_id);
-        formData.append("kabupaten_id", kabupaten_id);
 
         $.ajax({
             url: `script/master_kabupaten/php/add.php`,
@@ -183,13 +181,13 @@ const KabupatenRequest = (() => {
     }
 
     return {
-        fetchDataAndRender: fetchDataAndRender,
-        loadSelectOptions: loadSelectOptions,
-        loadSelectOptionsEdit: loadSelectOptionsEdit,
-        loadDataEdit: loadDataEdit,
-        dataAdd: dataAdd,
-        dataEdit: dataEdit,
-        dataDelete: dataDelete,
+        fetchDataAndRender,
+        loadSelectOptions,
+        loadSelectOptionsEdit,
+        loadDataEdit,
+        dataAdd,
+        dataEdit,
+        dataDelete,
     };
     
 })();
