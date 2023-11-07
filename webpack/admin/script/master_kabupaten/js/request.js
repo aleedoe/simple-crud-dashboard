@@ -169,7 +169,7 @@ const KabupatenRequest = (() => {
             contentType: false, // Tambahkan ini
             processData: false, // Tambahkan ini
             success: function (response) {
-                alert("succes!");
+                alert(response);
                 $('#staticBackdrop-delete').modal('hide');
             },
             error: function (xhr, status, error) {
