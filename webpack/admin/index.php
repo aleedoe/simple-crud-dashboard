@@ -62,7 +62,7 @@
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
             <a href="../../index3.html" class="brand-link">
-                <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle ml-5"
+                <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image rounded"
                     style="opacity: .8">
                 <span class="brand-text font-weight-light">Webzet.Dev</span>
             </a>
@@ -199,9 +199,9 @@
 
         <footer class="main-footer fixed-bottom">
             <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> 1.0.0
             </div>
-            <strong>Copyright &copy; 2023 <a href="https://github.com/Zaisiapa17">Mushyafa Ali</a>.</strong>
+            <strong>Copyright &copy; 2023 <a href="https://github.com/Zaisiapa17">Alie</a>.</strong>
         </footer>
 
         <!-- Control Sidebar -->
