@@ -322,15 +322,31 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="card card-primary card-outline">
-                            <div class="card-header pb-sm-3">
+                            <div class="card-header">
                                 <h5 class="card-title m-0">
                                     <div class="d-flex flex-wrap align-items-center">
-                                        <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                            data-toggle="modal" data-target="#staticBackdrop-add" onclick="">
+                                        <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
+                                            data-target="#staticBackdrop-add" onclick="">
                                             <i class="nav-icon fas fa-plus mr-1"></i>
                                             Tambah
                                         </button>
-                                        <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
+                                        <input class="form-control form-control-sm m-1" type="text"
+                                            placeholder="cari data" style="min-width: 10%; max-width: 18%;">
+                                        <select class="form-control" style="min-width: 30%; max-width: 40%; height: calc(1.8125rem + 2px);" id="gender-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
+                                        <select class="form-control" style="min-width: 30%; max-width: 40%; height: calc(1.8125rem + 2px);" id="profile-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
+
+
+                                        <button type="button" class="btn btn-primary btn-sm m-1"
                                             onclick="clearFilter()">
                                             <i class="nav-icon fas fa-sync-alt mr-1"></i>
                                             bersihkan filter
@@ -599,6 +615,20 @@
             }, 1000);
         }
 
+        // select2 plugin
+        $('#gender-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Jenis Kelamin",
+            minimumResultsForSearch: -1,
+            width: '150px',
+        })
+        
+        $('#profile-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Pilih",
+            minimumResultsForSearch: -1,
+            width: '150px'
+        })
 
     </script>
 

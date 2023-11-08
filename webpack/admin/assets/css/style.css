@@ -34,3 +34,23 @@
 #main-content-dev #row-1-dev .card-footer .d-flex{
     min-width: 400px;
 }
+
+.card-header .select2-selection__placeholder {
+    line-height: 27px !important;
+}
+
+.card-header .select2-selection__rendered {
+    line-height: 27px !important;
+}
+
+.card-header .select2-container .select2-selection--single {
+    height: 31px !important;
+}
+
+.card-header .select2{
+    margin:3px;
+}
+
+.card-header .select2 .select2-selection__rendered {
+    font-size:medium;
+}
