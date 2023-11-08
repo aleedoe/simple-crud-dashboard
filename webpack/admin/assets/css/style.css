@@ -36,7 +36,7 @@
 }
 
 .card-header .select2-selection__placeholder {
-    line-height: 27px !important;
+    line-height: 29px !important;
 }
 
 .card-header .select2-selection__rendered {
@@ -52,5 +52,5 @@
 }
 
 .card-header .select2 .select2-selection__rendered {
-    font-size:medium;
+    font-size:14px;
 }

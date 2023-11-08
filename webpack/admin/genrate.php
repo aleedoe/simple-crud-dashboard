@@ -332,20 +332,42 @@
                                         </button>
                                         <input class="form-control form-control-sm m-1" type="text"
                                             placeholder="cari data" style="min-width: 10%; max-width: 18%;">
-                                        <select class="form-control" style="min-width: 30%; max-width: 40%; height: calc(1.8125rem + 2px);" id="gender-filter"
+                                        <select class="form-control" id="gender-filter"
                                             onchange="">
                                             <option></option>
                                             <option>laki</option>
                                             <option>perempuan</option>
                                         </select>
-                                        <select class="form-control" style="min-width: 30%; max-width: 40%; height: calc(1.8125rem + 2px);" id="profile-filter"
+                                        <select class="form-control" id="profile-filter"
                                             onchange="">
                                             <option></option>
                                             <option>laki</option>
                                             <option>perempuan</option>
                                         </select>
-
-
+                                        <select class="form-control" id="provinsi-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
+                                        <select class="form-control" id="kabupaten-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
+                                        <select class="form-control" id="kecamatan-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
+                                        <select class="form-control" id="desa-filter"
+                                            onchange="">
+                                            <option></option>
+                                            <option>laki</option>
+                                            <option>perempuan</option>
+                                        </select>
                                         <button type="button" class="btn btn-primary btn-sm m-1"
                                             onclick="clearFilter()">
                                             <i class="nav-icon fas fa-sync-alt mr-1"></i>
@@ -625,8 +647,32 @@
         
         $('#profile-filter').select2({
             theme: 'bootstrap4',
-            placeholder: "Pilih",
+            placeholder: "Profile",
             minimumResultsForSearch: -1,
+            width: '150px'
+        })
+
+        $('#provinsi-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Provinsi",
+            width: '150px'
+        })
+
+        $('#kabupaten-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Kabupaten",
+            width: '150px'
+        })
+
+        $('#kecamatan-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Kecamatan",
+            width: '150px'
+        })
+
+        $('#desa-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Desa",
             width: '150px'
         })
 

@@ -265,20 +265,58 @@ const MahasiswaModule = (function () {
             <div class="col-12">
                 <div class="card card-primary card-outline">
                     <div class="card-header pb-sm-3">
-                        <h5 class="card-title m-0">
-                            <div class="d-flex flex-wrap align-items-center">
-                                <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    data-toggle="modal" data-target="#staticBackdrop-add" onclick="MahasiswaModule.resetModalAdd()">
-                                    <i class="nav-icon fas fa-plus mr-1"></i>
-                                    Tambah
-                                </button>
-                                <button type="button" class="btn btn-primary btn-sm mr-2 mt-2"
-                                    onclick="clearFilter()">
-                                    <i class="nav-icon fas fa-sync-alt mr-1"></i>
-                                    bersihkan filter
-                                </button>
-                            </div>
-                        </h5>
+                    <h5 class="card-title m-0">
+                        <div class="d-flex flex-wrap align-items-center">
+                            <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
+                                data-target="#staticBackdrop-add" onclick="MahasiswaModule.resetModalAdd()">
+                                <i class="nav-icon fas fa-plus mr-1"></i>
+                                Tambah
+                            </button>
+                            <input class="form-control form-control-sm m-1" type="text"
+                                placeholder="cari data" style="min-width: 10%; max-width: 18%;">
+                            <select class="form-control" id="gender-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <select class="form-control" id="profile-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <select class="form-control" id="provinsi-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <select class="form-control" id="kabupaten-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <select class="form-control" id="kecamatan-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <select class="form-control" id="desa-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
+                            <button type="button" class="btn btn-primary btn-sm m-1"
+                                onclick="clearFilter()">
+                                <i class="nav-icon fas fa-sync-alt mr-1"></i>
+                                bersihkan filter
+                            </button>
+                        </div>
+                    </h5>
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
@@ -352,6 +390,45 @@ const MahasiswaModule = (function () {
             title: '<i class="fas fa-upload mr-1"></i> Upload Profile',
             buttonClass: 'btn btn-danger',
         });
+
+        // definition for filter
+        $('#gender-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Jenis Kelamin",
+            minimumResultsForSearch: -1,
+            width: '150px',
+        })
+        
+        $('#profile-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Profile",
+            minimumResultsForSearch: -1,
+            width: '150px'
+        })
+
+        $('#provinsi-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Provinsi",
+            width: '150px'
+        })
+
+        $('#kabupaten-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Kabupaten",
+            width: '150px'
+        })
+
+        $('#kecamatan-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Kecamatan",
+            width: '150px'
+        })
+
+        $('#desa-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Desa",
+            width: '150px'
+        })
     }
 
     function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
