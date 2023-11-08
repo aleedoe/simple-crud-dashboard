@@ -10,7 +10,7 @@ var KabupatenModule = (function() {
 
     function buildStructure() {
         $(".head-name-title-dev").removeClass("d-none");
-        $(".head-name-title-dev h1").text("Tabel Mahasiswa");
+        $(".head-name-title-dev h1").text("Tabel Kabupaten");
         $(".content-wrapper").LoadingOverlay("show", {
             background: "rgba(0, 0, 0, 0.5)",
             image: "",
