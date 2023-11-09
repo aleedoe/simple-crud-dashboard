@@ -781,41 +781,29 @@ const MahasiswaModule = (function () {
     // validation function //
 
     function validators(input, modal) {
-
-        var kode_add = false;
-        var name_add = false;
-        var gender_add = false;
-        var provinsi_add = false;
-        var kabupaten_add = false;
-        var kecamatan_add = false;
-        var desa_add = false;
-
         
         if (input === 'kode') {
 
             if (modal === "add") {
                 const input_element_value = $("#kode-add").val();
-                const has_number = /^[0-9]+$/.test(input_element_value);
-                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
-
-                if (has_number) {
-                    kode_add = true;
-                    console.log(name_add);
+                const has_number_kode = /^[0-9]+$/.test(input_element_value);
+                const has_regex_name = /^[A-Za-z]+$/.test($("#name-add").val());
+                if (has_number_kode) {
+                    $("#kode-add").removeClass("is-invalid");
+                    $("#feedback-kode-add").remove();
                     $("#kode-add").addClass("is-valid");
-                    if (name_add) {
+                    if (has_regex_name) {
                         $("#button-add").prop("disabled", false);
                     } else {
-                        kode_add = false;
+                        console.log("tombol hidup");
                         $("#button-add").prop("disabled", true);
                     }
                 } else if (input_element_value == "") {
-                    kode_add = false;
                     $("#kode-add").removeClass("is-valid");
                     $("#kode-add").removeClass("is-invalid");
                     $("#feedback-kode-add").remove();
                     $("#button-add").prop("disabled", true);
                 } else {
-                    kode_add = false;
                     $("#button-add").prop("disabled", true);
                     $("#kode-add").removeClass("is-valid");
                     $("#kode-add").addClass("is-invalid");
@@ -833,7 +821,7 @@ const MahasiswaModule = (function () {
             } else {
                 const input_element_value = $("#kode-edit").val();
                 const has_number = /^[0-9]+$/.test(input_element_value);
-                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+                const has_regex = /^[a-zA-Z]+$/.test(input_element_value);
 
                 if (has_number) {
                     $("#kode-edit").addClass("is-valid");
