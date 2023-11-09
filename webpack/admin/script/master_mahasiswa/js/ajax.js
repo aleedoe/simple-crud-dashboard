@@ -38,7 +38,7 @@ const MahasiswaModule = (function () {
                                         <div class="form-group">
                                             <label for="tambahKode">Kode</label>
                                             <input type="text" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-add', 'button-add')" autocomplete="off">
+                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validators('kode', 'add')" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -398,7 +398,7 @@ const MahasiswaModule = (function () {
             minimumResultsForSearch: -1,
             width: '150px',
         })
-        
+
         $('#profile-filter').select2({
             theme: 'bootstrap4',
             placeholder: "Profile",
@@ -429,6 +429,10 @@ const MahasiswaModule = (function () {
             placeholder: "Desa",
             width: '150px'
         })
+    }
+
+    function filtering(filter_input) {
+        return
     }
 
     function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
@@ -612,12 +616,21 @@ const MahasiswaModule = (function () {
             // Reset the selected option
             $(this).val(0);
             $(this).trigger('change');
-            $("#gender-add").removeClass("is-valid");
-            $("#provinsi-add").removeClass("is-valid");
-            $("#kabupaten-add").removeClass("is-valid");
-            $("#kecamatan-add").removeClass("is-valid");
-            $("#desa-add").removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
         });
+        $(".fileinput-wrapper .fileinput-name").remove();
+        console.log("kode : " + $("#kode-add").val());
+        console.log("name : " + $("#name-add").val());
+        console.log("gender : " + $("#gender-add").val());
+        console.log("provinsi : " + $("#provinsi-add").val());
+        console.log("kabupaten : " + $("#kabupaten-add").val());
+        console.log("kecamatan : " + $("#kecamatan-add").val());
+        console.log("desa : " + $("#desa-add").val());
+        console.log("image : " + $("#image-add").val());
     }
 
     function aplyValueModalEdit(data) {
@@ -763,7 +776,7 @@ const MahasiswaModule = (function () {
         $("#button-delete").attr("onclick", "MahasiswaRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
-    
+
 
     // validation function //
 
@@ -1012,7 +1025,11 @@ const MahasiswaModule = (function () {
         });
 
         setTimeout(function () {
-            if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+
+            const has_number = /^[0-9]+$/.test($("#" + kode).val());
+            const has_character = /[^A-Za-z0-9\.\s]/.test($("#" + name).val());
+
+            if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "" && has_number && has_character) {
                 $("#" + button_id).prop("disabled", false);
             } else {
                 $("#" + button_id).prop("disabled", true);
@@ -1022,12 +1039,14 @@ const MahasiswaModule = (function () {
 
     return {
         load: load,
+        filtering,
         buildUrl: buildUrl,
         renderData: renderData,
         renderPagination: renderPagination,
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
+        validators,
         validatorCode: validatorCode,
         validatorName: validatorName,
         validatorSelect: validatorSelect
