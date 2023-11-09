@@ -38,7 +38,7 @@ const MahasiswaModule = (function () {
                                         <div class="form-group">
                                             <label for="tambahKode">Kode</label>
                                             <input type="text" class="form-control" id="kode-add"
-                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validatorCode('kode-add', 'button-add')" autocomplete="off">
+                                                placeholder="Kode Mahasiswa" oninput="MahasiswaModule.validators('kode', 'add')" autocomplete="off">
                                         </div>
                                     </div>
                                 </div>
@@ -398,7 +398,7 @@ const MahasiswaModule = (function () {
             minimumResultsForSearch: -1,
             width: '150px',
         })
-        
+
         $('#profile-filter').select2({
             theme: 'bootstrap4',
             placeholder: "Profile",
@@ -429,6 +429,10 @@ const MahasiswaModule = (function () {
             placeholder: "Desa",
             width: '150px'
         })
+    }
+
+    function filtering(filter_input) {
+        return
     }
 
     function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
@@ -612,12 +616,21 @@ const MahasiswaModule = (function () {
             // Reset the selected option
             $(this).val(0);
             $(this).trigger('change');
-            $("#gender-add").removeClass("is-valid");
-            $("#provinsi-add").removeClass("is-valid");
-            $("#kabupaten-add").removeClass("is-valid");
-            $("#kecamatan-add").removeClass("is-valid");
-            $("#desa-add").removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
+            $(this).removeClass("is-valid");
         });
+        $(".fileinput-wrapper .fileinput-name").remove();
+        console.log("kode : " + $("#kode-add").val());
+        console.log("name : " + $("#name-add").val());
+        console.log("gender : " + $("#gender-add").val());
+        console.log("provinsi : " + $("#provinsi-add").val());
+        console.log("kabupaten : " + $("#kabupaten-add").val());
+        console.log("kecamatan : " + $("#kecamatan-add").val());
+        console.log("desa : " + $("#desa-add").val());
+        console.log("image : " + $("#image-add").val());
     }
 
     function aplyValueModalEdit(data) {
@@ -763,9 +776,173 @@ const MahasiswaModule = (function () {
         $("#button-delete").attr("onclick", "MahasiswaRequest.dataDelete(" + id + ")");
         $('#staticBackdrop-delete').modal('show');
     }
-    
+
 
     // validation function //
+
+    function validators(input, modal) {
+
+        var kode_add = false;
+        var name_add = false;
+        var gender_add = false;
+        var provinsi_add = false;
+        var kabupaten_add = false;
+        var kecamatan_add = false;
+        var desa_add = false;
+
+        
+        if (input === 'kode') {
+
+            if (modal === "add") {
+                const input_element_value = $("#kode-add").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+
+                if (has_number) {
+                    kode_add = true;
+                    console.log(name_add);
+                    $("#kode-add").addClass("is-valid");
+                    if (name_add) {
+                        $("#button-add").prop("disabled", false);
+                    } else {
+                        kode_add = false;
+                        $("#button-add").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    kode_add = false;
+                    $("#kode-add").removeClass("is-valid");
+                    $("#kode-add").removeClass("is-invalid");
+                    $("#feedback-kode-add").remove();
+                    $("#button-add").prop("disabled", true);
+                } else {
+                    kode_add = false;
+                    $("#button-add").prop("disabled", true);
+                    $("#kode-add").removeClass("is-valid");
+                    $("#kode-add").addClass("is-invalid");
+                    if ($("#feedback-kode-add").length > 0) {
+                        $("#feedback-kode-add").remove();
+                    }
+                    $("#kode-add").after(`
+                            <div id="feedback-kode-add" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            } else {
+                const input_element_value = $("#kode-edit").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+
+                if (has_number) {
+                    $("#kode-edit").addClass("is-valid");
+                    if (name && gender && provinsi && kabupaten && kecamatan && desa) {
+                        $("#button-edit").prop("disabled", false);
+                    } else {
+                        $("#button-edit").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    $("#kode-edit").removeClass("is-valid");
+                    $("#kode-edit").removeClass("is-invalid");
+                    $("#feedback-kode-edit").remove();
+                    $("#button-edit").prop("disabled", true);
+                } else {
+                    $("#button-edit").prop("disabled", true);
+                    $("#kode-edit").removeClass("is-valid");
+                    $("#kode-edit").addClass("is-invalid");
+                    if ($("#feedback-kode-edit").length > 0) {
+                        $("#feedback-kode-edit").remove();
+                    }
+                    $("#kode-edit").after(`
+                            <div id="feedback-kode-edit" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            }
+        } else if (input === 'name') {
+
+            if (modal === "add") {
+                const input_element_value = $("#name-add").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+                if (!has_number && !has_regex) {
+                    name_add = true;
+                    $("#name-add").addClass("is-valid");
+                    if (kode_add) {
+                        $("#button-add").prop("disabled", false);
+                    } else {
+                        name_add = false;
+                        $("#button-add").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    name_add = false;
+                    $("#name-add").removeClass("is-valid");
+                    $("#name-add").removeClass("is-invalid");
+                    $("#feedback-name-add").remove();
+                    $("#button-add").prop("disabled", true);
+                } else {
+                    name_add = false;
+                    $("#button-add").prop("disabled", true);
+                    $("#name-add").removeClass("is-valid");
+                    $("#name-add").addClass("is-invalid");
+                    if ($("#feedback-name-add").length > 0) {
+                        $("#feedback-name-add").remove();
+                    }
+                    $("#name-add").after(`
+                            <div id="feedback-name-add" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            } else {
+                const input_element_value = $("#name-edit").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+
+            }
+        } else if (input === 'gender') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'provinsi') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'kabupaten') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'kecamatan') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'desa') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        }
+    }
 
     function validatorCode(input_id, button_id) {
         let kode;
@@ -1012,7 +1189,11 @@ const MahasiswaModule = (function () {
         });
 
         setTimeout(function () {
-            if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "") {
+
+            const has_number = /^[0-9]+$/.test($("#" + kode).val());
+            const has_character = /[^A-Za-z0-9\.\s]/.test($("#" + name).val());
+
+            if ($("#" + kode).val() !== "" && $("#" + name).val() !== "" && $("#" + gender).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "" && $("#" + kecamatan).val() !== "" && $("#" + desa).val() !== "" && has_number && has_character) {
                 $("#" + button_id).prop("disabled", false);
             } else {
                 $("#" + button_id).prop("disabled", true);
@@ -1022,12 +1203,14 @@ const MahasiswaModule = (function () {
 
     return {
         load: load,
+        filtering,
         buildUrl: buildUrl,
         renderData: renderData,
         renderPagination: renderPagination,
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
+        validators,
         validatorCode: validatorCode,
         validatorName: validatorName,
         validatorSelect: validatorSelect
