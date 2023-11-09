@@ -780,6 +780,158 @@ const MahasiswaModule = (function () {
 
     // validation function //
 
+    function validators(input, modal) {
+        
+        if (input === 'kode') {
+
+            if (modal === "add") {
+                const input_element_value = $("#kode-add").val();
+                const has_number_kode = /^[0-9]+$/.test(input_element_value);
+                const has_regex_name = /^[A-Za-z]+$/.test($("#name-add").val());
+                if (has_number_kode) {
+                    $("#kode-add").removeClass("is-invalid");
+                    $("#feedback-kode-add").remove();
+                    $("#kode-add").addClass("is-valid");
+                    if (has_regex_name) {
+                        $("#button-add").prop("disabled", false);
+                    } else {
+                        console.log("tombol hidup");
+                        $("#button-add").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    $("#kode-add").removeClass("is-valid");
+                    $("#kode-add").removeClass("is-invalid");
+                    $("#feedback-kode-add").remove();
+                    $("#button-add").prop("disabled", true);
+                } else {
+                    $("#button-add").prop("disabled", true);
+                    $("#kode-add").removeClass("is-valid");
+                    $("#kode-add").addClass("is-invalid");
+                    if ($("#feedback-kode-add").length > 0) {
+                        $("#feedback-kode-add").remove();
+                    }
+                    $("#kode-add").after(`
+                            <div id="feedback-kode-add" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            } else {
+                const input_element_value = $("#kode-edit").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /^[a-zA-Z]+$/.test(input_element_value);
+
+                if (has_number) {
+                    $("#kode-edit").addClass("is-valid");
+                    if (name && gender && provinsi && kabupaten && kecamatan && desa) {
+                        $("#button-edit").prop("disabled", false);
+                    } else {
+                        $("#button-edit").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    $("#kode-edit").removeClass("is-valid");
+                    $("#kode-edit").removeClass("is-invalid");
+                    $("#feedback-kode-edit").remove();
+                    $("#button-edit").prop("disabled", true);
+                } else {
+                    $("#button-edit").prop("disabled", true);
+                    $("#kode-edit").removeClass("is-valid");
+                    $("#kode-edit").addClass("is-invalid");
+                    if ($("#feedback-kode-edit").length > 0) {
+                        $("#feedback-kode-edit").remove();
+                    }
+                    $("#kode-edit").after(`
+                            <div id="feedback-kode-edit" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            }
+        } else if (input === 'name') {
+
+            if (modal === "add") {
+                const input_element_value = $("#name-add").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+                if (!has_number && !has_regex) {
+                    name_add = true;
+                    $("#name-add").addClass("is-valid");
+                    if (kode_add) {
+                        $("#button-add").prop("disabled", false);
+                    } else {
+                        name_add = false;
+                        $("#button-add").prop("disabled", true);
+                    }
+                } else if (input_element_value == "") {
+                    name_add = false;
+                    $("#name-add").removeClass("is-valid");
+                    $("#name-add").removeClass("is-invalid");
+                    $("#feedback-name-add").remove();
+                    $("#button-add").prop("disabled", true);
+                } else {
+                    name_add = false;
+                    $("#button-add").prop("disabled", true);
+                    $("#name-add").removeClass("is-valid");
+                    $("#name-add").addClass("is-invalid");
+                    if ($("#feedback-name-add").length > 0) {
+                        $("#feedback-name-add").remove();
+                    }
+                    $("#name-add").after(`
+                            <div id="feedback-name-add" class="invalid-feedback">
+                            Kode harus berupa angka.
+                            </div>
+                        `);
+                    console.log("madang");
+                }
+
+            } else {
+                const input_element_value = $("#name-edit").val();
+                const has_number = /^[0-9]+$/.test(input_element_value);
+                const has_regex = /[^A-Za-z0-9\s]/.test(input_element_value);
+
+            }
+        } else if (input === 'gender') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'provinsi') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'kabupaten') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'kecamatan') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        } else if (input === 'desa') {
+
+            if (modal === 'add') {
+
+            } else {
+
+            }
+        }
+    }
+
     function validatorCode(input_id, button_id) {
         let kode;
         let name;
