@@ -27,11 +27,20 @@
     opacity: 0;
 }
 
+@media only screen and (min-width: 1879px) {
+
+    /* Gaya khusus untuk layar lebih dari 1920px */
+    #row-1-dev .card-title .d-flex.align-content-center.flex-wrap {
+        min-width: 150%;
+    }
+}
+
+
 #main-content-dev #row-1-dev .card-footer {
     overflow-x: auto;
 }
 
-#main-content-dev #row-1-dev .card-footer .d-flex{
+#main-content-dev #row-1-dev .card-footer .d-flex {
     min-width: 400px;
 }
 
@@ -47,10 +56,10 @@
     height: 31px !important;
 }
 
-.card-header .select2{
-    margin:3px;
+.card-header .select2 {
+    margin: 3px;
 }
 
 .card-header .select2 .select2-selection__rendered {
-    font-size:14px;
+    font-size: 14px;
 }

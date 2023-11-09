@@ -266,7 +266,7 @@ const MahasiswaModule = (function () {
                 <div class="card card-primary card-outline">
                     <div class="card-header pb-sm-3">
                     <h5 class="card-title m-0">
-                        <div class="d-flex flex-wrap align-items-center">
+                        <div class="d-flex align-content-center flex-wrap">
                             <button type="button" class="btn btn-primary btn-sm m-1" data-toggle="modal"
                                 data-target="#staticBackdrop-add" onclick="MahasiswaModule.resetModalAdd()">
                                 <i class="nav-icon fas fa-plus mr-1"></i>
