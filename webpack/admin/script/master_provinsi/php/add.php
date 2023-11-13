@@ -13,12 +13,12 @@ function provinsiAdd($data) {
 
 if (isset($_POST["name_add"])) {
     $provinsi_name = $_POST["name_add"];
-    if ($provinsi_name == "") {
+    if (preg_match('/^\s*$/', $provinsi_name)) {
         echo "error_value_name";
         die;
     }
 
-    if (preg_match('/[^\w\s\.]/', $provinsi_name)) {
+    if (!preg_match('/^[a-zA-Z ]+$/', $provinsi_name)) {
         echo "error_unique_name";
         die;
     }

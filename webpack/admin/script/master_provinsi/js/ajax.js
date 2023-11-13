@@ -302,6 +302,8 @@ var ProvinsiModule = (function() {
         $("#feedback-name-add").remove();
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
+        $("#button-add").prop("disabled", true);
+
     }
     function aplyValueModalEdit(data) {
 
