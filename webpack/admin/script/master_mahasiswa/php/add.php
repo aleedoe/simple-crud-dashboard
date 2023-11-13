@@ -61,7 +61,7 @@ function addImage()
 }
 
 $kode_add = $_POST["kode_add"];
-if ($kode_add == "") {
+if (preg_match('/^\s*$/', $kode_add)) {
     echo "error_value_kode";
     die;
 }
@@ -79,24 +79,24 @@ if (strlen($kode_add) > 10) {
 }
 
 $name_add = $_POST["name_add"];
-if ($name_add == "") {
+if (preg_match('/^\s*$/', $name_add)) {
     echo "error_value_name";
     die;
 }
 
 // Validasi nama hanya boleh 0-9a-zA-Z spasi, max 10 karakter
-if (preg_match('/[^\w\s]/', $name_add)) {
+if (!preg_match('/^[a-zA-Z ]+$/', $name_add)) {
     echo "error_unique_name";
     die;
 }
 
-if (strlen($name_add) > 10) {
+if (strlen($name_add) > 20) {
     echo "error_length_name";
     die;
 }
 
 $gender_add = $_POST["gender_add"];
-if ($gender_add == "") {
+if (preg_match('/^\s*$/', $gender_add)) {
     echo "error_gender_value";
     die;
 }
@@ -122,8 +122,13 @@ if ($kecamatan_id == "") {
     echo "error_value_kec";
     die;
 }
-if ($desa_id == "") {
+if (preg_match('/^\s*$/', $desa_id)) {
     echo "error_value_des";
+    die;
+}
+
+if (!is_numeric($desa_id)) {
+    echo "error_number_kode";
     die;
 }
 
