@@ -309,6 +309,12 @@ const MahasiswaModule = (function () {
                                 <option>laki</option>
                                 <option>perempuan</option>
                             </select>
+                            <select class="form-control" id="matkul-filter"
+                                onchange="">
+                                <option></option>
+                                <option>laki</option>
+                                <option>perempuan</option>
+                            </select>
                             <button type="button" class="btn btn-primary btn-sm m-1"
                                 onclick="clearFilter()">
                                 <i class="nav-icon fas fa-sync-alt mr-1"></i>
@@ -426,6 +432,12 @@ const MahasiswaModule = (function () {
         $('#desa-filter').select2({
             theme: 'bootstrap4',
             placeholder: "Desa",
+            width: '150px'
+        })
+
+        $('#matkul-filter').select2({
+            theme: 'bootstrap4',
+            placeholder: "Matkul",
             width: '150px'
         })
     }
