@@ -31,6 +31,7 @@ const KecamatanRequest = (() => {
                     target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                 });
                 $("#button-add").prop("disabled", true);
+                $("#button-edit").prop("disabled", true);
 
             },
             error: function () {
