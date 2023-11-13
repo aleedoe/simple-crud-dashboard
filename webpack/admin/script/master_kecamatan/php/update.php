@@ -17,13 +17,13 @@ function editForm($data)
 $id = $_POST["kecamatan_id"];
 
 $kecamatan_edit = $_POST["name_edit"];
-if ($kecamatan_edit == "") {
+if (preg_match('/^\s*$/', $kecamatan_edit)) {
     echo "error_value_name";
     die;
 }
 
 // Validasi nama hanya boleh 0-9a-zA-Z spasi, max 10 karakter
-if (preg_match('/[^\w\s]/', $kecamatan_edit)) {
+if (!preg_match('/^[a-zA-Z ]+$/', $kecamatan_edit)) {
     echo "error_unique_name";
     die;
 }
