@@ -58,6 +58,7 @@
 
 .card-header .select2 {
     margin: 3px;
+    margin-top: 4px;
 }
 
 .card-header .select2 .select2-selection__rendered {
