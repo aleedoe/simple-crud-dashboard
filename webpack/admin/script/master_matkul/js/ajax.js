@@ -38,7 +38,7 @@ var MatkulModule = (function () {
                                         <div class="form-group">
                                             <label for="tambahNama">Nama</label>
                                             <input type="text" class="form-control" id="name-add"
-                                                placeholder="Nama Mahasiswa" oninput="MatkulModule.validatorName('name-add', 'button-add')"
+                                                placeholder="Nama Mahasiswa" oninput="MatkulModule.validators('name_add')"
                                                 maxlength="12" autocomplete="off">
                                         </div>
                                     </div>
@@ -76,7 +76,7 @@ var MatkulModule = (function () {
                                         <label for="tambahNama">Nama</label>
                                         <input type="hidden" class="form-control" id="matkul-id">
                                         <input type="text" class="form-control" id="name-edit"
-                                            placeholder="Nama Matakuliah" oninput="MatkulModule.validatorName('name-edit', 'button-edit')">
+                                            placeholder="Nama Matakuliah" oninput="MatkulModule.validators('name_edit')">
                                     </div>
                                 </div>
                             </div>
@@ -296,64 +296,17 @@ var MatkulModule = (function () {
         $("#feedback-name-add").remove();
         $("#name-add").removeClass("is-valid");
         $("#name-add").removeClass("is-invalid");
+        $("#button-add").prop("disabled", true);
+
     }
 
     function aplyValueModalEdit(data) {
 
-        const nameValidator = (name) => {
-
-            const inputElement = $("#name-edit");
-
-            const regex = /[^A-Za-z0-9\.\s]/;
-
-            if (!regex.test(name)) {
-                const has_number = /[0-9]/.test(name);
-
-                if (!has_number) {
-                    if (name !== "") {
-                        $("#button-edit").prop("disabled", false);
-                    }
-                    inputElement.removeClass("is-invalid");
-                    inputElement.addClass("is-valid");
-                    $("#feedback-name-edit").remove();
-                    if (name == "") {
-                        inputElement.removeClass("is-valid");
-                        $("#button-edit").prop("disabled", true);
-                    }
-                } else {
-                    $("#button-edit").prop("disabled", true);
-                    inputElement.removeClass("is-valid");
-                    inputElement.addClass("is-invalid");
-                    if ($("#feedback-name-edit").length > 0) {
-                        $("#feedback-name-edit").remove();
-                    }
-                    inputElement.after(`
-                        <div id="feedback-name-edit" class="invalid-feedback">
-                        Nama tidak boleh mengandung angka.
-                        </div>
-                    `);
-                }
-            } else {
-                $("#button-edit").prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-name-edit").length > 0) {
-                    $("#feedback-name-edit").remove();
-                }
-                inputElement.after(`
-                    <div id="feedback-name-edit" class="invalid-feedback">
-                    Nama tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-            }
-
-        }
-
         $("#matkul-id").val(data[0].id);
         $("#name-edit").val(data[0].name);
-        const name = $("#name-edit").val();
-        nameValidator(name);
 
+
+        validators('name_edit');
         $("#button-edit").prop("disabled", false);
     }
 
@@ -364,60 +317,81 @@ var MatkulModule = (function () {
 
 
     // validation function //
-    function validatorName(input_id, button_id) {
-        let name;
+    function validators(input_modal) {
 
-        if (input_id === 'kode-add' || input_id === 'name-add') {
-            name = "name-add";
-        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            name = "name-edit";
+        // const hasNumber = (value) => {
+        //     const validator = /^[0-9]+$/.test(value);
+        //     return validator;
+        // }
+
+        const hasLetter = (value) => {
+            const validator = /^[A-Za-z ]+$/.test(value);
+            return validator;
         }
 
-        const inputElement = $("#" + input_id);
+        const hasEmpty = (value) => {
+            const validator = /^\s*$/.test(value);
+            return validator;
+        }
 
-        const input_value = inputElement.val();
-        const regex = /[^A-Za-z0-9\.\s]/;
+        // const resetSelectOptions = (target_select) => {
+        //     target_select.html('<option value=""></option>');
+        //     target_select.removeClass("is-valid");
+        // }
 
-        if (!regex.test(input_value)) {
-            const has_number = /[0-9]/.test(input_value);
-
-            if (!has_number) {
-                if ($("#" + name).val() !== "") {
-                    $("#" + button_id).prop("disabled", false);
-                }
-                inputElement.removeClass("is-invalid");
-                inputElement.addClass("is-valid");
-                $("#feedback-" + input_id).remove();
-                if (input_value == "") {
-                    inputElement.removeClass("is-valid");
-                    $("#" + button_id).prop("disabled", true);
-                }
+        if (input_modal === 'name_add') {
+            const input_element_value = $("#name-add").val();
+            if (hasLetter(input_element_value)) {
+                $("#name-add").removeClass("is-invalid");
+                $("#feedback-name-add").remove();
+                $("#name-add").addClass("is-valid");
+                $("#button-add").prop("disabled", false);
+            } else if (hasEmpty(input_element_value)) {
+                $("#name-add").removeClass("is-valid");
+                $("#name-add").removeClass("is-invalid");
+                $("#feedback-name-add").remove();
+                $("#button-add").prop("disabled", true);
             } else {
-                $("#" + button_id).prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-" + input_id).length > 0) {
-                    $("#feedback-" + input_id).remove();
+                $("#button-add").prop("disabled", true);
+                $("#name-add").removeClass("is-valid");
+                $("#name-add").addClass("is-invalid");
+                if ($("#feedback-name-add").length > 0) {
+                    $("#feedback-name-add").remove();
                 }
-                inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Nama tidak boleh mengandung angka.
-                        </div>
-                    `);
+                $("#name-add").after(`
+                            <div id="feedback-name-add" class="invalid-feedback">
+                            Nama harus berupa huruf.
+                            </div>
+                        `);
             }
-        } else {
-            $("#" + button_id).prop("disabled", true);
-            inputElement.removeClass("is-valid");
-            inputElement.addClass("is-invalid");
-            if ($("#feedback-" + input_id).length > 0) {
-                $("#feedback-" + input_id).remove();
+
+        } else if (input_modal === 'name_edit') {
+            const input_element_value = $("#name-edit").val();
+            if (hasLetter(input_element_value)) {
+                $("#name-edit").removeClass("is-invalid");
+                $("#feedback-name-edit").remove();
+                $("#name-edit").addClass("is-valid");
+                $("#button-edit").prop("disabled", false);
+            } else if (hasEmpty(input_element_value)) {
+                $("#name-edit").removeClass("is-valid");
+                $("#name-edit").removeClass("is-invalid");
+                $("#feedback-name-edit").remove();
+                $("#button-edit").prop("disabled", true);
+            } else {
+                $("#button-edit").prop("disabled", true);
+                $("#name-edit").removeClass("is-valid");
+                $("#name-edit").addClass("is-invalid");
+                if ($("#feedback-name-edit").length > 0) {
+                    $("#feedback-name-edit").remove();
+                }
+                $("#name-edit").after(`
+                            <div id="feedback-name-edit" class="invalid-feedback">
+                            Nama harus berupa huruf.
+                            </div>
+                        `);
             }
-            inputElement.after(`
-                    <div id="feedback-${input_id}" class="invalid-feedback">
-                    Nama tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
         }
+
     }
 
     return {
@@ -428,6 +402,7 @@ var MatkulModule = (function () {
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
-        validatorName: validatorName,
+        validators
+
     };
 })();
