@@ -30,6 +30,8 @@ const DesaRequest = (() => {
                 $.each(data, function (index, option) {
                     target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                 });
+                $("#button-add").prop("disabled", true);
+                $("#button-edit").prop("disabled", true);
             },
             error: function () {
                 console.error("Failed to fetch data.");
@@ -50,7 +52,8 @@ const DesaRequest = (() => {
                     });
                     $('#kabupaten-edit').val(id);
                     $('#kabupaten-edit').trigger('change');
-                    $('#kabupaten-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
+                    $('#kabupaten-edit').attr("onchange", "DesaModule.validators('kabupaten_edit')");
+                    $("#button-edit").prop("disabled", true);
 
                 },
                 error: function () {
@@ -70,26 +73,9 @@ const DesaRequest = (() => {
                     });
                     $('#kecamatan-edit').val(id);
                     $('#kecamatan-edit').trigger('change');
-                    $('#kecamatan-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
-                },
-                error: function () {
-                    console.error("Failed to fetch data.");
-                }
-            });
-        } else if (describe == "desa") {
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
-                    target_select.append($("<option value=''></option>"));
-                    $.each(data, function (index, option) {
-                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
-                    });
-                    $('#desa-edit').val(id);
-                    $('#desa-edit').trigger('change');
-                    $('#desa-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit')");
+                    $('#kecamatan-edit').attr("onchange", "DesaModule.validators('kecamatan_edit')");
+                    $("#button-edit").prop("disabled", true);
+
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
