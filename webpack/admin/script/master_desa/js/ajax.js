@@ -452,7 +452,7 @@ const DesaModule = (function () {
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
-        $('#provinsi-edit').attr("onchange", "DesaModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
+        $('#provinsi-edit').attr("onchange", "DesaModule.validators('provinsi_edit')");
 
         var url = "script/master_desa/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");

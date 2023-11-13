@@ -30,6 +30,8 @@ const KecamatanRequest = (() => {
                 $.each(data, function (index, option) {
                     target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                 });
+                $("#button-add").prop("disabled", true);
+
             },
             error: function () {
                 console.error("Failed to fetch data.");
@@ -50,46 +52,8 @@ const KecamatanRequest = (() => {
                     });
                     $('#kabupaten-edit').val(id);
                     $('#kabupaten-edit').trigger('change');
-                    $('#kabupaten-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
-
-                },
-                error: function () {
-                    console.error("Failed to fetch data.");
-                }
-            });
-        } else if (describe == "kecamatan") {
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
-                    target_select.append($("<option value=''></option>"));
-                    $.each(data, function (index, option) {
-                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
-                    });
-                    $('#kecamatan-edit').val(id);
-                    $('#kecamatan-edit').trigger('change');
-                    $('#kecamatan-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
-                },
-                error: function () {
-                    console.error("Failed to fetch data.");
-                }
-            });
-        } else if (describe == "desa") {
-            $.ajax({
-                url: url,
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
-                    target_select.append($("<option value=''></option>"));
-                    $.each(data, function (index, option) {
-                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
-                    });
-                    $('#desa-edit').val(id);
-                    $('#desa-edit').trigger('change');
-                    $('#desa-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit')");
+                    $('#kabupaten-edit').attr("onchange", "KecamatanModule.validators('kabupaten_edit')");
+                    $("#button-edit").prop("disabled", true);
                 },
                 error: function () {
                     console.error("Failed to fetch data.");

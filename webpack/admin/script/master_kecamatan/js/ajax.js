@@ -39,7 +39,7 @@ const KecamatanModule = (function() {
                                             <label>Provinsi</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="provinsi-add"
-                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'provinsi-add')">
+                                                onchange="KecamatanModule.validators('provinsi_add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -51,7 +51,7 @@ const KecamatanModule = (function() {
                                             <label>Kabupaten</label>
                                             <select class="form-control select2-search-box-add"
                                                 id="kabupaten-add"
-                                                onchange="KecamatanModule.validatorSelect('add', 'button-add', 'kabupaten-add')">
+                                                onchange="KecamatanModule.validators('kabupaten_add')">
                                                 <option></option>
                                             </select>
                                         </div>
@@ -63,7 +63,7 @@ const KecamatanModule = (function() {
                                             <label for="tambahNama">Nama Kecamatan</label>
                                             <input type="text" class="form-control" id="name-add"
                                                 placeholder="Nama Kecamatan"
-                                                oninput="KecamatanModule.validatorName('name-add', 'button-add')"
+                                                oninput="KecamatanModule.validators('name_add')"
                                                 maxlength="25" autocomplete="off">
                                         </div>
                                     </div>
@@ -125,7 +125,7 @@ const KecamatanModule = (function() {
                                             <input type="hidden" class="form-control" id="kecamatan-id">
                                             <input type="text" class="form-control" id="name-edit"
                                                 placeholder="Nama Desa"
-                                                oninput="KecamatanModule.validatorName('name-edit', 'button-edit')">
+                                                oninput="KecamatanModule.validators('name_edit')">
                                         </div>
                                     </div>
                                 </div>
@@ -419,70 +419,19 @@ const KecamatanModule = (function() {
 
         $("#provinsi-edit").removeAttr("onchange");
         $("#kabupaten-edit").removeAttr("onchange");
-        $("#kecamatan-edit").removeAttr("onchange");
-
-        const nameValidator = (name) => {
-
-            const inputElement = $("#name-edit");
-
-            const regex = /[^A-Za-z0-9\.\s]/;
-
-            if (!regex.test(name)) {
-                const has_number = /[0-9]/.test(name);
-
-                if (!has_number) {
-                    if (name !== "") {
-                        $("#button-edit").prop("disabled", false);
-                    }
-                    inputElement.removeClass("is-invalid");
-                    inputElement.addClass("is-valid");
-                    $("#feedback-name-edit").remove();
-                    if (name == "") {
-                        inputElement.removeClass("is-valid");
-                        $("#button-edit").prop("disabled", true);
-                    }
-                } else {
-                    $("#button-edit").prop("disabled", true);
-                    inputElement.removeClass("is-valid");
-                    inputElement.addClass("is-invalid");
-                    if ($("#feedback-name-edit").length > 0) {
-                        $("#feedback-name-edit").remove();
-                    }
-                    inputElement.after(`
-                        <div id="feedback-name-edit" class="invalid-feedback">
-                        Nama tidak boleh mengandung angka.
-                        </div>
-                    `);
-                }
-            } else {
-                $("#button-edit").prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-name-edit").length > 0) {
-                    $("#feedback-name-edit").remove();
-                }
-                inputElement.after(`
-                    <div id="feedback-name-edit" class="invalid-feedback">
-                    Nama tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-            }
-
-        }
 
         $("#kecamatan-id").val(data[0].id);
         $("#name-edit").val(data[0].name);
-        const name = $("#name-edit").val();
-        nameValidator(name);
 
         $('#provinsi-edit').val(data[0].id_provinsi);
         $('#provinsi-edit').trigger('change');
-        $('#provinsi-edit').attr("onchange", "KecamatanModule.validatorSelect('edit', 'button-edit', 'provinsi-edit')");
+        $('#provinsi-edit').attr("onchange", "KecamatanModule.validators('provinsi_edit')");
 
         var url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + data[0].id_provinsi;
         var target_select = $("#kabupaten-edit");
         KecamatanRequest.loadSelectOptionsEdit(url, target_select, data[0].id_kabupaten, "kabupaten");
 
+        validators('name_edit');
         $("#button-edit").prop("disabled", false);
         $("#provinsi-edit").addClass("is-valid");
         $("#kabupaten-edit").addClass("is-valid");
@@ -495,121 +444,172 @@ const KecamatanModule = (function() {
 
     // validation function //
 
-    function validatorName(input_id, button_id) {
-        let name;
-        let provinsi;
-        let kabupaten;
+    function validators(input_modal) {
 
-        if (input_id === 'kode-add' || input_id === 'name-add') {
-            name = "name-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-        } else if (input_id === 'kode-edit' || input_id === 'name-edit') {
-            name = "name-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
+        // const hasNumber = (value) => {
+        //     const validator = /^[0-9]+$/.test(value);
+        //     return validator;
+        // }
+
+        const hasLetter = (value) => {
+            const validator = /^[A-Za-z ]+$/.test(value);
+            return validator;
         }
 
-        const inputElement = $("#" + input_id);
+        const hasEmpty = (value) => {
+            const validator = /^\s*$/.test(value);
+            return validator;
+        }
 
-        const input_value = inputElement.val();
-        const regex = /[^A-Za-z0-9\.\s]/;
+        // const resetSelectOptions = (target_select) => {
+        //     target_select.html('<option value=""></option>');
+        //     target_select.removeClass("is-valid");
+        // }
 
-        if (!regex.test(input_value)) {
-            const has_number = /[0-9]/.test(input_value);
-
-            if (!has_number) {
-                if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
-                    $("#" + button_id).prop("disabled", false);
+        if (input_modal === 'name_add') {
+            const input_element_value = $("#name-add").val();
+            if (hasLetter(input_element_value)) {
+                $("#name-add").removeClass("is-invalid");
+                $("#feedback-name-add").remove();
+                $("#name-add").addClass("is-valid");
+                if ($("#provinsi-add").val() !== null && $("#kabupaten-add").val() !== "") {
+                    $("#button-add").prop("disabled", false);
+                } else {
+                    $("#button-add").prop("disabled", true);
                 }
-                inputElement.removeClass("is-invalid");
-                inputElement.addClass("is-valid");
-                $("#feedback-" + input_id).remove();
-                if (input_value == "") {
-                    inputElement.removeClass("is-valid");
-                    $("#" + button_id).prop("disabled", true);
-                }
+            } else if (hasEmpty(input_element_value)) {
+                $("#name-add").removeClass("is-valid");
+                $("#name-add").removeClass("is-invalid");
+                $("#feedback-name-add").remove();
+                $("#button-add").prop("disabled", true);
             } else {
-                $("#" + button_id).prop("disabled", true);
-                inputElement.removeClass("is-valid");
-                inputElement.addClass("is-invalid");
-                if ($("#feedback-" + input_id).length > 0) {
-                    $("#feedback-" + input_id).remove();
+                $("#button-add").prop("disabled", true);
+                $("#name-add").removeClass("is-valid");
+                $("#name-add").addClass("is-invalid");
+                if ($("#feedback-name-add").length > 0) {
+                    $("#feedback-name-add").remove();
                 }
-                inputElement.after(`
-                        <div id="feedback-${input_id}" class="invalid-feedback">
-                        Nama tidak boleh mengandung angka.
-                        </div>
-                    `);
+                $("#name-add").after(`
+                            <div id="feedback-name-add" class="invalid-feedback">
+                            Nama harus berupa huruf.
+                            </div>
+                        `);
             }
-        } else {
-            $("#" + button_id).prop("disabled", true);
-            inputElement.removeClass("is-valid");
-            inputElement.addClass("is-invalid");
-            if ($("#feedback-" + input_id).length > 0) {
-                $("#feedback-" + input_id).remove();
-            }
-            inputElement.after(`
-                    <div id="feedback-${input_id}" class="invalid-feedback">
-                    Nama tidak diperbolehkan mengandung karakter unik.
-                    </div>
-                `);
-        }
-    }
 
-    function validatorSelect(input_id, button_id, load = "") {
+        } else if (input_modal === 'provinsi_add') {
 
-        const resetSelectOptions = (target_select) => {
-            target_select.html('<option value=""></option>');
-            target_select.removeClass("is-valid");
-        }
-
-        if (load === "provinsi-add") {
             const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-add").val();
             const target_select = $("#kabupaten-add");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-add"));
+            MahasiswaRequest.loadSelectOptions(url, target_select);
 
-        }
+            const input_element_value = $("#provinsi-add").val();
+            if (input_element_value !== null || input_element_value !== '') {
+                $("#provinsi-add").removeClass("is-invalid");
+                $("#provinsi-add").addClass("is-valid");
+                if (hasLetter($("#name-add").val()) && $("#kabupaten-add").val() !== "") {
+                    $("#button-add").prop("disabled", false);
+                } else {
+                    $("#button-add").prop("disabled", true);
+                }
+            } else {
+                $("#button-add").prop("disabled", true);
+                $("#provinsi-add").removeClass("is-valid");
+                $("#provinsi-add").addClass("is-invalid");
+            }
 
-        if (load === "provinsi-edit") {
+        } else if (input_modal === 'kabupaten_add') {
+
+            const url = "script/master_kecamatan/php/load_address.php?table=kecamatan&id=" + $("#kabupaten-add").val();
+            const target_select = $("#kecamatan-add");
+            target_select.removeClass("is-valid");
+            MahasiswaRequest.loadSelectOptions(url, target_select);
+
+            const input_element_value = $("#kabupaten-add").val();
+            if (input_element_value !== null || input_element_value !== '') {
+                $("#kabupaten-add").removeClass("is-invalid");
+                $("#kabupaten-add").addClass("is-valid");
+                if (hasLetter($("#name-add").val())) {
+                    $("#button-add").prop("disabled", false);
+                } else {
+                    $("#button-add").prop("disabled", true);
+                }
+            } else {
+                $("#button-add").prop("disabled", true);
+                $("#kabupaten-add").removeClass("is-valid");
+                $("#kabupaten-add").addClass("is-invalid");
+            }
+
+        } else if (input_modal === 'name_edit') {
+            const input_element_value = $("#name-edit").val();
+            if (hasLetter(input_element_value)) {
+                $("#name-edit").removeClass("is-invalid");
+                $("#feedback-name-edit").remove();
+                $("#name-edit").addClass("is-valid");
+                if ($("#provinsi-edit").val() !== null && $("#kabupaten-edit").val() !== "") {
+                    $("#button-edit").prop("disabled", false);
+                } else {
+                    $("#button-edit").prop("disabled", true);
+                }
+            } else if (hasEmpty(input_element_value)) {
+                $("#name-edit").removeClass("is-valid");
+                $("#name-edit").removeClass("is-invalid");
+                $("#feedback-name-edit").remove();
+                $("#button-edit").prop("disabled", true);
+            } else {
+                $("#button-edit").prop("disabled", true);
+                $("#name-edit").removeClass("is-valid");
+                $("#name-edit").addClass("is-invalid");
+                if ($("#feedback-name-edit").length > 0) {
+                    $("#feedback-name-edit").remove();
+                }
+                $("#name-edit").after(`
+                            <div id="feedback-name-edit" class="invalid-feedback">
+                            Nama harus berupa huruf.
+                            </div>
+                        `);
+            }
+
+        } else if (input_modal === 'provinsi_edit') {
+
             const url = "script/master_kecamatan/php/load_address.php?table=kabupaten&id=" + $("#provinsi-edit").val();
             const target_select = $("#kabupaten-edit");
             target_select.removeClass("is-valid");
-            DesaRequest.loadSelectOptions(url, target_select);
-            resetSelectOptions($("#kecamatan-edit"));
+            MahasiswaRequest.loadSelectOptions(url, target_select);
 
-        }
-
-        let name;
-        let provinsi;
-        let kabupaten;
-
-        if (input_id === 'add') {
-            name = "name-add";
-            provinsi = "provinsi-add";
-            kabupaten = "kabupaten-add";
-        } else if (input_id === 'edit') {
-            name = "name-edit";
-            provinsi = "provinsi-edit";
-            kabupaten = "kabupaten-edit";
-        }
-
-        $("#" + provinsi).on('change', function () {
-            $("#" + provinsi).addClass('is-valid');
-        });
-        $("#" + kabupaten).on('change', function () {
-            $("#" + kabupaten).addClass('is-valid');
-        });
-
-        setTimeout(function () {
-            if ($("#" + name).val() !== "" && $("#" + provinsi).val() !== "" && $("#" + kabupaten).val() !== "") {
-                $("#" + button_id).prop("disabled", false);
+            const input_element_value = $("#provinsi-edit").val();
+            if (input_element_value !== null || input_element_value !== '') {
+                $("#provinsi-edit").removeClass("is-invalid");
+                $("#provinsi-edit").addClass("is-valid");
+                if (hasLetter($("#name-edit").val()) && $("#kabupaten-edit").val() !== "") {
+                    $("#button-edit").prop("disabled", false);
+                } else {
+                    $("#button-edit").prop("disabled", true);
+                }
             } else {
-                $("#" + button_id).prop("disabled", true);
+                $("#button-edit").prop("disabled", true);
+                $("#provinsi-edit").removeClass("is-valid");
+                $("#provinsi-edit").addClass("is-invalid");
             }
-        }, 100);
+
+        } else if (input_modal === 'kabupaten_edit') {
+
+            const input_element_value = $("#kabupaten-edit").val();
+            if (input_element_value !== null || input_element_value !== '') {
+                $("#kabupaten-edit").removeClass("is-invalid");
+                $("#kabupaten-edit").addClass("is-valid");
+                if (hasLetter($("#name-edit").val())) {
+                    $("#button-edit").prop("disabled", false);
+                } else {
+                    $("#button-edit").prop("disabled", true);
+                }
+            } else {
+                $("#button-edit").prop("disabled", true);
+                $("#kabupaten-edit").removeClass("is-valid");
+                $("#kabupaten-edit").addClass("is-invalid");
+            }
+        }
+
     }
 
     return {
@@ -620,8 +620,7 @@ const KecamatanModule = (function() {
         resetModalAdd: resetModalAdd,
         aplyValueModalEdit: aplyValueModalEdit,
         showModalDelete: showModalDelete,
-        validatorName: validatorName,
-        validatorSelect: validatorSelect
+        validators
     };
 
 })();
