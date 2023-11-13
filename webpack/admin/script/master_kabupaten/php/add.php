@@ -14,13 +14,13 @@ function addForm($data)
 }
 
 $name_add = $_POST["name_add"];
-if ($name_add == "") {
+if (preg_match('/^\s*$/', $name_add)) {
     echo "error_value_name";
     die;
 }
 
 // Validasi nama hanya boleh 0-9a-zA-Z spasi, max 10 karakter
-if (preg_match('/[^\w\s]/', $name_add)) {
+if (!preg_match('/^[a-zA-Z ]+$/', $name_add)) {
     echo "error_unique_name";
     die;
 }
