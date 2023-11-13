@@ -29,6 +29,8 @@ const MahasiswaRequest = (function () {
                 $.each(data, function (index, option) {
                     target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                 });
+                $("#button-add").prop("disabled", true);
+                $("#button-edit").prop("disabled", true);
             },
             error: function () {
                 console.error("Failed to fetch data.");
@@ -49,8 +51,8 @@ const MahasiswaRequest = (function () {
                     });
                     $('#kabupaten-edit').val(id);
                     $('#kabupaten-edit').trigger('change');
-                    $('#kabupaten-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kabupaten-edit')");
-
+                    $('#kabupaten-edit').attr("onchange", "MahasiswaModule.validators('kabupaten_edit')");
+                    $("#button-edit").prop("disabled", true);
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -69,7 +71,8 @@ const MahasiswaRequest = (function () {
                     });
                     $('#kecamatan-edit').val(id);
                     $('#kecamatan-edit').trigger('change');
-                    $('#kecamatan-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit', 'kecamatan-edit')");
+                    $('#kecamatan-edit').attr("onchange", "MahasiswaModule.validators('kecamatan_edit')");
+                    $("#button-edit").prop("disabled", true);
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -88,7 +91,8 @@ const MahasiswaRequest = (function () {
                     });
                     $('#desa-edit').val(id);
                     $('#desa-edit').trigger('change');
-                    $('#desa-edit').attr("onchange", "MahasiswaModule.validatorSelect('edit', 'button-edit')");
+                    $('#desa-edit').attr("onchange", "MahasiswaModule.validators('desa_edit')");
+                    $("#button-edit").prop("disabled", true);
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
