@@ -17,12 +17,12 @@ function edit_Data_matkul($data)
 if (isset($_POST["matkul_id"]) && isset($_POST["name_edit"])) {
     $id = $_POST["matkul_id"];
     $matkul_name = $_POST["name_edit"];
-    if ($matkul_name == "") {
+    if (preg_match('/^\s*$/',$matkul_name)) {
         echo "error_value_name";
         die;
     }
 
-    if (preg_match('/[^\w\s\.]/', $matkul_name)) {
+    if (!preg_match('/^[a-zA-Z ]+$/', $matkul_name)) {
         echo "error_unique_name";
         die;
     }

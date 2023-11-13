@@ -14,12 +14,12 @@ function matkulAdd($data) {
 
 if (isset($_POST["name_add"])) {
     $matkul_name = $_POST["name_add"];
-    if ($matkul_name == "") {
+    if (preg_match('/^\s*$/',$matkul_name)) {
         echo "error_value_name";
         die;
     }
 
-    if (preg_match('/[^\w\s\.]/', $matkul_name)) {
+    if (!preg_match('/^[a-zA-Z ]+$/', $matkul_name)) {
         echo "error_unique_name";
         die;
     }
