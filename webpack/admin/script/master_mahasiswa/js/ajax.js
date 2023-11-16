@@ -1,16 +1,47 @@
 // modul master_mahasiswa
 
+const master_mahasiswa_sessions = {
+    filters: {
+        keyword_filter: '',
+        gender_filter: '',
+        profile_filter: '',
+        provinsi_filter: '',
+        kabupaten_filter: '',
+        kecamatan_filter: '',
+        desa_filter: '',
+        matkul_filter: ''
+    },
+};
+
 const MahasiswaModule = (function () {
 
     function load() {
         buildStructure();
+
+        // const filters = {
+        //     keyword_filter: '',
+        //     gender_filter: '',
+        //     profile_filter: '',
+        //     provinsi_filter: '',
+        //     kabupaten_filter: '',
+        //     kecamatan_filter: '',
+        //     desa_filter: '',
+        //     matkul_filter: ''
+        // };
+
+        // const to_json = JSON.stringify(filters);
+        // localStorage.setItem('filters', to_json);
+        const url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
+        const target_select = $("#provinsi-filter");
+        MahasiswaRequest.loadSelectOptions(url, target_select);
+
         MahasiswaRequest.fetchDataAndRender(1);
         console.log('mahasiswa module loaded');
     }
 
     function buildStructure() {
         $(".head-name-title-dev").removeClass("d-none");
-        $(".head-name-title-dev h1").text("Tabel Mahasiswa");
+        // $(".head-name-title-dev h1").text("Tabel Mahasiswa");
         $(".content-wrapper").LoadingOverlay("show", {
             background: "rgba(0, 0, 0, 0.5)",
             image: "",
@@ -272,7 +303,7 @@ const MahasiswaModule = (function () {
                                 Tambah
                             </button>
                             <input class="form-control form-control-sm m-1" type="text"
-                                placeholder="cari data" style="min-width: 10%; max-width: 18%;">
+                                placeholder="cari berdasarkan nama" id="keyword-filter" oninput="MahasiswaModule.filtering('keyword')" style="min-width: 10%; max-width: 18%;">
                             <select class="form-control" id="gender-filter"
                                 onchange="">
                                 <option></option>
@@ -286,10 +317,8 @@ const MahasiswaModule = (function () {
                                 <option>perempuan</option>
                             </select>
                             <select class="form-control" id="provinsi-filter"
-                                onchange="">
+                                onchange="MahasiswaModule.filtering('provinsi')">
                                 <option></option>
-                                <option>laki</option>
-                                <option>perempuan</option>
                             </select>
                             <select class="form-control" id="kabupaten-filter"
                                 onchange="">
@@ -438,12 +467,25 @@ const MahasiswaModule = (function () {
         $('#matkul-filter').select2({
             theme: 'bootstrap4',
             placeholder: "Matkul",
-            width: '150px'
+            width: '150px',
+            allowClear: true
         })
     }
 
     function filtering(filter_input) {
-        return
+        if (filter_input === 'keyword') {
+            master_mahasiswa_sessions.filters.keyword_filter = $("#keyword-filter").val(); 
+            MahasiswaRequest.fetchDataAndRender(1,$("#keyword-filter").val());
+            // const filters = localStorage.getItem('filters');
+            // const filters_parse = JSON.parse(filters);
+            // const filter = $("#keyword-filter").val();
+            // filters_parse.keyword_filter = filter;
+            // const update_filters = JSON.stringify(filters_parse);
+            // localStorage.setItem('filters', update_filters);
+        } else if (filter_input === 'provinsi') {
+            master_mahasiswa_sessions.filters.provinsi_filter = $("#provinsi-filter").val(); 
+            MahasiswaRequest.fetchDataAndRender(1,$("#keyword-filter").val(), "", "", $("#provinsi-filter").val());
+        }
     }
 
     function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
@@ -568,7 +610,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(i);
+                MahasiswaRequest.fetchDataAndRender(i, master_mahasiswa_sessions.filters.keyword_filter, "", "", master_mahasiswa_sessions.filters.provinsi_filter);
             });
         }
 
@@ -591,7 +633,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page - 1);
+                MahasiswaRequest.fetchDataAndRender(current_page - 1, master_mahasiswa_sessions.filters.keyword_filter, "", "", master_mahasiswa_sessions.filters.provinsi_filter);
             }
         });
 
@@ -602,7 +644,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page + 1);
+                MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, "", "", master_mahasiswa_sessions.filters.provinsi_filter);
             }
         });
 

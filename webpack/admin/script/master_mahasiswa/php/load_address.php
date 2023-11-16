@@ -4,7 +4,7 @@ require '../../config.php';
 // Fungsi untuk mengambil data dari database
 // Ambil data berdasarkan tabel dan kondisi tertentu
 $table = $_GET['table'];
-$id = $_GET['id'];
+$id = isset($_GET['id']) ? $_GET['id'] : "";
 $query = '';
 
 if ($table === 'kabupaten') {
