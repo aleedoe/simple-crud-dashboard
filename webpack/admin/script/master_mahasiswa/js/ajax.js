@@ -17,24 +17,6 @@ const MahasiswaModule = (function () {
 
     function load() {
         buildStructure();
-
-        // const filters = {
-        //     keyword_filter: '',
-        //     gender_filter: '',
-        //     profile_filter: '',
-        //     provinsi_filter: '',
-        //     kabupaten_filter: '',
-        //     kecamatan_filter: '',
-        //     desa_filter: '',
-        //     matkul_filter: ''
-        // };
-
-        // const to_json = JSON.stringify(filters);
-        // localStorage.setItem('filters', to_json);
-        const url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
-        const target_select = $("#provinsi-filter");
-        MahasiswaRequest.loadSelectOptions(url, target_select);
-
         MahasiswaRequest.fetchDataAndRender(1);
         console.log('mahasiswa module loaded');
     }
@@ -394,6 +376,9 @@ const MahasiswaModule = (function () {
 
         `);
 
+        const url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
+        const target_select = $("#provinsi-filter");
+        MahasiswaRequest.loadSelectOptions(url, target_select);
 
         // definition for modal add
         $('.select2-search-box-add').select2({
