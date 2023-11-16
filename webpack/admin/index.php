@@ -94,7 +94,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link nav-custom-dev" id="load-master-mahasiswa">
+                            <a href="#" class="nav-link nav-custom-dev" onclick="MahasiswaModule.load()">
                                 <i class="nav-icon fas fa-user-graduate"></i>
                                 <p>
                                     Mahasisiwa
@@ -243,8 +243,8 @@
     <!-- /.file input plugin -->
 
     <!-- ajax for master master_mahasiswa -->
-    <!-- <script src="script/master_mahasiswa/js/ajax.js"></script>
-    <script src="script/master_mahasiswa/js/request.js"></script> -->
+    <script src="script/master_mahasiswa/js/ajax.js"></script>
+    <script src="script/master_mahasiswa/js/request.js"></script>
     <!-- /.ajax for master master_mahasiswa -->
 
     <!-- ajax for master master_provinsi -->
@@ -272,8 +272,6 @@
     <script src="script/master_matkul/js/request.js"></script>
     <!-- /.ajax for master master_matkul -->
 
-    <script type="module" src="script/modules.js"></script>
-    
     <!-- original javascript dev -->
     <script src="assets/js/script.js"></script>
     <!-- original javascript dev -->

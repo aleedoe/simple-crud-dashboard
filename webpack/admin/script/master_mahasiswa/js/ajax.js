@@ -17,6 +17,20 @@ const MahasiswaModule = (function () {
 
     function load() {
         buildStructure();
+
+        // const filters = {
+        //     keyword_filter: '',
+        //     gender_filter: '',
+        //     profile_filter: '',
+        //     provinsi_filter: '',
+        //     kabupaten_filter: '',
+        //     kecamatan_filter: '',
+        //     desa_filter: '',
+        //     matkul_filter: ''
+        // };
+
+        // const to_json = JSON.stringify(filters);
+        // localStorage.setItem('filters', to_json);
         MahasiswaRequest.fetchDataAndRender(1);
         console.log('mahasiswa module loaded');
     }
