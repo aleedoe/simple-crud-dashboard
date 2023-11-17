@@ -3,7 +3,7 @@ require '../../config.php';
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 $limit = 5;
-$offset = ($page - 1) * $limit;
+$offset = ($page - 1) * $limit == 0 ? 0 : ($page - 1) * $limit;
 $keyword_filter = isset($_GET['keyword_filter']) ? $_GET['keyword_filter'] : '';
 $gender_filter = isset($_GET["gender_filter"]) ? $_GET["gender_filter"] : "";
 $image_filter = isset($_GET["image_filter"]) ? $_GET["image_filter"] : "";
@@ -72,7 +72,12 @@ $query .= " ORDER BY data.nama ASC"; // Menambahkan ORDER BY
 $total_data = count(get_data($query));
 $total_pages = ceil($total_data / $limit);
 
-$query .= " LIMIT $offset, $limit";
+if ($keyword_filter != "" && $gender_filter != "" && $image_filter != "" && $provinsi_filter != "" && $kabupaten_filter != "" && $kecamatan_filter != "" && $desa_filter != "") {
+    $offset = 0;
+    $query .= " LIMIT $offset, $limit";
+} else {
+    $query .= " LIMIT $offset, $limit";
+}
 
 $data = get_data($query);
 

@@ -9,7 +9,7 @@ const MahasiswaRequest = (function () {
             dataType: "json",
             success: function (response) {
                 MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
-                MahasiswaModule.renderPagination(response.totalPages, page);
+                MahasiswaModule.renderPagination(response.totalPages, page, response.data);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },
             error: function () {
@@ -93,6 +93,24 @@ const MahasiswaRequest = (function () {
                     $('#desa-edit').trigger('change');
                     $('#desa-edit').attr("onchange", "MahasiswaModule.validators('desa_edit')");
                     $("#button-edit").prop("disabled", true);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "provinsi") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function (index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#provinsi-filter').val(id);
+                    $('#provinsi-filter').trigger('change');
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
