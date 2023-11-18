@@ -30,8 +30,8 @@
 @media only screen and (min-width: 1879px) {
 
     /* Gaya khusus untuk layar lebih dari 1920px */
-    #row-1-dev .card-title .d-flex.align-content-center.flex-wrap {
-        min-width: 150%;
+    #row-1-dev .card-header {
+        overflow-x: auto;
     }
 }
 

@@ -64,7 +64,7 @@
             <a href="../../index3.html" class="brand-link">
                 <img src="assets/img/logo.jpg" alt="AdminLTE Logo" class="brand-image rounded"
                     style="opacity: .8">
-                <span class="brand-text font-weight-light">Webzet.Dev</span>
+                <span class="brand-text font-weight-light">Webzet.dev</span>
             </a>
 
             <!-- Sidebar -->

@@ -37,6 +37,7 @@ const MahasiswaRequest = (function () {
             }
         });
     }
+
     function loadSelectOptionsEdit(url, target_select, id, describe) {
         if (describe == "kabupaten") {
             $.ajax({
@@ -98,6 +99,70 @@ const MahasiswaRequest = (function () {
                     console.error("Failed to fetch data.");
                 }
             });
+        }
+    }
+
+    function loadSelectOptionsFilter(url, target_select, id, describe) {
+        if (describe == "kabupaten") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function (index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#kabupaten-filter').val(id);
+                    $('#kabupaten-filter').trigger('change');
+                    // $('#kabupaten-filter').attr("onchange", "MahasiswaModule.validators('kabupaten_edit')");
+                    $("#button-filter").prop("disabled", true);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "kecamatan") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function (index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#kecamatan-filter').val(id);
+                    $('#kecamatan-filter').trigger('change');
+                    // $('#kecamatan-filter').attr("onchange", "MahasiswaModule.validators('kecamatan_edit')");
+                    $("#button-filter").prop("disabled", true);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "desa") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function (index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#desa-filter').val(id);
+                    $('#desa-filter').trigger('change');
+                    // $('#desa-filter').attr("onchange", "MahasiswaModule.validators('desa_edit')");
+                    $("#button-filter").prop("disabled", true);
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
         } else if (describe == "provinsi") {
             $.ajax({
                 url: url,
@@ -111,6 +176,8 @@ const MahasiswaRequest = (function () {
                     });
                     $('#provinsi-filter').val(id);
                     $('#provinsi-filter').trigger('change');
+                    $('#provinsi-filter').attr("onchange", "MahasiswaModule.filtering('provinsi')");
+
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -228,12 +295,13 @@ const MahasiswaRequest = (function () {
     }
 
     return {
-        fetchDataAndRender: fetchDataAndRender,
-        loadSelectOptions: loadSelectOptions,
-        loadSelectOptionsEdit: loadSelectOptionsEdit,
-        loadDataEdit: loadDataEdit,
-        dataAdd: dataAdd,
-        dataEdit: dataEdit,
-        dataDelete: dataDelete,
+        fetchDataAndRender,
+        loadSelectOptions,
+        loadSelectOptionsEdit,
+        loadSelectOptionsFilter,
+        loadDataEdit,
+        dataAdd,
+        dataEdit,
+        dataDelete,
     };
 })();
