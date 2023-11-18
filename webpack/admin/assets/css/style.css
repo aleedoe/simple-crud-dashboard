@@ -27,15 +27,6 @@
     opacity: 0;
 }
 
-@media only screen and (min-width: 1879px) {
-
-    /* Gaya khusus untuk layar lebih dari 1920px */
-    #row-1-dev .card-header {
-        overflow-x: auto;
-    }
-}
-
-
 #main-content-dev #row-1-dev .card-footer {
     overflow-x: auto;
 }

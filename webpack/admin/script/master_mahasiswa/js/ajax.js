@@ -19,7 +19,7 @@ const MahasiswaModule = (function () {
 
     function load() {
         buildStructure();
-        MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter);
+        MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter, master_mahasiswa_sessions.filters.kecamatan_filter, master_mahasiswa_sessions.filters.desa_filter);
         console.log('mahasiswa module loaded');
     }
 
@@ -287,7 +287,7 @@ const MahasiswaModule = (function () {
                                 Tambah
                             </button>
                             <input class="form-control form-control-sm m-1" type="text"
-                                placeholder="cari berdasarkan nama" id="keyword-filter" oninput="MahasiswaModule.filtering('keyword')" autocomplete="off" style="min-width: 10%; max-width: 18%;">
+                                placeholder="cari nama/kode" id="keyword-filter" oninput="MahasiswaModule.filtering('keyword')" autocomplete="off" style="width: 135px;">
                             <select class="form-control" id="gender-filter"
                                 onchange="">
                                 <option></option>
@@ -307,26 +307,18 @@ const MahasiswaModule = (function () {
                             <select class="form-control" id="kabupaten-filter"
                                 onchange="">
                                 <option></option>
-                                <option>laki</option>
-                                <option>perempuan</option>
                             </select>
                             <select class="form-control" id="kecamatan-filter"
                                 onchange="">
                                 <option></option>
-                                <option>laki</option>
-                                <option>perempuan</option>
                             </select>
                             <select class="form-control" id="desa-filter"
                                 onchange="">
                                 <option></option>
-                                <option>laki</option>
-                                <option>perempuan</option>
                             </select>
                             <select class="form-control" id="matkul-filter"
                                 onchange="">
                                 <option></option>
-                                <option>laki</option>
-                                <option>perempuan</option>
                             </select>
                             <button type="button" class="btn btn-primary btn-sm m-1"
                                 onclick="clearFilter()">
@@ -380,19 +372,37 @@ const MahasiswaModule = (function () {
 
         if (master_mahasiswa_sessions.filters.keyword_filter != '' || master_mahasiswa_sessions.filters.gender_filter != '' || master_mahasiswa_sessions.filters.profile_filter != '' || master_mahasiswa_sessions.filters.provinsi_filter != '' || master_mahasiswa_sessions.filters.kabupaten_filter != '' || master_mahasiswa_sessions.filters.kecamatan_filter != '' || master_mahasiswa_sessions.filters.desa_filter != '') {
             $("#keyword-filter").val(master_mahasiswa_sessions.filters.keyword_filter);
-            
+
             $("#gender-filter").val(master_mahasiswa_sessions.filters.gender_filter);
             $('#gender-filter').trigger('change');
             $('#gender-filter').attr("onchange", "MahasiswaModule.filtering('gender')");
-            
+
             $("#profile-filter").val(master_mahasiswa_sessions.filters.profile_filter);
             $('#profile-filter').trigger('change');
             $('#profile-filter').attr("onchange", "MahasiswaModule.filtering('profile')");
-            
+
         }
-        const url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
-        const target_select = $("#provinsi-filter");
+        var url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
+        var target_select = $("#provinsi-filter");
         MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.provinsi_filter, "provinsi");
+
+        if (master_mahasiswa_sessions.filters.provinsi_filter !== '') {
+            var url = `script/master_mahasiswa/php/load_address.php?table=kabupaten&id=${master_mahasiswa_sessions.filters.provinsi_filter}`;
+            var target_select = $("#kabupaten-filter");
+            MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.kabupaten_filter, "kabupaten");
+        }
+
+        if (master_mahasiswa_sessions.filters.kabupaten_filter !== '') {
+            var url = `script/master_mahasiswa/php/load_address.php?table=kecamatan&id=${master_mahasiswa_sessions.filters.kabupaten_filter}`;
+            var target_select = $("#kecamatan-filter");
+            MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.kecamatan_filter, "kecamatan");
+        }
+
+        if (master_mahasiswa_sessions.filters.kecamatan_filter !== '') {
+            var url = `script/master_mahasiswa/php/load_address.php?table=desa&id=${master_mahasiswa_sessions.filters.kecamatan_filter}`;
+            var target_select = $("#desa-filter");
+            MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.desa_filter, "desa");
+        }
 
         // definition for modal add
         $('.select2-search-box-add').select2({
@@ -486,26 +496,56 @@ const MahasiswaModule = (function () {
 
         if (filter_input === 'keyword') {
             master_mahasiswa_sessions.filters.keyword_filter = $("#keyword-filter").val();
-            MahasiswaRequest.fetchDataAndRender(1, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val());
+            MahasiswaRequest.fetchDataAndRender(1, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), $("#kecamatan-filter").val(), $("#desa-filter").val());
 
         } else if (filter_input === 'gender') {
             master_mahasiswa_sessions.filters.gender_filter = $("#gender-filter").val();
-            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val());
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), $("#kecamatan-filter").val(), $("#desa-filter").val());
 
         } else if (filter_input === 'profile') {
             master_mahasiswa_sessions.filters.profile_filter = $("#profile-filter").val();
-            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val());
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), $("#kecamatan-filter").val(), $("#desa-filter").val());
 
         } else if (filter_input === 'provinsi') {
             master_mahasiswa_sessions.filters.provinsi_filter = $("#provinsi-filter").val();
-            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val());
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), "", "", "");
             resetSelectOptions($("#kabupaten-filter"));
             resetSelectOptions($("#kecamatan-filter"));
             resetSelectOptions($("#desa-filter"));
 
-            const url = `script/master_mahasiswa/php/load_address.php?table=kabupaten&id=${$("#provinsi-filter").val()}`;
-            const target_select = $("#kabupaten-filter");
-            MahasiswaRequest.loadSelectOptions(url, target_select);
+            if (master_mahasiswa_sessions.filters.provinsi_filter !== '') {
+                const url = `script/master_mahasiswa/php/load_address.php?table=kabupaten&id=${$("#provinsi-filter").val()}`;
+                const target_select = $("#kabupaten-filter");
+                MahasiswaRequest.loadSelectOptionsFilter(url, target_select, "", "kabupaten");
+            }
+
+        } else if (filter_input === 'kabupaten') {
+            master_mahasiswa_sessions.filters.kabupaten_filter = $("#kabupaten-filter").val();
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), "", "");
+            resetSelectOptions($("#kecamatan-filter"));
+            resetSelectOptions($("#desa-filter"));
+
+            if (master_mahasiswa_sessions.filters.kabupaten_filter !== '') {
+                const url = `script/master_mahasiswa/php/load_address.php?table=kecamatan&id=${$("#kabupaten-filter").val()}`;
+                const target_select = $("#kecamatan-filter");
+                MahasiswaRequest.loadSelectOptionsFilter(url, target_select, '', "kecamatan");
+            }
+
+        } else if (filter_input === 'kecamatan') {
+            master_mahasiswa_sessions.filters.kecamatan_filter = $("#kecamatan-filter").val();
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), $("#kecamatan-filter").val(), "");
+            resetSelectOptions($("#desa-filter"));
+
+            if (master_mahasiswa_sessions.filters.kecamatan_filter !== '') {
+                const url = `script/master_mahasiswa/php/load_address.php?table=desa&id=${$("#kecamatan-filter").val()}`;
+                const target_select = $("#desa-filter");
+                MahasiswaRequest.loadSelectOptionsFilter(url, target_select, '', "desa");
+            }
+
+        } else if (filter_input === 'desa') {
+            master_mahasiswa_sessions.filters.desa_filter = $("#desa-filter").val();
+            MahasiswaRequest.fetchDataAndRender(master_mahasiswa_sessions.current_page, $("#keyword-filter").val(), $("#gender-filter").val(), $("#profile-filter").val(), $("#provinsi-filter").val(), $("#kabupaten-filter").val(), $("#kecamatan-filter").val(), $("#desa-filter").val());
+
         }
     }
 
@@ -635,7 +675,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(i, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter);
+                MahasiswaRequest.fetchDataAndRender(i, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
                 master_mahasiswa_sessions.current_page = i;
             });
         }
@@ -659,7 +699,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page - 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter);
+                MahasiswaRequest.fetchDataAndRender(current_page - 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
                 master_mahasiswa_sessions.current_page = current_page - 1;
             }
         });
@@ -671,7 +711,7 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter);
+                MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
                 master_mahasiswa_sessions.current_page = current_page + 1;
             }
         });

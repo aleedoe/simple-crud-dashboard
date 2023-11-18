@@ -116,8 +116,7 @@ const MahasiswaRequest = (function () {
                     });
                     $('#kabupaten-filter').val(id);
                     $('#kabupaten-filter').trigger('change');
-                    // $('#kabupaten-filter').attr("onchange", "MahasiswaModule.validators('kabupaten_edit')");
-                    $("#button-filter").prop("disabled", true);
+                    $('#kabupaten-filter').attr("onchange", "MahasiswaModule.filtering('kabupaten')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -136,8 +135,7 @@ const MahasiswaRequest = (function () {
                     });
                     $('#kecamatan-filter').val(id);
                     $('#kecamatan-filter').trigger('change');
-                    // $('#kecamatan-filter').attr("onchange", "MahasiswaModule.validators('kecamatan_edit')");
-                    $("#button-filter").prop("disabled", true);
+                    $('#kecamatan-filter').attr("onchange", "MahasiswaModule.filtering('kecamatan')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
@@ -156,14 +154,33 @@ const MahasiswaRequest = (function () {
                     });
                     $('#desa-filter').val(id);
                     $('#desa-filter').trigger('change');
-                    // $('#desa-filter').attr("onchange", "MahasiswaModule.validators('desa_edit')");
-                    $("#button-filter").prop("disabled", true);
+                    $('#desa-filter').attr("onchange", "MahasiswaModule.filtering('desa')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
                 }
             });
         } else if (describe == "provinsi") {
+            $.ajax({
+                url: url,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
+                    target_select.append($("<option value=''></option>"));
+                    $.each(data, function (index, option) {
+                        target_select.append($("<option></option>").attr("value", option.id).text(option.name));
+                    });
+                    $('#provinsi-filter').val(id);
+                    $('#provinsi-filter').trigger('change');
+                    $('#provinsi-filter').attr("onchange", "MahasiswaModule.filtering('provinsi')");
+
+                },
+                error: function () {
+                    console.error("Failed to fetch data.");
+                }
+            });
+        } else if (describe == "matkul") {
             $.ajax({
                 url: url,
                 type: "GET",
