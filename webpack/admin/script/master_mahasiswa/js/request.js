@@ -10,7 +10,7 @@ const MahasiswaRequest = (function () {
             type: "GET",
             dataType: "json",
             success: function (response) {
-                MahasiswaModule.renderData(response.data, response.dataProvinsi, page);
+                MahasiswaModule.renderData(response.data, response.dataProvinsi, response.dataMatkul, page);
                 MahasiswaModule.renderPagination(response.totalPages, page, response.data);
                 $(".content-wrapper").LoadingOverlay("hide", true);
             },

@@ -372,12 +372,16 @@ const MahasiswaModule = (function () {
 
         $("#keyword-filter").val(master_mahasiswa_sessions.filters.keyword_filter);
 
-        $("#gender-filter").val(master_mahasiswa_sessions.filters.gender_filter);
-        $('#gender-filter').trigger('change');
+        if (master_mahasiswa_sessions.filters.gender_filter !== '') {
+            $("#gender-filter").val(master_mahasiswa_sessions.filters.gender_filter);
+            $('#gender-filter').trigger('change');
+        }
         $('#gender-filter').attr("onchange", "MahasiswaModule.filtering('gender')");
 
-        $("#profile-filter").val(master_mahasiswa_sessions.filters.profile_filter);
-        $('#profile-filter').trigger('change');
+        if (master_mahasiswa_sessions.filters.profile_filter !== '') {
+            $("#profile-filter").val(master_mahasiswa_sessions.filters.profile_filter);
+            $('#profile-filter').trigger('change');
+        }
         $('#profile-filter').attr("onchange", "MahasiswaModule.filtering('profile')");
 
         var url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
@@ -584,7 +588,7 @@ const MahasiswaModule = (function () {
         return url;
     }
 
-    function renderData(data, provinsi_select, current_page) {
+    function renderData(data, provinsi_select, matkul, current_page) {
         const table = document.getElementById("data-table");
         const tbody = table.querySelector("tbody");
         tbody.innerHTML = ""; // Clear the existing table body content
@@ -636,6 +640,15 @@ const MahasiswaModule = (function () {
             new_option.val(row.id);
             new_option.text(row.name);
             provinsi_select_edit.append(new_option);
+        });
+
+        const matkul_filter = $("#matkul-filter");
+        matkul_filter.html('<option value=""></option>');
+        matkul.forEach((row) => {
+            const new_option = $("<option></option>");
+            new_option.val(row.id);
+            new_option.text(row.name);
+            matkul_filter.append(new_option);
         });
     }
 
