@@ -291,7 +291,7 @@ const MahasiswaModule = (function () {
                             <select class="form-control" id="gender-filter"
                                 onchange="">
                                 <option></option>
-                                <option value="Laki-laki">laki</option>
+                                <option value="Laki-laki">laki-laki</option>
                                 <option value="Perempuan">perempuan</option>
                             </select>
                             <select class="form-control" id="profile-filter"
@@ -370,18 +370,16 @@ const MahasiswaModule = (function () {
 
         `);
 
-        if (master_mahasiswa_sessions.filters.keyword_filter != '' || master_mahasiswa_sessions.filters.gender_filter != '' || master_mahasiswa_sessions.filters.profile_filter != '' || master_mahasiswa_sessions.filters.provinsi_filter != '' || master_mahasiswa_sessions.filters.kabupaten_filter != '' || master_mahasiswa_sessions.filters.kecamatan_filter != '' || master_mahasiswa_sessions.filters.desa_filter != '') {
-            $("#keyword-filter").val(master_mahasiswa_sessions.filters.keyword_filter);
+        $("#keyword-filter").val(master_mahasiswa_sessions.filters.keyword_filter);
 
-            $("#gender-filter").val(master_mahasiswa_sessions.filters.gender_filter);
-            $('#gender-filter').trigger('change');
-            $('#gender-filter').attr("onchange", "MahasiswaModule.filtering('gender')");
+        $("#gender-filter").val(master_mahasiswa_sessions.filters.gender_filter);
+        $('#gender-filter').trigger('change');
+        $('#gender-filter').attr("onchange", "MahasiswaModule.filtering('gender')");
 
-            $("#profile-filter").val(master_mahasiswa_sessions.filters.profile_filter);
-            $('#profile-filter').trigger('change');
-            $('#profile-filter').attr("onchange", "MahasiswaModule.filtering('profile')");
+        $("#profile-filter").val(master_mahasiswa_sessions.filters.profile_filter);
+        $('#profile-filter').trigger('change');
+        $('#profile-filter').attr("onchange", "MahasiswaModule.filtering('profile')");
 
-        }
         var url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
         var target_select = $("#provinsi-filter");
         MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.provinsi_filter, "provinsi");
@@ -488,6 +486,14 @@ const MahasiswaModule = (function () {
     }
 
     function filtering(filter_input) {
+
+        $(".head-name-title-dev").removeClass("d-none");
+        $(".head-name-title-dev h1").text("Tabel Mahasiswa");
+        $(".content-wrapper").LoadingOverlay("show", {
+            background: "rgba(0, 0, 0, 0.5)",
+            image: "",
+            fontawesome: "fa fa-cog fa-spin"
+        });
 
         const resetSelectOptions = (target_select) => {
             target_select.html('<option value=""></option>');

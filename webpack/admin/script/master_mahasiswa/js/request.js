@@ -3,6 +3,8 @@
 const MahasiswaRequest = (function () {
 
     function fetchDataAndRender(page, keyword_filter = "", gender_filter = "", image_filter = "", provinsi_filter = "", kabupaten_filter = "", kecamatan_filter = "", desa_filter = "", matkul_filter = "") {
+
+        $("#main-content-dev #row-1-dev td").html('');
         $.ajax({
             url: MahasiswaModule.buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter),
             type: "GET",
