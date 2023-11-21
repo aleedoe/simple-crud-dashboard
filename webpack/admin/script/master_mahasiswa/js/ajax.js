@@ -384,6 +384,10 @@ const MahasiswaModule = (function () {
         }
         $('#profile-filter').attr("onchange", "MahasiswaModule.filtering('profile')");
 
+        var url = "script/master_mahasiswa/php/load_matkul.php?";
+        var target_select = $("#matkul-filter");
+        MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.matkul_filter, "matkul");
+
         var url = "script/master_mahasiswa/php/load_address.php?table=provinsi";
         var target_select = $("#provinsi-filter");
         MahasiswaRequest.loadSelectOptionsFilter(url, target_select, master_mahasiswa_sessions.filters.provinsi_filter, "provinsi");
@@ -689,7 +693,8 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(i, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
+                MahasiswaRequest.fetchDataAndRender(i, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter, master_mahasiswa_sessions.filters.kecamatan_filter, master_mahasiswa_sessions.filters.desa_filter, master_mahasiswa_sessions.filters.matkul_filter);
+                
                 master_mahasiswa_sessions.current_page = i;
             });
         }
@@ -713,7 +718,8 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page - 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
+                MahasiswaRequest.fetchDataAndRender(current_page - 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter, master_mahasiswa_sessions.filters.kecamatan_filter, master_mahasiswa_sessions.filters.desa_filter, master_mahasiswa_sessions.filters.matkul_filter);
+                
                 master_mahasiswa_sessions.current_page = current_page - 1;
             }
         });
@@ -725,7 +731,8 @@ const MahasiswaModule = (function () {
                     image: "",
                     fontawesome: "fa fa-cog fa-spin"
                 });
-                MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter);
+                MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter, master_mahasiswa_sessions.filters.kecamatan_filter, master_mahasiswa_sessions.filters.desa_filter, master_mahasiswa_sessions.filters.matkul_filter);
+                
                 master_mahasiswa_sessions.current_page = current_page + 1;
             }
         });
@@ -758,14 +765,14 @@ const MahasiswaModule = (function () {
             $(this).removeClass("is-valid");
         });
         $(".fileinput-wrapper .fileinput-name").remove();
-        console.log("kode : " + $("#kode-add").val());
-        console.log("name : " + $("#name-add").val());
-        console.log("gender : " + $("#gender-add").val());
-        console.log("provinsi : " + $("#provinsi-add").val());
-        console.log("kabupaten : " + $("#kabupaten-add").val());
-        console.log("kecamatan : " + $("#kecamatan-add").val());
-        console.log("desa : " + $("#desa-add").val());
-        console.log("image : " + $("#image-add").val());
+        // console.log("kode : " + $("#kode-add").val());
+        // console.log("name : " + $("#name-add").val());
+        // console.log("gender : " + $("#gender-add").val());
+        // console.log("provinsi : " + $("#provinsi-add").val());
+        // console.log("kabupaten : " + $("#kabupaten-add").val());
+        // console.log("kecamatan : " + $("#kecamatan-add").val());
+        // console.log("desa : " + $("#desa-add").val());
+        // console.log("image : " + $("#image-add").val());
     }
 
     function aplyValueModalEdit(data) {

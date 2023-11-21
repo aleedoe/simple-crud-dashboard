@@ -190,18 +190,18 @@ const MahasiswaRequest = (function () {
                 success: function (data) {
                     target_select.empty(); // Mengosongkan elemen select sebelum menambahkan opsi baru
                     target_select.append($("<option value=''></option>"));
-                    $.each(data, function (index, option) {
+                    $.each(data.dataMatkul, function (index, option) {
                         target_select.append($("<option></option>").attr("value", option.id).text(option.name));
                     });
-                    $('#provinsi-filter').val(id);
-                    $('#provinsi-filter').trigger('change');
-                    $('#provinsi-filter').attr("onchange", "MahasiswaModule.filtering('provinsi')");
-
+                    $('#matkul-filter').val(id);
+                    $('#matkul-filter').trigger('change');
+                    $('#matkul-filter').attr("onchange", "MahasiswaModule.filtering('matkul')");
                 },
                 error: function () {
                     console.error("Failed to fetch data.");
                 }
             });
+            
         }
     }
 
