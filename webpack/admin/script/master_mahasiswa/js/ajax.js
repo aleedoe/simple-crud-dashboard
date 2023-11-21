@@ -321,7 +321,7 @@ const MahasiswaModule = (function () {
                                 <option></option>
                             </select>
                             <button type="button" class="btn btn-primary btn-sm m-1"
-                                onclick="clearFilter()">
+                                onclick="MahasiswaModule.resetFilters()">
                                 <i class="nav-icon fas fa-sync-alt mr-1"></i>
                                 bersihkan filter
                             </button>
@@ -567,6 +567,14 @@ const MahasiswaModule = (function () {
         }
     }
 
+    function resetFilters() {
+        $('#row-1-dev select').each(function () {
+            // Reset the selected option
+            $(this).val(0);
+            $(this).trigger('change');
+        });
+    }
+
     function buildUrl(page, keyword_filter, gender_filter, image_filter, provinsi_filter, kabupaten_filter, kecamatan_filter, desa_filter, matkul_filter) {
         let url = `script/master_mahasiswa/php/get_data.php?page=${page}`;
         if (keyword_filter) {
@@ -732,7 +740,7 @@ const MahasiswaModule = (function () {
                     fontawesome: "fa fa-cog fa-spin"
                 });
                 MahasiswaRequest.fetchDataAndRender(current_page + 1, master_mahasiswa_sessions.filters.keyword_filter, master_mahasiswa_sessions.filters.gender_filter, master_mahasiswa_sessions.filters.profile_filter, master_mahasiswa_sessions.filters.provinsi_filter, master_mahasiswa_sessions.filters.kabupaten_filter, master_mahasiswa_sessions.filters.kecamatan_filter, master_mahasiswa_sessions.filters.desa_filter, master_mahasiswa_sessions.filters.matkul_filter);
-                
+
                 master_mahasiswa_sessions.current_page = current_page + 1;
             }
         });
@@ -758,10 +766,6 @@ const MahasiswaModule = (function () {
             // Reset the selected option
             $(this).val(0);
             $(this).trigger('change');
-            $(this).removeClass("is-valid");
-            $(this).removeClass("is-valid");
-            $(this).removeClass("is-valid");
-            $(this).removeClass("is-valid");
             $(this).removeClass("is-valid");
         });
         $(".fileinput-wrapper .fileinput-name").remove();
@@ -1179,6 +1183,7 @@ const MahasiswaModule = (function () {
     return {
         load: load,
         filtering,
+        resetFilters,
         buildUrl: buildUrl,
         renderData: renderData,
         renderPagination: renderPagination,
